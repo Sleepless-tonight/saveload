@@ -1,0 +1,1069 @@
+=======================================================================================================================================================================================
+
+
+查看安装
+rpm -aq| grep postgres
+
+查看启动
+ps -ax | grep postgres
+
+列出所有端口
+netstat -ntlp
+
+mkdir /usr/pgsql-10/data
+
+chown postgres /usr/pgsql-10/data
+ 
+
+CREATE USER finley WITH PASSWORD 'password';
+
+ALTER USER postgres WITH PASSWORD 'password'
+
+psql mydb -U finley
+
+
+
+
+
+============================================================================================  CentOS 7 开发环境部署   =================================================================
+
+CentOS 7的网络配置以及设置主机名和绑定IP的问题
+
+
+	说明：截止目前CentOS 7.x最新版本为CentOS 7.0-1804，下面介绍CentOS 7.0的具体安装配置过程
+
+
+前置工作	
+	VMware 设置
+		1、点击工具栏：编辑（E）
+		2、点击：虚拟网络编辑器
+		3、点击：更改设置（需具备管理员权限）
+		4、点击条目：VNnet8
+		5、取消勾选：使用本地DHCP服务奖IP地址分配给虚拟机（D）
+		6、修改：子网IP（I）：192.168.2.0 子网掩码（M）：255.255.255.0
+		7、点击：NAT设置（S）
+		8、修改：网关IP（G）：192.168.2.2                          		#下方的 端口转发（F）：可在实现虚拟机的端口穿透功能。
+		9、将虚拟机的 网络适配器 选择 NAT模式。
+	win系统的网络适配器设置
+		将 VMware Neteork Adapter VMnet8 设置为固定IP：192.168.2.1 子网掩码（M）：255.255.255.0
+		
+进入登录界面
+
+	账号输入root 回车
+
+	再输入上面设置的root密码回车
+
+	系统登录成功
+
+设置IP地址、网关DNS
+	ip addr		#显示网卡信息
+	ping 127.0.0.1   #看网卡是否是好的
+
+
+	说明：CentOS 7.0默认安装好之后是没有自动开启网络连接的！
+
+	cd  /etc/sysconfig/network-scripts/  #进入网络配置文件目录
+
+	vi  ifcfg-ens33  #编辑配置文件，添加修改以下内容
+	i  #进入修改
+
+	HWADDR=00:0C:29:8D:24:73
+
+	TYPE=Ethernet 
+
+	BOOTPROTO=static  #启用静态IP地址 
+
+	DEFROUTE=yes 
+
+	PEERDNS=yes 
+
+	PEERROUTES=yes 
+
+	IPV4_FAILURE_FATAL=no 
+
+	IPV6INIT=yes 
+
+	IPV6_AUTOCONF=yes
+
+	IPV6_DEFROUTE=yes 
+
+	IPV6_PEERDNS=yes 
+
+	IPV6_PEERROUTES=yes 
+
+	IPV6_FAILURE_FATAL=no 
+
+	NAME=eno16777736 
+
+	UUID=ae0965e7-22b9-45aa-8ec9-3f0a20a85d11 
+
+	ONBOOT=yes  #开启自动启用网络连接 
+
+	IPADDR=192.168.2.100  #设置IP地址 
+
+	NETMASK=255.255.255.0  #设置子网掩码 
+
+	GATEWAY0=192.168.2.2  #设置网关 
+
+	DNS1=8.8.8.8  #设置主DNS 
+
+	DNS2=8.8.4.4  #设置备DNS 
+
+	:wq!  #保存退出 
+
+	service network restart  #重启网络 
+
+	ping www.baidu.com  #测试网络是否正常
+
+	ip addr  #查看IP地址
+
+	设置主机名为www
+		hostname  www  #设置主机名为www
+		vi /etc/hostname #编辑配置文件
+		www  #修改localhost.localdomain为www
+		:wq!  #保存退出
+		vi /etc/hosts #编辑配置文件
+		127.0.0.1  localhost  www  #修改localhost.localdomain为www
+		:wq!  #保存退出
+		shutdown -r now  #重启系统
+
+
+		
+================================================================    更新ContOS    ==============================================================
+	阿里镜像网站地址
+		https://opsx.alibaba.com/mirror
+		
+	安装wget
+		yum -y install wget
+		
+	添加阿里云镜像
+		wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+		
+
+	在CentOS 7下更改yum源与更新系统。
+
+	[1] 首先备份/etc/yum.repos.d/CentOS-Base.repo
+		cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+	[2] 进入yum源配置文件所在文件夹
+		[root@localhost yum.repos.d]# cd /etc/yum.repos.d/
+	[3] 下载163的yum源配置文件，放入/etc/yum.repos.d/(操作前请做好相应备份)
+		[root@localhost yum.repos.d]# wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+	[4] 运行yum makecache生成缓存
+		[root@localhost yum.repos.d]# yum makecache
+	[5] 更新系统(时间比较久,主要看个人网速)
+		[root@localhost yum.repos.d]# yum -y update
+	[6] 安装vim编辑器
+		[root@localhost ~]# yum -y install vim*
+
+
+================================================================   安装 MySQL	============================================================
+	mysql -u root -p
+	vHGnmre56l)_w%
+	
+	sa	5dsfGGhfdl)_w%				CRUD@%
+	admin	d12h.Po(_f				ALL@%
+	root	vHGnmre56l)_w%			ALL@localhost			
+	customer	5sfR3o3_osfdl)_w%	CRUD+CD@%
+	dts	5sfR3o3_osfdl)_w%	CRUD+CD@%
+	
+	使用yum 命令更新MySQL		
+		yum update mysql-server
+		
+	使用yum 命令安装MySQL
+	
+	查看有没有安装包:
+		yum list installed | grep mysql
+		
+	如果有，就先全部卸载，命令如下：		
+		yum -y remove mysql-libs.x86_64
+		
+		yum remove mysql mysql-server mysql-libs compat-mysql80
+		rm -rf /var/lib/mysql
+		rm /etc/my.cnf
+		rm /var/log/mysqld.log
+		
+	查看是否还有mysql软件:	
+		rpm -qa | grep mysql
+		
+	如果有，就先全部卸载，命令如下：	
+		rpm -e mysql　　// 普通删除模式
+		rpm -e --nodeps mysql　　// 强力删除模式，如果使用上面命令删除时，提示有依赖的其它文件，则用该命令可以对其进行强力删除
+
+	安装 MySQL：
+		下载 MySQL Yum Repository
+			下载地址为：https://dev.mysql.com/downloads/repo/yum/
+			
+			wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+			
+		添加 MySQL Yum Repository
+			添加 MySQL Yum Repository 到你的系统 repository 列表中，执行:
+				yum localinstall mysql80-community-release-el7-1.noarch.rpm
+				
+			验证下是否添加成功
+				yum repolist enabled | grep "mysql.*-community.*"
+				
+				/*
+				可以看到下面内容：
+					[root@bogon software]# yum repolist enabled | grep "mysql.*-community.*"
+					mysql-connectors-community/x86_64        MySQL Connectors Community           1
+					mysql-tools-community/x86_64             MySQL Tools Community                1
+					mysql56-community/x86_64                 MySQL 5.6 Community Server          13
+				*/
+
+		选择要启用 MySQL 版本
+			查看 MySQL 版本，执行
+				yum repolist all | grep mysql
+				
+				可以通过类似下面的语句来启动某些版本
+				/*
+					yum-config-manager --disable mysql56-community
+					yum-config-manager --enable mysql57-community-dmr
+					或者通过修改 /etc/yum.repos.d/mysql-community.repo 文件
+
+					# Enable to use MySQL 5.6
+					[mysql56-community]
+					name=MySQL 5.6 Community Server
+					baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/7/$basearch/
+					enabled=1
+					gpgcheck=1
+					gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+					其中 enabled=0 是指禁用，enabled=1 指启用。
+
+					注意： 任何时候，只能启用一个版本。
+					
+					执行
+					
+					yum repolist enabled | grep mysql
+					查看当前的启动的 MySQL 版本
+
+					[root@bogon software]# yum repolist enabled | grep mysql
+					mysql-connectors-community/x86_64        MySQL Connectors Community           14
+					mysql-tools-community/x86_64             MySQL Tools Community                17
+					mysql56-community/x86_64                 MySQL 5.6 Community Server          139
+				*/
+				
+		通过 Yum 来安装 MySQL
+			yum install mysql-community-server 
+				
+			验证 MySQL 安装
+				whereis mysql
+				mysqladmin --version
+				
+				可以看到 MySQL 的安装目录是 /usr/bin/
+				[root@localhost ~]# whereis mysql
+				mysql: /usr/bin/mysql /usr/lib64/mysql /usr/share/mysql /usr/share/man/man1/mysql.1.gz	
+		方式（1）：（这个方法好像不行啊！！！！）
+			初始化 MySQL：
+				mysqld --initialize
+				
+			Mysql安装成功后，默认的root用户密码为空，你可以使用以下命令来创建root用户的密码：（好像不行啊！！！！）
+				mysqladmin -u root password "vHGnmre56l)_w%";
+			
+			通过以下命令来连接到Mysql服务器：
+				[root@host]# mysql -u root -p
+				Enter password:*******	
+			
+		方式（2）：
+
+			service mysqld start
+			service mysqld status
+			grep 'temporary password' /var/log/mysqld.log
+			
+			在服务器初始启动时，如果服务器的数据目录为空，则会发生以下情况：
+
+			服务器已初始化。
+
+			SSL证书和密钥文件在数据目录中生成。
+
+			validate_password 已安装并已启用。
+
+			将'root'@'localhost创建一个超级用户帐户。设置超级用户的密码并将其存储在错误日志文件中。要显示它，请使用以下命令：
+				grep 'temporary password' /var/log/mysqld.log
+				
+				/*
+					A temporary password is generated for root@localhost: vHrs77dl)_w%
+
+				*/	
+			
+			通过使用生成的临时密码登录并为超级用户帐户设置自定义密码，尽快更改root密码：
+
+			shell> mysql -uroot -p
+
+			mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'vHGnmre56l)_w%';
+			
+			注意
+				validate_password 默认安装。实现的默认密码策略validate_password要求密码包含至少一个大写字母，一个小写字母，一个数字和一个特殊字符，并且密码总长度至少为8个字符。
+						
+
+	至此，整个 MySQL 安装完成！！！
+	
+	防火墙设置	
+		执行
+			firewall-cmd --permanent --zone=public --add-port=3306/tcp
+			firewall-cmd --permanent --zone=public --add-port=3306/udp
+		这样就开放了相应的端口。
+
+		执行
+			firewall-cmd --reload 
+		使最新的防火墙设置规则生效。
+		
+				
+	启动和关闭 MySQL Server
+		启动 MySQL Server
+			systemctl start  mysqld
+			
+		查看 MySQL Server 状态
+			systemctl status  mysqld
+			
+		关闭 MySQL Server
+			systemctl stop mysqld		
+			
+		重启 MySQL Server
+			service mysqld restart
+			
+		测试是否安装成功
+			mysql
+		
+	远程访问设置
+		1、创建一个普通用户 sa ，密码是 5dsfGGhfdl)_w%
+
+			CREATE USER 'sa'@'%' IDENTIFIED BY '5dsfGGhfdl)_w%';
+		
+		给这个用户授予 SELECT,INSERT,UPDATE,DELETE 的远程访问的权限，这个账号一般用于提供给实施的系统访问
+
+			GRANT SELECT,INSERT,UPDATE,DELETE  ON *.* TO 'sa'@'%';		
+
+		
+		2、创建一个管理员用户 admin 账号 ，密码是 d12h.Po(_f
+
+			CREATE USER 'admin'@'%' IDENTIFIED BY 'd12h.Po(_f';
+		
+		给这个用户授予所有的远程访问的权限。这个用户主要用于管理整个数据库、备份、还原等操作。
+
+			GRANT ALL  ON *.* TO 'admin'@'%';
+			
+		3、创建一个普通用户 customer ，密码是 5sfR3o3_osfdl)_w%
+
+			CREATE USER 'customer'@'%' IDENTIFIED BY '5sfR3o3_osfdl)_w%';
+		
+		给这个用户授予 SELECT,INSERT,UPDATE,DELETE,CREATE,DROP 的远程访问的权限，这个账号一般用于提供给实施的系统访问
+
+			GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP  ON *.* TO 'customer'@'%';
+		
+		使授权立刻生效
+
+		flush privileges;
+		
+	开机自起(貌似会自动开机自启！！！)（下面的命令有问题）
+		查看 MySQL 服务是否开机启动
+
+			[root@localhost ~]# systemctl is-enabled mysql.service;echo $?
+			enabled
+			0
+		如果是 enabled 则说明是开机自动，如果不是，执行
+
+		chkconfig --levels 235 mysqld on
+		
+	Linux MySQL 几个重要 的目录
+		数据库目录 /var/lib/mysql/
+		配置文件 /usr/share /mysql（mysql.server命令及配置文件）
+		相关命令 /usr/bin（mysqladmin mysqldump等命令）
+		启动脚本 /etc/rc.d/init.d/（启动脚本文件mysql的目录）
+		
+		datadir=/var/lib/mysql
+		socket=/var/lib/mysql/mysql.sock
+
+		log-error=/var/log/mysqld.log
+		pid-file=/var/run/mysqld/mysqld.pid	
+		
+	设置字符集
+		一般的，为了支持中文，我们应该讲字符集设为 UTF-8， 执行
+
+		SHOW VARIABLES LIKE 'character%';
+		查看当前 MySQL 字符集
+		mysql>  SHOW VARIABLES LIKE 'character%';	
+		
+		设置
+			vi /etc/my.cnf
+			添加：
+				[mysqld]   
+				character_set_server = utf8
+		
+	
+===============================================================  JDK安装： ================================================================
+
+JDK安装：
+一：解压安装
+	cd /usr/local/src
+
+	tar -zxvf jdk-9.0.4_linux-x64_bin.tar.gz
+	或
+	％tar zxvf jdk-8uversion-linux-x64.tar.gz
+	
+二：设置环境变量
+	[root@localhost java]# vi /etc/profile
+	在profile中添加如下内容:
+
+	#set java environment
+	JAVA_HOME=/usr/local/src/jdk1.8.0_181
+	JRE_HOME=/usr/local/src/jdk1.8.0_181/jre
+	CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+	PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+	export JAVA_HOME JRE_HOME CLASS_PATH PATH
+
+	让修改生效:
+
+	[root@localhost java]# source /etc/profile
+
+三：验证JDK有效性
+
+	[root@localhost java]# java -version
+	java version "1.7.0_79"
+	Java(TM) SE Runtime Environment (build 1.7.0_79-b15)
+	Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)
+		
+===============================================================  TomCat9 ================================================================
+		
+TomCat安装：
+一：解压安装
+	cd /usr/local/src
+
+	tar -zxvf apache-tomcat-9.0.10.tar.gz 
+
+
+二：防火墙设置	
+		执行
+			firewall-cmd --permanent --zone=public --add-port=8080/tcp
+			firewall-cmd --permanent --zone=public --add-port=8080/udp
+		这样就开放了相应的端口。
+
+		执行
+			firewall-cmd --reload 
+		使最新的防火墙设置规则生效。
+
+		列出所有端口
+		netstat -ntlp
+
+		查看Nginx是否运行
+		ps -ax | grep Nginx
+		
+
+===============================================================  Nginx ================================================================
+		
+安装依赖
+	yum install gcc
+	yum install pcre-devel
+	yum install zlib zlib-devel
+	yum install openssl openssl-devel
+	//一键安装上面四个依赖
+	yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel
+	
+下载nginx的tar包
+
+	//创建一个文件夹
+	cd /usr/local
+	mkdir nginx
+	cd nginx
+	//下载tar包
+	wget http://nginx.org/download/nginx-1.13.7.tar.gz
+	tar -zxvf nginx-1.13.7.tar.g
+
+安装nginx
+	//进入nginx目录
+	cd /usr/local/nginx
+	//执行命令
+	./configure
+	//执行make命令
+	make
+	//执行make install命令
+	make install
+	
+Nginx常用命令
+
+	启动命令
+		[root@bogon sbin]# cd /usr/local/nginx/sbin/
+		[root@bogon sbin]# ./nginx 
+
+	
+	查看进程命令
+		ps -ef | grep nginx
+
+	创建 Nginx 运行使用的用户 www：
+		[root@bogon conf]# /usr/sbin/groupadd www 
+		[root@bogon conf]# /usr/sbin/useradd -g www www
+
+	配置nginx.conf 
+		/usr/local/nginx/conf/nginx.conf
+
+	
+	Nginx 其他命令:
+	一旦nginx启动，就可以通过调用带有-s参数的可执行文件来控制它。使用以下语法：
+		/usr/local/nginx/sbin/nginx -t            		 # 检查配置文件ngnix.conf的正确性命令
+		/usr/local/nginx/sbin/nginx -s reload            # 重新载入配置文件
+		/usr/local/nginx/sbin/nginx -s reopen            # 重启 Nginx
+		kill -HUP Nginx主进程号							 # 平滑重启
+		/usr/local/nginx/sbin/nginx -s quit              # 优雅停止 Nginx
+		/usr/local/nginx/sbin/nginx -s stop              # 停止 Nginx
+		/usr/local/nginx/sbin/nginx -v					 # Nginx 版本号_验证安装
+		
+	
+配置防火墙
+	//打开防火墙文件
+	sudo vim /etc/sysconfig/iptables
+	//新增行  开放80端口
+	-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+	//保存退
+	//重启防火墙
+	sudo service iptables restart
+	
+	
+	firewall-cmd --permanent --zone=public --add-port=80/tcp
+	firewall-cmd --permanent --zone=public --add-port=80/udp
+	执行
+
+	firewall-cmd --reload 
+	使最新的防火墙设置规则生
+	
+	列出所有端口
+	netstat -ntlp
+
+	查看Nginx是否运行
+	ps -ax | grep nginx
+	
+Nginx虚拟域名配置及测试验证
+
+	//编辑nginx.conf
+	sudo vi /usr/local/nginx/conf/nginx.conf
+	//增加行 
+	include vhost/*.conf
+	//保存退出
+	//在/usr/local/nginx/conf目录新建vhost文件夹
+	mkdir vhost
+	//创建每个域名的配置
+	sudo vim jimisun.com.conf
+	//节点中增加入响应的配置 端口转发  或者访问文件系统
+	
+Nginx启动
+	//进入nginx安装目录
+	cd sbin
+	sudo ./nginx
+	测试访问
+	http://ip地址		
+		
+===============================================================  redis ================================================================
+
+	tar -zxvf redis-4.0.11.tar.gz 
+	cd redis-4.0.11
+	make
+	cd src
+	cd /usr/local/src/redis-4.0.11/src
+	./usr/local/src/redis-4.0.11/src/redis-server /usr/local/src/redis-4.0.11/redis.conf
+	./usr/local/src/redis-4.0.11/src/redis-cli
+	./redis-server redis.conf					#redis.conf 是一个默认的配置文件。我们可以根据需要使用自己的配置文件。
+	./redis-cli
+		set foo bar
+		get foo
+		
+	firewall-cmd --permanent --zone=public --add-port=6379/tcp
+	firewall-cmd --permanent --zone=public --add-port=6379/udp
+
+	firewall-cmd --reload 
+	使最新的防火墙设置规则生
+	
+	设置主从
+		slaveof 192.168.2.100 6379
+		masterauth aB(D2f9
+		
+	查看redis是否运行	
+	ps -ax | grep redis
+
+	redis设置密码访问
+	vi  /redis-4.0.11/redis.conf
+	#requirepass foobared去掉注释，foobared改为自己的密码，我在这里改为
+	requirepass aB(D2f9
+	
+	#后台运行
+	daemonize yes
+	
+	auth aB(D2f9
+	
+	redis启动
+	./usr/local/src/redis-4.0.11/src/redis-server /usr/local/src/redis-4.0.11/redis.conf
+
+	
+	redis关闭
+
+	pkill redis
+
+
+===============================================================  MongoDB ================================================================
+MongoDB
+
+firewall-cmd --permanent --zone=public --add-port=27017/tcp
+
+查看 mongod 是否运行
+ps -ax | grep mongod
+ps -ef | grep mongod
+
+whereis mongod
+
+
+
+利用阿里云的源yum方式安装Mongodb
+1）在/etc/yum.repos.d 创建一个mongodb-org.repo 源文件
+	[root@qd-vpc-dev-op01 ~]$ cd /etc/yum.repos.d/
+	[root@qd-vpc-dev-op01 yum.repos.d]$ touch mongodb-org.repo
+	[root@qd-vpc-dev-op01 yum.repos.d]$ cat mongodb-org.repo
+	
+	[mongodb-org]
+	name=MongoDB Repository
+	baseurl=https://mirrors.aliyun.com/mongodb/yum/redhat/7Server/mongodb-org/4.1/x86_64/
+	gpgcheck=0
+	enabled=1
+	
+	或
+	
+	[mongodb-org-4.0]
+	name=MongoDB Repository
+	baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
+	gpgcheck=1
+	enabled=1
+	gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+	
+	
+2）清空缓存和更新yum源
+	[root@qd-vpc-dev-op01 yum.repos.d]$ yum clean all
+	[root@qd-vpc-dev-op01 yum.repos.d]$ yum makecache
+#更新yum源
+	[root@qd-vpc-dev-op01 yum.repos.d]$ yum update
+ 
+3) 安装MongoDB
+	[root@qd-vpc-dev-op01 yum.repos.d]$ yum install -y mongodb-org  或 yum install -y mongodb-enterprise
+
+
+4) 启动MongoDB
+	[root@localhost ~]# service mongod start
+	Redirecting to /bin/systemctl start mongod.service
+	
+	或
+	
+	mongod --auth --port 27017 --dbpath /var/lib/mongo -f /etc/mongod.conf -fork
+	
+	[root@localhost ~]# ps -ef | grep mongod
+	mongod 24960 1 1 23:43 ? 00:00:00 /usr/bin/mongod -f /etc/mongod.conf
+	root 24989 24056 0 23:43 pts/0 00:00:00 grep --color=auto mongod
+	查看mongo状态
+		systemctl status mongod.service
+	
+5) 停止MongoDB
+	[root@localhost ~]# service mongod stop
+	
+	
+
+6) 重启MongoDB
+
+	sudo service mongod restart	
+	
+
+7) 开始使用MongoDB
+
+	mongo --host 127.0.0.1:27017
+
+	在连接期间进行身份验证
+	mongo --host 127.0.0.1:27017 -u "admin" -p "148895" --authenticationDatabase "admin"
+	
+	
+8) 开机自启-------------------安装完就是开机自启不要执行这个命令
+	[root@localhost ~]# chkconfig mongod on	
+	
+9) 安全
+		use admin;
+		db.createUser({user: 'admin', pwd: '148895', roles: [{role: 'userAdminAnyDatabase', db: 'admin'}]})
+		db.auth('admin', '148895')			#输出 1 表示验证成功
+		db.createCollection("myAdmincollection")
+		db.myAdmincollection.insert({
+		   _id: 100,
+		   title: 'MongoDB Overview', 
+		   description: 'MongoDB is no sql database',
+		   by: 'yiibai tutorials',
+		   url: 'http://www.yiibai.com',
+		   tags: ['mongodb', 'database', 'NoSQL'],
+		   likes: 100,
+		})
+		show collections
+		db.myAdmincollection.find().pretty()
+		
+		use test;
+		db.createUser(
+		  {
+			user: "myTester",
+			pwd: "xyz123",
+			roles: [ { role: "readWrite", db: "test" },
+					 { role: "read", db: "reporting" } ]
+		  }
+		)
+		show collections
+		db.auth('myTester', 'xyz123')
+
+		db.createUser(
+		  {
+			user: "dts",
+			pwd: "123456",
+			roles: [ { role: "readWrite", db: "mongo_oms_api" },
+					 { role: "readWrite", db: "oms_api_log",
+					 { role: "readWrite", db: "platform_task_info",
+					 { role: "readWrite", db: "platform_task_error" } ]
+		  }
+		)
+		
+		db.auth('dts', '123456')
+		
+		mongod --auth --port 27017 --dbpath /var/lib/mongo
+		
+		#启动命令
+		./bin/mongod -f /etc/mongod.conf --auth
+		#启动命令
+			/*
+			如果/etc/mongod.conf已经做了如下配置，就不用添加 --auth
+			security:
+				authorization: enabled
+			*/	
+		./bin/mongod -f /etc/mongod.conf 
+		#关闭命令
+		./bin/mongod  --shutdown -f /etc/mongod.conf --auth
+		
+		
+		db.createCollection("mycollection")
+
+		show collections
+		
+		db.mycollection.insert({
+		   _id: 100,
+		   title: 'MongoDB Overview', 
+		   description: 'MongoDB is no sql database',
+		   by: 'yiibai tutorials',
+		   url: 'http://www.yiibai.com',
+		   tags: ['mongodb', 'database', 'NoSQL'],
+		   likes: 100,
+		})
+		
+		db.mycollection.find().pretty()
+		
+		
+		use test
+
+		db.createUser(
+		  {
+			user: "simpleUser",
+			pwd: "simplePass",
+			roles: [{ role: "readWrite", db: "test" }}]
+		  }
+		)
+		
+		
+		
+mongo --port 27017 -u "adminUser" -p "adminPass" --authenticationDatabase "admin"
+		
+9) 命令
+		show dbs					#显示数据库大小情况
+		db							#显示当前数据库
+
+
+		
+		
+三、URI 形式的访问
+	生产中常用 URI 形式对数据库进行连接
+
+	mongodb://your.db.ip.address:27017/foo
+	添加用户名密码验证
+
+	mongodb://simpleUser:simplePass@your.db.ip.address:27017/foo
+	
+四、卸载
+
+	4.1 关闭服务
+		service mongod stop
+		
+	4.2 删除相关的包
+		yum erase $(rpm -qa | grep mongodb-org)
+		
+	4.3 删除目录和文件
+		rm -r /var/log/mongodb
+		rm -r /var/lib/mongo	
+
+===============================================================  zookeeper ================================================================
+
+tar -zxvf zookeeper-3.4.13.tar.gz 
+
+3. 开启防火墙端口
+firewall-cmd --permanent --zone=public --add-port=2181/tcp
+firewall-cmd --permanent --zone=public --add-port=2888/tcp
+firewall-cmd --permanent --zone=public --add-port=3888/tcp
+
+
+4. 创建数据和日志文件夹
+cd /tmp/zookeeper
+
+//cd /usr/local/zookeeper-3.4.6
+mkdir data
+mkdir logs
+
+5. 将zookeeper目录下conf下的zoo_sample.cfg拷贝一份，命名为zoo.cfg
+cp zoo_sample.cfg zoo.cfg
+
+
+
+6.配置集群服务器
+server.1=192.168.2.100:2888:3888				//其中2888是zookeeper服务之间通信的端口；3888是zookeeper与其他应用程序通信端口
+server.2=192.168.2.101:2888:3888
+server.3=192.168.2.102:2888:3888
+
+
+
+7. 在上面创建的／home/www/zookeeper-3.4.8/data下创建myid文件,并在其中写入对应的ip的机器的编号（上面的server.1）中的1
+vi myid
+1
+
+8、启动 zookeeper 服务：
+    ./zkServer.sh start
+    如打印如下信息则表明启动成功：
+    ZooKeeper JMX enabled by default
+    Using config: /usr/local/services/zookeeper/zookeeper-3.4.9/bin/../conf/zoo.cfg
+    Starting zookeeper ... STARTED
+
+13、查询 zookeeper 状态：
+    ./zkServer.sh status
+
+14、关闭 zookeeper 服务：
+    zkServer.sh stop
+    如打印如下信息则表明成功关闭：
+    ZooKeeper JMX enabled by default
+    Using config: /usr/local/services/zookeeper/zookeeper-3.4.9/bin/../conf/zoo.cfg
+    Stopping zookeeper ... STOPPED
+
+15、重启 zookeeper 服务：
+    zkServer.sh restart
+    如打印如下信息则表明重启成功：
+    ZooKeeper JMX enabled by default
+    Using config: /usr/local/services/zookeeper/zookeeper-3.4.9/bin/../conf/zoo.cfg
+    ZooKeeper JMX enabled by default
+    Using config: /usr/local/services/zookeeper/zookeeper-3.4.9/bin/../conf/zoo.cfg
+    Stopping zookeeper ... STOPPED
+    ZooKeeper JMX enabled by default
+    Using config: /usr/local/services/zookeeper/zookeeper-3.4.9/bin/../conf/zoo.cfg
+    Starting zookeeper ... STARTED
+
+16. 验证
+	./zkCli.sh -server 192.168.2.100:2181
+	help
+
+
+===============================================================  Kafka ================================================================
+快速开始
+
+	防火墙设置	
+		执行
+			firewall-cmd --permanent --zone=public --add-port=9092/tcp
+			firewall-cmd --permanent --zone=public --add-port=9092/udp
+		这样就开放了相应的端口。
+
+		执行
+			firewall-cmd --reload
+		使最新的防火墙设置规则生效。
+
+第1步：下载代码并解压缩它。
+	
+	tar -zxvf kafka_2.12-2.0.0.tgz
+	
+第2步：启动服务器
+	Kafka使用ZooKeeper，因此如果您还没有ZooKeeper服务器，则需要先启动它。
+	现在启动Kafka服务器：
+		bin/kafka-server-start.sh config/server.properties
+
+	停止Kafka服务器：	
+		bin/kafka-server-stop.sh config/server.properties
+		
+第3步：创建主题
+	1、让我们创建一个名为“test”的主题，它只包含一个分区，只有一个副本：
+		说明：备份因子replication-factor越大，则说明集群容错性越强，就是当集群down掉后，数据恢复的可能性越大。所有的分区数里的内容共同组成了一份数据，
+		分区数partions越大，则该topic的消息就越分散，集群中的消息分布就越均匀。
+	
+		bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+		
+		集群上创建备份因子为3，分区数为4的Topic：
+			bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 4 --topic kafka
+		
+		知道哪个经纪人（broker）正在做什么？要查看运行“describe topics”命令：
+			bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic
+			
+			Topic:my-replicated-topic   PartitionCount:1    ReplicationFactor:3 Configs:
+			Topic: my-replicated-topic  Partition: 0    Leader: 1   Replicas: 1,2,0 Isr: 1,2,0
+			
+			这是输出的解释。第一行给出了所有分区的摘要，每个附加行提供有关一个分区的信息。由于我们只有一个分区用于此主题，因此只有一行。
+
+			“leader”是负责给定分区的所有读取和写入的节点。每个节点将成为随机选择的分区部分的领导者。
+			“replicas”是复制此分区日志的节点列表，无论它们是否为领导者，或者即使它们当前处于活动状态。
+			“isr”是“同步”复制品的集合。这是副本列表的子集，该列表当前处于活跃状态并且已经被领导者捕获。
+			
+			拿partition:0这个分区来说，该分区的Leader是server0，分布在id为0，1，2这三个节点上，而且这三个节点都活着。
+			
+		
+	2、运行list topic命令，我们现在可以看到该主题：
+		bin/kafka-topics.sh --list --zookeeper localhost:2181
+		> test
+		
+	3、修改topic，添加分区数：
+		bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic test --partitions 4
+	
+	4、删除topic：
+		bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic test
+		
+		此时你若想真正删除它，可以登录zookeeper客户端：
+
+		  命令：./zkCli.sh -server 192.168.2.100:2181
+				rmr /
+				rmr /cluster
+				rmr /controller_epoch
+				rmr /brokers 
+				rmr /admin
+				rmr /isr_change_notification
+				rmr /consumers
+				rmr /log_dir_event_notification
+				rmr /latest_producer_id_block
+				rmr /config
+
+
+
+		  找到topic所在的目录：ls /brokers/topics
+
+		  找到要删除的topic，执行命令：rmr /brokers/topics/【topic name】即可，此时topic被彻底删除。
+	
+	5、检查消费者的位置
+	
+		bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group my-group
+		
+	6、列出所有主题的所有使用者组：
+		
+		bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+		
+	7、要查看偏移量，如前所述，我们“描述”这样的消费者群体：	
+		bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group my-group
+		
+		
+第4步：发送一些消息
+	Kafka附带一个命令行客户端，它将从文件或标准输入中获取输入，并将其作为消息发送到Kafka集群。默认情况下，每行将作为单独的消息发送。
+	运行生产者，然后在控制台中键入一些消息以发送到服务器：
+		bin/kafka-console-producer.sh --broker-list 192.168.2.100:9092 --topic test
+
+第5步：启动消费者
+	Kafka还有一个命令行使用者，它会将消息转储到标准输出。
+		bin/kafka-console-consumer.sh --bootstrap-server 192.168.2.102:9092 --topic test3 --from-beginning
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+======================================================================常用命令==============================================================
+
+top -c 
+
+kill 1352
+
+service mysqld status    MySQL已经自动启动
+
+列出所有端口：
+netstat -ntlp
+	redis 6379
+	kafka 9092
+	mysql 3306
+	mongod 27017
+	zookeeper 2181
+	zookeeper 2888
+	zookeeper 3888
+	
+参数说明：
+a：表示所有
+n：表示不查询dns
+t：表示tcp协议
+u：表示udp协议
+p：表示查询占用的程序
+l：表示查询正在监听的程序
+
+
+
+zookeeper 启动
+./usr/local/src/zookeeper-3.4.12/bin/zkServer.sh start /usr/local/src/zookeeper-3.4.12/conf/zoo.cfg
+
+zookeeper 查看各个zk服务器的角色信息
+./usr/local/src/zookeeper-3.4.12/bin/zkServer.sh status /usr/local/src/zookeeper-3.4.12/conf/zoo.cfg
+
+zookeeper 重启
+./usr/local/src/zookeeper-3.4.12/bin/zkServer.sh restart /usr/local/src/zookeeper-3.4.12/conf/zoo.cfg
+
+
+	
+redis启动
+./usr/local/src/redis-4.0.11/src/redis-server /usr/local/src/redis-4.0.11/redis.conf
+
+
+
+kafka 启动
+	/usr/local/src/kafka_2.12-2.0.0/bin/kafka-server-start.sh /usr/local/src/kafka_2.12-2.0.0/config/server.properties
+
+kafka 查看主题列表：
+	/usr/local/src/kafka_2.12-2.0.0/bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+kafka 查看主题的broker：	
+	/usr/local/src/kafka_2.12-2.0.0/bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic
+
+kafka 运行生产者
+	/usr/local/src/kafka_2.12-2.0.0/bin/kafka-console-producer.sh --broker-list 192.168.2.100:9092 --topic test
+
+kafka 启动消费者
+	/usr/local/src/kafka_2.12-2.0.0/bin/kafka-console-consumer.sh --bootstrap-server 192.168.2.102:9092 --topic test3 --from-beginn	
+	
+kafka 停止
+	/usr/local/src/kafka_2.12-2.0.0/bin/kafka-server-stop.sh /usr/local/src/kafka_2.12-2.0.0/config/server.properties
+	Ctrl + C
+
+
+
+
+
+NoSyncDeliverCause
+
+	
+yum安装：
+
+       # yum install 包名
+
+yum卸载：
+
+       # yum -y remove 包名
+yum升级：
+
+       # yum update 包名
+
+
+
+
+
+
+
+
+
+
+
+
+	

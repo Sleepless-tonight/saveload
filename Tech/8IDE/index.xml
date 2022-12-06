@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>8、IDE on Save Load</title>
+    <link>https://www.saveload.cn/Tech/8IDE/</link>
+    <description>Recent content in 8、IDE on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/8IDE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/chrom/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/chrom/</guid>
+      <description>手动强制同步 地址栏输入：chrome://sync-internals中间那列中下方，点击“Stop Sync (Keep Data)”，之后点击“Request Start”两个设备上的Chrome都进行一次这个操作更新：如果不行，重启chrome再重复以上操作</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Window10%E4%B8%8B-%E6%90%AD%E5%BB%BA-Rust-%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Window10%E4%B8%8B-%E6%90%AD%E5%BB%BA-Rust-%E7%8E%AF%E5%A2%83/</guid>
+      <description>Window10下 搭建 Rust 环境 首先要说明的是，本文是介绍 windows + MSYS2 + Rust ，非 MSVC。
+Windows作业系统中的Rust程式，预设会使用MSVC来编译的。但是如果Rust程式有使用到GNU相关的函式库(例如GTK)时，就得搭配MinGW来编译了。MSYS2 是一套整合MinGW和POSIX环境的工具，可以在Windows作业系统上模拟出Linux作业系统的开发环境，且能利用MinGW直接编译出在Windows作业系统上执行的程式。
+1、安装和设定 MSYS2 已经有其他博文做过介绍，参考即可
+2、安在Windows作业系统安装Rust开发环境 现在官方推荐使用 rustup 来安装 Rust 环境。
+首先在MSYS2的终端机上执行以下指令：
+curl https://sh.rustup.rs -sSf | sh 注意，在 Windows 上面，Rust 编译需要 Visual C++ Build Tools。请先安装这个之后再安装 rustup。
+安装程式可能会提示说需要微软的Visual C++ Build Tools。不要理它，输入「y」继续。
+选择第二个选项，自定义Rust要如何安装
+host triple的部份，输入「x86_64-pc-windows-gnu」，也就是我们的Rust编译器预设使用的目标(target)名称。
+接着输入Rust的版本，建议使用「stable」，如果有nightly需求的话就用「nightly」吧！
+概要文件(要安装哪些工具和数据)?(最小/违约/完成) Profile (which tools and data to install)? (minimal/default/complete)
+default
+接着设定是否要修改「PATH」环境变数，输入「y」。
+然后回到选单，选择第一项，开始用我们刚才的设定来安装Rust。
+更新与卸载 更新所有 Rust，运行：
+rustup update 校验Rust编译环境
+rustc --versioncargo --version 检查 rustup 自身是否有更新：</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Windward-C-%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Windward-C-%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>Windward C 语言开发环境配置 1、下载安装 MSYS2 MSYS2官方网站：http://www.msys2.org/
+清华大学开源镜像：https://mirrors.tuna.tsinghua.edu.cn/help/msys2/
+中国科学技术大学源 https://mirrors.ustc.edu.cn/help/msys2.html
+2、修改软件源： 可修改 中科大源 或者 清华大学 源
+3、配置更新 执行 pacman -Sy 刷新软件包数据即可。 执行 pacman-key &amp;ndash;init
+pacman -Syu
+更新软件，更新过程中可能要求重新打开终端，另外更新的时候，pacman的软件源可能恢复到默认，需要手动再修改一次。 gpg: 警告：服务器 ‘gpg-agent’ 比我们的版本更老 （2.2.19-unknown &amp;lt; 2.2.20-unknown） gpg: 注意： 过时的服务器可能缺少重要的安全修复。 gpg: 注意： 使用 “gpgconf &amp;ndash;kill all” 来重启他们。
+4、安装工具链 pacman -S mingw-w64-x86_64-cmake mingw-w64-x86_64-extra-cmake-modules pacman -S mingw-w64-x86_64-make pacman -S mingw-w64-x86_64-gdb pacman -S mingw-w64-x86_64-toolchain 命令出错可重新执行。
+5、安装GTK3及其依赖项 运行： pacman -S mingw-w64-x86_64-gtk3 pacman -S mingw-w64-x86_64-gtk4
+步骤5（可选）：安装构建工具 如果要用其他语言（例如C，C ++，Fortran等）开发GTK3应用程序，则需要像gcc和其他开发工具这样的编译器： pacman -S mingw-w64-x86_64-toolchain base-devel</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/%E6%82%A8%E7%9A%84%E6%9C%AC%E5%9C%B0-Git-%E6%8F%90%E4%BA%A4%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%E6%9C%AA%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%82%A8%E7%9A%84%E5%B8%90%E6%88%B7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/%E6%82%A8%E7%9A%84%E6%9C%AC%E5%9C%B0-Git-%E6%8F%90%E4%BA%A4%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%E6%9C%AA%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%82%A8%E7%9A%84%E5%B8%90%E6%88%B7/</guid>
+      <description>在 Git 中设置您的提交电子邮件地址 您可以使用 git config 命令更改与 Git 提交关联的电子邮件地址。 您设置的新电子邮件地址将在从命令行推送到 GitHub.com 的任何未来提交中显示。 在您更改提交电子邮件地址之前进行的任何提交仍与之前的电子邮件地址关联。
+为计算机上的每个仓库设置电子邮件地址 打开 Git Bash。 在 Git 中设置电子邮件地址。 您可以使用 GitHub 提供的 no-reply 电子邮件地址或任何电子邮件地址。 $ git config &amp;ndash;global user.email &amp;ldquo;email@example.com&amp;rdquo; 确认在 Git 中正确设置了电子邮件地址： $ git config &amp;ndash;global user.email email@example.com 将电子邮件地址添加到您在 GitHub 上的帐户，以便您的提交归因于您并且出现在您的贡献图中。 更多信息请参阅“添加电子邮件地址到 GitHub 帐户”。</description>
+    </item>
+    
+  </channel>
+</rss>

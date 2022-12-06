@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Save Load</title>
+    <link>https://www.saveload.cn/Tech/8IDE/Git/</link>
+    <description>Recent content in Git on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/8IDE/Git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Git/IDEA-Git-%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Git/IDEA-Git-%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</guid>
+      <description>IDEA Git 配置代理
+idea需要git操作的这样配置代理，在当前项目目录进入命令行：
+配置全局参数：&amp;ndash;global
+代理 ：git config &amp;ndash;global http.proxy http://127.0.0.1:7890 代理 ：git config http.proxy http://127.0.0.1:7890 取消代理： git config &amp;ndash;global &amp;ndash;unset http.proxy 取消代理： git config &amp;ndash;unset http.proxy 查询是否使用：git config &amp;ndash;global http.proxy 查询是否使用：git config http.proxy</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Git/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%A3%80%E5%87%BA%E5%AE%A1%E6%A0%B8%E5%92%8C%E5%90%88%E5%B9%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Git/%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%A3%80%E5%87%BA%E5%AE%A1%E6%A0%B8%E5%92%8C%E5%90%88%E5%B9%B6/</guid>
+      <description>第 1 步. 获取并查看此合并请求的分支
+git fetch origingit checkout -b &amp;#34;feature-快递停发&amp;#34; &amp;#34;origin/feature-快递停发&amp;#34; 第 2 步. 在本地查看更改 第 3 步. 合并分支并解决出现的任何冲突
+git fetch origingit checkout &amp;#34;test&amp;#34;git merge --no-ff &amp;#34;feature-快递停发&amp;#34; 第 4 步. 将合并结果推送到GitLab
+git push origin &amp;#34;test&amp;#34; </description>
+    </item>
+    
+  </channel>
+</rss>

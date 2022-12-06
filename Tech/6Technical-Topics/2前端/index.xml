@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2、前端 on Save Load</title>
+    <link>https://www.saveload.cn/Tech/6Technical-Topics/2%E5%89%8D%E7%AB%AF/</link>
+    <description>Recent content in 2、前端 on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/6Technical-Topics/2%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/6Technical-Topics/2%E5%89%8D%E7%AB%AF/html%E5%92%8Ccss%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/6Technical-Topics/2%E5%89%8D%E7%AB%AF/html%E5%92%8Ccss%E7%AC%94%E8%AE%B0/</guid>
+      <description>html和css笔记
+&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-html和css&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;- 一、HTML的基本概念 1、HTML(Hyper Text Markup Language) 超文本标记语言 2、静态页面&amp;mdash;为后续的动态页面服务（JSP） 3、IP:在因特网(Internet)中唯一标识一台主机 公网IP：在整个互联网中唯一 局域网IP：在同一个局域网中唯一，不同的局域网之间可能重复。 4、URL：统一资源定位符 www.baidu.com 5、HTTP协议：超文本协议，通常是字符串 http://192.168.0.3:8989/xxx
+二、HTML的内容： 1、文件的创建及运行 .html、.htm后缀，只需浏览器就能运行。 2、HTML的语法特点： 内容都是以标签的形式，这些标签一般由前标签和后标签构成 我的第一个网页 Hello World 3、语法不严格：大小写不区分 一般情况成对出现，特殊，没有标签体的标签可以只有前标签 标签可以嵌套，但是不能交叉
+三、具体的语法： 1、head部分：在网页中不见 1)title 网页的标题 2)meta 标签 ：定义网页中信息、特点 设置网页的编码格式
+&amp;lt;META name=&amp;quot;author&amp;quot; content=&amp;quot;zpark&amp;quot;&amp;gt; 定义网页作者 &amp;lt;META name=&amp;quot;keywords&amp;quot; content=&amp;quot;云计算,,...&amp;quot;&amp;gt; 定义网页关键字 &amp;lt;META http-equiv=&amp;quot;refresh&amp;quot; content=&amp;quot;1&amp;quot;&amp;gt; &amp;lt;META http-equiv=&amp;quot;refresh&amp;quot; content=&amp;quot;2;url=http://www.taobao.com&amp;quot;&amp;gt; 定义网页2秒后自动刷新到&amp;quot;淘宝 3)script标签 :引入或者开发javascript代码 4)link标签 ：引入css文件 2、body：在网页中可见 1)body标签 &amp;lt;BODY bgcolor=&amp;quot;#FFCCFF“ background=&amp;quot;back_image.GIF&amp;quot; text=&amp;quot;#FF0000&amp;quot;&amp;gt; bgcolor=	背景颜色 background=	背景图片 text=	前景颜色(字体颜色) 2)注释 &amp;lt;!--注释内容--&amp;gt; 3)特殊的符号： 空格：	&amp;amp;nbsp; &amp;gt;:	&amp;amp;gt; &amp;lt;:	&amp;amp;lt; 换行：	&amp;lt;br/&amp;gt;; 水平线：&amp;lt;hr size=&amp;quot;30px&amp;quot; color=&amp;quot;green&amp;quot; width=&amp;quot;300px&amp;quot; align=&amp;quot;right&amp;quot;/&amp;gt; size :垂直高度 width：水平宽度 color：水平线的颜色 取值：英文值 RGB值 align：水平线的对其方式 left|center(默认)|right 版权符号：&amp;amp;copy; 水平线：&amp;lt;hr size=&amp;quot;30px&amp;quot; color=&amp;quot;green&amp;quot; width=&amp;quot;300px&amp;quot; align=&amp;quot;right&amp;quot;/&amp;gt; size :垂直高度(线的厚度) width：水平宽度(线的颜色) color：水平线的颜色 取值：英文值 RGB值 align：水平线的对其方式 left|center(默认)|right 4、body标签中的元素 1、文本相关 1)标题标签&amp;lt;H1&amp;gt;&amp;lt;H6&amp;gt; 说明：&amp;lt;H1&amp;gt;到&amp;lt;H6&amp;gt;字体大小依次递减 如果需要更大或者更小的字号借助CSS 2)&amp;lt;font&amp;gt;标签 &amp;lt;font size = &amp;quot;2&amp;quot; color = &amp;quot;red&amp;quot; face = &amp;quot;黑体&amp;quot;&amp;gt; .</description>
+    </item>
+    
+  </channel>
+</rss>

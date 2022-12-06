@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring Cloud on Save Load</title>
+    <link>https://www.saveload.cn/Tech/3Java/Spring/Spring-Cloud/</link>
+    <description>Recent content in Spring Cloud on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/3Java/Spring/Spring-Cloud/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Spring/Spring-Cloud/Spring-Cloud/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Spring/Spring-Cloud/Spring-Cloud/</guid>
+      <description>Hello World Spring Cloud 分布式/版本化配置，服务注册和发现，负载均衡，断路器，智能路由，微代理，控制总线，一次性令牌，全局锁定，领导选举，分布式会话，集群状态</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rust on Save Load</title>
+    <link>https://www.saveload.cn/Tech/4Other-Language/rust/</link>
+    <description>Recent content in rust on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/4Other-Language/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/4Other-Language/rust/Rust/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/4Other-Language/rust/Rust/</guid>
+      <description>变量 首先必须说明，Rust 是强类型语言，但具有自动判断变量类型的能力。
+声明变量，需要使用 let 关键字
+let a = 123; a 就被确定为整型数字，不能把字符串类型的值赋给它。
+使变量变得&amp;quot;可变&amp;quot;（mutable）只需一个 mut 关键字。
+let mut a = 123;a = 456; 变量的值可以&amp;quot;重新绑定&amp;quot;，但在&amp;quot;重新绑定&amp;quot;以前不能私自被改变，
+重影（Shadowing） 重影就是刚才讲述的所谓&amp;quot;重新绑定&amp;quot;，重影就是指变量的名称可以被重新使用的机制。
+fn main() {let x = 5;let x = x + 1;let x = x * 2;println!(&amp;#34;The value of x is: {}&amp;#34;, x);// The value of x is: 12} 重影与可变变量的赋值不是一个概念，重影是指用同一个名字重新代表另一个变量实体，其类型、可变属性和值都可以变化。但可变变量赋值仅能发生值的变化。
+常量 const a: i32 = 123; 比那辆可以允许重影</description>
+    </item>
+    
+  </channel>
+</rss>

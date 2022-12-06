@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker 命令 on Save Load</title>
+    <link>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/</link>
+    <description>Recent content in Docker 命令 on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-1-%E5%AE%B9%E5%99%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-1-%E5%AE%B9%E5%99%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86/</guid>
+      <description>Docker 命令大全 容器生命周期管理 run start/stop/restart kill rm pause/unpause create exec Docker run 命令 docker run ：创建一个新的容器并运行一个命令
+语法 docker run [OPTIONS] IMAGE [COMMAND] [ARG...] OPTIONS说明：
+-a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项； -d: 后台运行容器，并返回容器ID； -i: 以交互模式运行容器，通常与 -t 同时使用； -P: 随机端口映射，容器内部端口随机映射到主机的端口 -p: 指定端口映射，格式为：主机(宿主)端口:容器端口 -t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用； &amp;ndash;name=&amp;ldquo;nginx-lb&amp;rdquo;: 为容器指定一个名称； &amp;ndash;dns 8.8.8.8: 指定容器使用的DNS服务器，默认和宿主一致； &amp;ndash;dns-search example.com: 指定容器DNS搜索域名，默认和宿主一致； -h &amp;ldquo;mars&amp;rdquo;: 指定容器的hostname； -e username=&amp;ldquo;ritchie&amp;rdquo;: 设置环境变量； &amp;ndash;env-file=[]: 从指定文件读入环境变量； &amp;ndash;cpuset=&amp;ldquo;0-2&amp;rdquo; or &amp;ndash;cpuset=&amp;ldquo;0,1,2&amp;rdquo;: 绑定容器到指定CPU运行； -m :设置容器使用内存最大值； &amp;ndash;net=&amp;ldquo;bridge&amp;rdquo;: 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型； &amp;ndash;link=[]: 添加链接到另一个容器； &amp;ndash;expose=[]: 开放一个端口或一组端口； &amp;ndash;volume , -v: 绑定一个卷 &amp;ndash;ulimit , 生成的进程的资源进行限制 实例 使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-2-%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-2-%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C/</guid>
+      <description> Docker 命令大全 容器操作 ps inspect top attach events logs wait export port Docker rm 命令 docker rm ：删除一个或多个容器。
+语法 docker rm [OPTIONS] CONTAINER [CONTAINER...] OPTIONS说明：
+-f :通过 SIGKILL 信号强制删除一个运行中的容器。
+-l :移除容器间的网络连接，而非容器本身。
+-v :删除与容器关联的卷。
+实例 强制删除容器 db01、db02：
+docker rm -f db01 db02 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-3-%E5%AE%B9%E5%99%A8rootfs%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-3-%E5%AE%B9%E5%99%A8rootfs%E5%91%BD%E4%BB%A4/</guid>
+      <description> Docker 命令大全 容器rootfs命令 commit cp diff Docker rm 命令 docker rm ：删除一个或多个容器。
+语法 docker rm [OPTIONS] CONTAINER [CONTAINER...] OPTIONS说明：
+-f :通过 SIGKILL 信号强制删除一个运行中的容器。
+-l :移除容器间的网络连接，而非容器本身。
+-v :删除与容器关联的卷。
+实例 强制删除容器 db01、db02：
+docker rm -f db01 db02 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-4-%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-4-%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93/</guid>
+      <description> Docker 命令大全 镜像仓库 login pull push search Docker rm 命令 docker rm ：删除一个或多个容器。
+语法 docker rm [OPTIONS] CONTAINER [CONTAINER...] OPTIONS说明：
+-f :通过 SIGKILL 信号强制删除一个运行中的容器。
+-l :移除容器间的网络连接，而非容器本身。
+-v :删除与容器关联的卷。
+实例 强制删除容器 db01、db02：
+docker rm -f db01 db02 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-5-%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-5-%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/</guid>
+      <description> Docker 命令大全 本地镜像管理 images rmi tag build history save load import Docker rm 命令 docker rm ：删除一个或多个容器。
+语法 docker rm [OPTIONS] CONTAINER [CONTAINER...] OPTIONS说明：
+-f :通过 SIGKILL 信号强制删除一个运行中的容器。
+-l :移除容器间的网络连接，而非容器本身。
+-v :删除与容器关联的卷。
+实例 强制删除容器 db01、db02：
+docker rm -f db01 db02 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-6-info-version/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4-6-info-version/</guid>
+      <description> Docker 命令大全 info|version info version Docker rm 命令 docker rm ：删除一个或多个容器。
+语法 docker rm [OPTIONS] CONTAINER [CONTAINER...] OPTIONS说明：
+-f :通过 SIGKILL 信号强制删除一个运行中的容器。
+-l :移除容器间的网络连接，而非容器本身。
+-v :删除与容器关联的卷。
+实例 强制删除容器 db01、db02：
+docker rm -f db01 db02 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Docker/Docker-%E5%91%BD%E4%BB%A4/Docker-%E5%91%BD%E4%BB%A4/</guid>
+      <description> Docker 命令大全 转自：菜鸟教程
+链接：https://www.runoob.com/docker/docker-command-manual.html
+容器生命周期管理 run start/stop/restart kill rm pause/unpause create exec 容器操作 ps inspect top attach events logs wait export port 容器rootfs命令 commit cp diff 镜像仓库 login pull push search 本地镜像管理 images rmi tag build history save load import info|version info version </description>
+    </item>
+    
+  </channel>
+</rss>
