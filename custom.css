@@ -1,1 +1,14 @@
 /* You can add custom styles here. */
+
+
+
+:root[color-theme="dark"] {
+    --header-background: #011938;
+    --header-font-color: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --header-background: #011938;
+        --header-font-color: #ffffff;
+    }
+}
