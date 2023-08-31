@@ -14,7 +14,31 @@
       <description>Java并发编程：Synchronized 同步并实现原理 一、Synchronized 的基本使用 修饰普通方法
 对方法的同步本质上是对对象的同步（方法本质上是属于对象的方法），所以同一同的对象，只能顺序的执行，不能并发执行。 修饰静态方法
 对静态方法的同步本质上是对类的同步（静态方法本质上是属于类的方法，而不是对象上的方法），所以即使方法属于不同的对象，但是它们都属于类的实例，所以也只能顺序的执行，不能并发执行。 修饰代码块
-对于代码块的同步实质上需要获取Synchronized关键字后面括号中对象的monitor jvm用monitorenter和monitorexit指令对同步提供显式支持。而java常用sychronized方法。sychronized“方法”通常不是用monitorenter和monitorexit指令实现的。往往是由“方法调用指令”检查常数池里的ACC_SYCHRONIZED标志但monitorenter和monitorexit指令是为了支持sychronized“语句”而存在的。注意这里的方法和语句的区别。语句实例如下：test.javapublic class test {public test() {}public static void main(String[] args) {synchronized(new Object()){int i = 0;}}}编译完的结果：C:\JBuilderX\bin&amp;gt;javap -c -classpath &amp;#34;d:/epm40/classes&amp;#34; testCompiled from &amp;#34;test.java&amp;#34;public class test extends java.lang.Object{public test();Code:0: aload_01: invokespecial #1; //Method java/lang/Object.&amp;#34;&amp;#34;:()V4: nop5: returnpublic static void main(java.</description>
+对于代码块的同步实质上需要获取Synchronized关键字后面括号中对象的monitor jvm用monitorenter和monitorexit指令对同步提供显式支持。而java常用sychronized方法。
+sychronized“方法”通常不是用monitorenter和monitorexit指令实现的。往往是由“方法调用指令”检查常数池里的ACC_SYCHRONIZED标志
+但monitorenter和monitorexit指令是为了支持sychronized“语句”而存在的。
+注意这里的方法和语句的区别。
+语句实例如下：test.java
+public class test {
+public test() {
+}
+public static void main(String[] args) {
+synchronized(new Object()){
+int i = 0;
+}
+}
+}
+编译完的结果：
+C:\JBuilderX\bin&amp;gt;javap -c -classpath &amp;#34;d:/epm40/classes&amp;#34; test
+Compiled from &amp;#34;test.java&amp;#34;
+public class test extends java.lang.Object{
+public test();
+Code:
+0: aload_0
+1: invokespecial #1; //Method java/lang/Object.&amp;#34;&amp;#34;:()V
+4: nop
+5: return
+public static void main(java.</description>
     </item>
     
     <item>

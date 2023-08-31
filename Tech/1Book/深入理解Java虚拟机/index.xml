@@ -11,7 +11,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.saveload.cn/Tech/1Book/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%A0%87%E9%A2%98/</guid>
-      <description> 深入理解Java虚拟机 标签：Java、基础、深入理解Java虚拟机 、源码解读、进阶、Java开源框架 时间：2020年8月3日18:13:00 连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk </description>
+      <description> 深入理解Java虚拟机 标签：Java、基础、深入理解Java虚拟机 、源码解读、进阶、Java开源框架 时间：2020年8月3日18:13:00 连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk </description>
     </item>
     
     <item>
@@ -160,7 +160,7 @@ Java堆既可以被实现成固定大小的，也可以是可扩展的，不过�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.saveload.cn/Tech/1Book/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/</guid>
-      <description>深入理解Java虚拟机 标签：Java、基础、深入理解Java虚拟机 、源码解读、进阶、Java开源框架 时间：2020年8月3日18:13:00 连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk 前言 致谢 第一部分　走近Java 第1章　走近Java 2 1.1　概述 2 1.2　Java技术体系 3 1.3　Java发展史 4 1.4　Java虚拟机家族 12 1.4.1　虚拟机始祖：Sun Classic/Exact VM 12 1.4.2　武林盟主：HotSpot VM 13 1.4.3　小家碧玉：Mobile/Embedded VM 14 1.4.4　天下第二：BEA JRockit/IBM J9 VM 15 1.4.5　软硬合璧：BEA Liquid VM/Azul VM 16 1.4.6　挑战者：Apache Harmony/Google Android Dalvik VM 17 1.4.7　没有成功，但并非失败：Microsoft JVM及其他 18 1.4.8　百家争鸣 19 1.5　展望Java技术的未来 21 1.5.1　无语言倾向 21 1.</description>
+      <description>深入理解Java虚拟机 标签：Java、基础、深入理解Java虚拟机 、源码解读、进阶、Java开源框架 时间：2020年8月3日18:13:00 连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk 前言 致谢 第一部分　走近Java 第1章　走近Java 2 1.1　概述 2 1.2　Java技术体系 3 1.3　Java发展史 4 1.4　Java虚拟机家族 12 1.4.1　虚拟机始祖：Sun Classic/Exact VM 12 1.4.2　武林盟主：HotSpot VM 13 1.4.3　小家碧玉：Mobile/Embedded VM 14 1.4.4　天下第二：BEA JRockit/IBM J9 VM 15 1.4.5　软硬合璧：BEA Liquid VM/Azul VM 16 1.4.6　挑战者：Apache Harmony/Google Android Dalvik VM 17 1.4.7　没有成功，但并非失败：Microsoft JVM及其他 18 1.4.8　百家争鸣 19 1.5　展望Java技术的未来 21 1.5.1　无语言倾向 21 1.</description>
     </item>
     
   </channel>

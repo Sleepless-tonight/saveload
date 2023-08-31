@@ -107,7 +107,7 @@
       "url" : "https://www.saveload.cn/Tech/1Book/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8D%8F%E8%AE%AE%E5%92%8C%E5%AE%9E%E8%B7%B5%E7%AC%AC%E4%B8%89%E7%89%88/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8D%8F%E8%AE%AE%E5%92%8C%E5%AE%9E%E8%B7%B5%E7%AC%AC%E4%B8%89%E7%89%88-%E7%AC%AC-1-%E9%83%A8%E5%88%86%E5%8E%9F%E5%88%99-2-%E5%BB%BA%E7%AB%8B%E7%BD%91%E7%BB%9C/",
       "headline": "计算机网络：原理、协议和实践，第三版 第 1 部分：原则 2 建立网络",
       "description": "计算机网络：原理、协议和实践，第三版 转自：Computer Networking : Principles, Protocols and Practice, third edition\n链接：https:\/\/beta.computer-networking.info\/syllabus\/default\/index.html\n第 1 部分：原则 构建网络 数据报组织 计算转发表 平面或分层地址 处理异构数据链层 虚拟线路组织 控制平面 距离矢量路由 链路状态路由 构建网络 在上一节中，我们已经解释了可靠协议如何允许主机可靠地交换数据，即使底层物理层不完善并因此不可靠。通过电线将两台主机连接在一起是构建网络的第一步。然而，这还不够。主机通常需要与其他不通过直接物理层链路直接连接的主机进行交互。这可以通过在数据链路层之上添加一层来实现：网络层。\n网络层\n网络层的主要目标是:允许连接到不同网络的主机通过称为路由器的中间系统交换信息。网络层的信息单位称为数据包。\n在解释网络层的操作之前，记住数据链路层提供的服务的特性是很有用的。数据链路层有许多变体。有些提供可靠的服务，而有些则不提供任何交付保证。可靠的数据链路层服务在传输错误频繁的无线网络等环境中很受欢迎。另一方面，当物理层提供几乎可靠的服务时，通常使用不可靠的服务（即只有极少部分的帧受到传输错误的影响）。这种几乎可靠的服务经常用于有线和光网络。在本章中，我们将假设数据链路层服务提供了一个几乎可靠的服务，因为这既是最通用的服务，也是部署最广泛的服务。\n有两种主要类型的数据链路层。最简单的数据链路层是当只有两个通信系统通过物理层直接连接时。当两个通信系统之间存在点对点链路时，使用这种数据链路层。这两个系统可以是主机或路由器。PPP（点对点协议），定义在RFC 1661 是这种点对点数据链路层的示例。数据链路层实体交换帧。左侧数据链路层实体发送的数据链路帧通过物理层传输，可以到达右侧数据链路层实体。点对点数据链路层既可以提供不可靠的服务（帧可能损坏或丢失），也可以提供可靠的服务（在这种情况下，数据链路层包括重传机制）。\n第二种类型的数据链路层是在局域网 (LAN) 中使用的层。从概念上讲，LAN 是一组通信设备，因此任何两个设备都可以通过数据链路层直接交换帧。主机和路由器都可以连接到 LAN。有的局域网只连接几个设备，但也有可以连接成百上千台设备的局域网。在本章中，我们关注点对点数据链路层的利用。我们稍后将描述局域网的组织和操作以及它们对网络层的影响。\n即使我们只考虑点对点数据链路层，这些层也有一个我们不能忽视的重要特征。没有数据链路层能够发送无限大小的帧。每个数据链路层都有一个最大帧大小。有十多个不同的数据链路层，不幸的是，它们中的大多数使用不同的最大帧大小。当我们需要在连接到不同类型数据链路层的主机之间交换数据时，最大帧大小的这种异质性会导致问题。\n作为第一步，让我们假设我们只需要交换少量数据。在这种情况下，帧的最大长度没有问题。但是，还有其他更有趣的问题需要我们解决。为了理解这些问题，让我们考虑下图中表示的网络。\n该网络包含两种类型的设备。主机用圆圈表示，路由器用方框表示。主机是一种能够发送和接收数据以供自己使用的设备，而路由器在大多数情况下只是将数据转发到其最终目的地。路由器有多个链接到相邻的路由器或主机。主机通常通过单个链接连接到网络。如今，随着无线网络的发展，越来越多的主机配备了多个物理接口。这些主机通常称为多宿主。尽管如此，同时使用多个接口通常会导致超出本文档范围的实际问题。出于这个原因，我们在这本电子书中只考虑单宿主主机。\n要了解网络操作背后的关键原理，让我们分析一下需要执行的所有操作，以允许上述网络中的主机 A 向主机 B 发送一个字节。由于在 A-R1 链路之上使用了数据链路层，主机 A 可以轻松地在一个帧内向路由器 R1 发送一个字节。然而，在接收到这个帧后，路由器 R1 需要知道这个字节是发往主机 B 而不是它自己的。这是网络层的目标。\n网络层使不通过中间路由器直接连接的主机之间能够传输信息。这种传输是通过将要传输的信息放入称为数据包的数据结构中来执行的。作为包含有用数据和控制信息的帧，数据包还包含用户提供的数据和控制信息。网络层的一个重要问题是：识别网络内部节点（主机或路由器）的能力。该识别是通过将地址与每个节点相关联来执行的。地址_通常表示为一个比特序列。大多数网络使用固定长度的地址。在这个阶段，让我们简单地假设上述网络中的每个节点都有一个地址，该地址对应于图中其名称的二进制表示。\n为了向主机 B 发送一个字节的信息，主机 A 需要将该信息放入一个数据包中。除了正在传输的数据之外，数据包还包含源节点和目标节点的地址，或者指示到达目标需要遵循的路径的信息。\n网络层有两种可能的组织：\n数据报 虚电路 数据报组织 网络层的第一个也是最流行的组织是数据报组织。该组织的灵感来自邮政服务的组织。每个主机都由一个网络层地址标识。要将信息发送到远程主机，主机会创建一个数据包，其中包含：\n目的主机的网络层地址 自己的网络层地址 要发送的信息 为了理解数据报的组织，让我们考虑下图。一个由字母表示的网络层地址已分配给每个主机和路由器。为了向主机J发送一些信息，主机A创建一个包含它自己的地址、目标地址和要交换的信息的数据包。",
-      "wordCount" : "182",
+      "wordCount" : "341",
       "inLanguage": "zh-cn",
       "isFamilyFriendly": "true",
       "mainEntityOfPage": {
@@ -395,13 +395,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3cc3d2c1"
+                class="gdoc-nav__toggle" id="navtree-fe2db443"
                 
               
             />
             <label
               
-                for="navtree-3cc3d2c1" class="flex justify-between align-center"
+                for="navtree-fe2db443" class="flex justify-between align-center"
               
             >
               
@@ -488,13 +488,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-64c2c9fd"
+                class="gdoc-nav__toggle" id="navtree-e5426527"
                 
               
             />
             <label
               
-                for="navtree-64c2c9fd" class="flex justify-between align-center"
+                for="navtree-e5426527" class="flex justify-between align-center"
               
             >
               
@@ -588,13 +588,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-faf43468"
+                class="gdoc-nav__toggle" id="navtree-6f592cfe"
                 
               
             />
             <label
               
-                for="navtree-faf43468" class="flex justify-between align-center"
+                for="navtree-6f592cfe" class="flex justify-between align-center"
               
             >
               
@@ -645,13 +645,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-2ae1a033"
+                class="gdoc-nav__toggle" id="navtree-a399c26b"
                 
               
             />
             <label
               
-                for="navtree-2ae1a033" class="flex justify-between align-center"
+                for="navtree-a399c26b" class="flex justify-between align-center"
               
             >
               
@@ -859,6 +859,42 @@
                     class="gdoc-nav__entry"
                   >
                     减肥、健身
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E5%BE%AE%E5%8D%9A/"
+                    class="gdoc-nav__entry"
+                  >
+                    微博
                   </a>
                 </span>
               
@@ -1134,13 +1170,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-aca31f40"
+                class="gdoc-nav__toggle" id="navtree-0277f23f"
                 
               
             />
             <label
               
-                for="navtree-aca31f40" class="flex justify-between align-center"
+                for="navtree-0277f23f" class="flex justify-between align-center"
               
             >
               
@@ -1344,6 +1380,42 @@
               
                 <span class="flex">
                   <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E5%81%B6%E5%BE%97/"
+                    class="gdoc-nav__entry"
+                  >
+                    偶得
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E5%85%B8%E5%9E%8B%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"
                     class="gdoc-nav__entry"
                   >
@@ -1452,6 +1524,42 @@
               
                 <span class="flex">
                   <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E5%96%84%E7%9A%84%E6%A6%82%E5%BF%B5/"
+                    class="gdoc-nav__entry"
+                  >
+                    善的概念
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/"
                     class="gdoc-nav__entry"
                   >
@@ -1492,6 +1600,42 @@
                     class="gdoc-nav__entry"
                   >
                     很多年前我对焦虑症的症状描述
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E6%88%91%E7%88%B8%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A1%8C%E4%B8%9A%E7%9A%84%E7%9C%8B%E6%B3%95%E6%98%AF%E5%90%A6%E5%87%86%E7%A1%AE/"
+                    class="gdoc-nav__entry"
+                  >
+                    我爸对计算机行业的看法，是否准确？
                   </a>
                 </span>
               
@@ -1659,13 +1803,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-7bdb6418"
+                class="gdoc-nav__toggle" id="navtree-c76b9361"
                 
               
             />
             <label
               
-                for="navtree-7bdb6418" class="flex justify-between align-center"
+                for="navtree-c76b9361" class="flex justify-between align-center"
               
             >
               
@@ -1766,13 +1910,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3fd2aa84"
+                class="gdoc-nav__toggle" id="navtree-092a3f99"
                 
               
             />
             <label
               
-                for="navtree-3fd2aa84" class="flex justify-between align-center"
+                for="navtree-092a3f99" class="flex justify-between align-center"
               
             >
               
@@ -1809,6 +1953,42 @@
         
       
 
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E6%88%91%E7%9A%84/%E4%BA%BA%E7%B1%BB%E7%AE%80%E5%8F%B2%E4%BB%8E%E5%8A%A8%E7%89%A9%E5%88%B0%E4%B8%8A%E5%B8%9D-%E7%AC%AC12%E7%AB%A0-%E5%AE%97%E6%95%99%E7%9A%84%E6%B3%95%E5%88%99/"
+                    class="gdoc-nav__entry"
+                  >
+                    《人类简史：从动物到上帝》 第12章 宗教的法则
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
       
         
           
@@ -2521,13 +2701,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-68fab7e9"
+                class="gdoc-nav__toggle" id="navtree-f501cdc0"
                 
               
             />
             <label
               
-                for="navtree-68fab7e9" class="flex justify-between align-center"
+                for="navtree-f501cdc0" class="flex justify-between align-center"
               
             >
               
@@ -2657,13 +2837,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-4948519f"
+                class="gdoc-nav__toggle" id="navtree-a23e7d4d"
                 
               
             />
             <label
               
-                for="navtree-4948519f" class="flex justify-between align-center"
+                for="navtree-a23e7d4d" class="flex justify-between align-center"
               
             >
               
@@ -2757,13 +2937,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-b0ba5f50"
+                class="gdoc-nav__toggle" id="navtree-f4069326"
                 
               
             />
             <label
               
-                for="navtree-b0ba5f50" class="flex justify-between align-center"
+                for="navtree-f4069326" class="flex justify-between align-center"
               
             >
               
@@ -3073,13 +3253,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-daaf6bd1"
+                class="gdoc-nav__toggle" id="navtree-1ca821cd"
                 
               
             />
             <label
               
-                for="navtree-daaf6bd1" class="flex justify-between align-center"
+                for="navtree-1ca821cd" class="flex justify-between align-center"
               
             >
               
@@ -3288,13 +3468,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-7299c599"
+                class="gdoc-nav__toggle" id="navtree-d6aeccd6"
                 
               
             />
             <label
               
-                for="navtree-7299c599" class="flex justify-between align-center"
+                for="navtree-d6aeccd6" class="flex justify-between align-center"
               
             >
               
@@ -3395,13 +3575,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3915b10b"
+                class="gdoc-nav__toggle" id="navtree-36a8ca77"
                 checked
               
             />
             <label
               
-                for="navtree-3915b10b" class="flex justify-between align-center"
+                for="navtree-36a8ca77" class="flex justify-between align-center"
               
             >
               
@@ -3452,13 +3632,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-c0ca2bc1"
+                class="gdoc-nav__toggle" id="navtree-bb1177b7"
                 checked
               
             />
             <label
               
-                for="navtree-c0ca2bc1" class="flex justify-between align-center"
+                for="navtree-bb1177b7" class="flex justify-between align-center"
               
             >
               
@@ -3509,13 +3689,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-6fb22e70"
+                class="gdoc-nav__toggle" id="navtree-36e80970"
                 
               
             />
             <label
               
-                for="navtree-6fb22e70" class="flex justify-between align-center"
+                for="navtree-36e80970" class="flex justify-between align-center"
               
             >
               
@@ -4149,13 +4329,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-a58b8741"
+                class="gdoc-nav__toggle" id="navtree-5c22d487"
                 
               
             />
             <label
               
-                for="navtree-a58b8741" class="flex justify-between align-center"
+                for="navtree-5c22d487" class="flex justify-between align-center"
               
             >
               
@@ -4753,13 +4933,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-ef553d00"
+                class="gdoc-nav__toggle" id="navtree-b21a4e39"
                 
               
             />
             <label
               
-                for="navtree-ef553d00" class="flex justify-between align-center"
+                for="navtree-b21a4e39" class="flex justify-between align-center"
               
             >
               
@@ -5645,13 +5825,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-1ca3c3d2"
+                class="gdoc-nav__toggle" id="navtree-a0854cc8"
                 
               
             />
             <label
               
-                for="navtree-1ca3c3d2" class="flex justify-between align-center"
+                for="navtree-a0854cc8" class="flex justify-between align-center"
               
             >
               
@@ -6393,13 +6573,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-f1e4ba24"
+                class="gdoc-nav__toggle" id="navtree-2b569e10"
                 
               
             />
             <label
               
-                for="navtree-f1e4ba24" class="flex justify-between align-center"
+                for="navtree-2b569e10" class="flex justify-between align-center"
               
             >
               
@@ -6493,13 +6673,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-c693007e"
+                class="gdoc-nav__toggle" id="navtree-5e8850d6"
                 checked
               
             />
             <label
               
-                for="navtree-c693007e" class="flex justify-between align-center"
+                for="navtree-5e8850d6" class="flex justify-between align-center"
               
             >
               
@@ -6701,13 +6881,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3db3d9b4"
+                class="gdoc-nav__toggle" id="navtree-38c50775"
                 
               
             />
             <label
               
-                for="navtree-3db3d9b4" class="flex justify-between align-center"
+                for="navtree-38c50775" class="flex justify-between align-center"
               
             >
               
@@ -6801,13 +6981,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-1a947666"
+                class="gdoc-nav__toggle" id="navtree-5bb8978a"
                 
               
             />
             <label
               
-                for="navtree-1a947666" class="flex justify-between align-center"
+                for="navtree-5bb8978a" class="flex justify-between align-center"
               
             >
               
@@ -7405,13 +7585,149 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-cd939af2"
+                class="gdoc-nav__toggle" id="navtree-cc414335"
                 
               
             />
             <label
               
-                for="navtree-cd939af2" class="flex justify-between align-center"
+                for="navtree-cc414335" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/1Book/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"
+                    class="gdoc-nav__entry"
+                  >
+                    深入理解计算机系统
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/1Book/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/"
+                    class="gdoc-nav__entry"
+                  >
+                    深入理解计算机系统 第1章 计算机系统漫游
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/1Book/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"
+                    class="gdoc-nav__entry"
+                  >
+                    深入理解计算机系统
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-b126a2ef"
+                
+              
+            />
+            <label
+              
+                for="navtree-b126a2ef" class="flex justify-between align-center"
               
             >
               
@@ -7541,13 +7857,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-29bd2b5f"
+                class="gdoc-nav__toggle" id="navtree-8d03daf7"
                 
               
             />
             <label
               
-                for="navtree-29bd2b5f" class="flex justify-between align-center"
+                for="navtree-8d03daf7" class="flex justify-between align-center"
               
             >
               
@@ -7677,13 +7993,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-dc91ca4a"
+                class="gdoc-nav__toggle" id="navtree-d2338873"
                 
               
             />
             <label
               
-                for="navtree-dc91ca4a" class="flex justify-between align-center"
+                for="navtree-d2338873" class="flex justify-between align-center"
               
             >
               
@@ -7856,13 +8172,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-bbbdd5b4"
+                class="gdoc-nav__toggle" id="navtree-47f505a4"
                 
               
             />
             <label
               
-                for="navtree-bbbdd5b4" class="flex justify-between align-center"
+                for="navtree-47f505a4" class="flex justify-between align-center"
               
             >
               
@@ -8174,6 +8490,78 @@
               
                 <span class="flex">
                   <a
+                    href="/Tech/10Miscellaneous/%E6%89%B9%E5%A4%84%E7%90%86%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"
+                    class="gdoc-nav__entry"
+                  >
+                    批处理操作指南
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/10Miscellaneous/%E6%8B%89%E5%8D%95%E6%A8%A1%E5%9D%97%E4%B8%9A%E5%8A%A1%E8%AF%B4%E6%98%8E/"
+                    class="gdoc-nav__entry"
+                  >
+                    拉单模块业务说明
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Tech/10Miscellaneous/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/"
                     class="gdoc-nav__entry"
                   >
@@ -8309,13 +8697,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-6d1faa3e"
+                class="gdoc-nav__toggle" id="navtree-4c0b21c4"
                 
               
             />
             <label
               
-                for="navtree-6d1faa3e" class="flex justify-between align-center"
+                for="navtree-4c0b21c4" class="flex justify-between align-center"
               
             >
               
@@ -8488,13 +8876,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-68b84803"
+                class="gdoc-nav__toggle" id="navtree-c092b0c8"
                 
               
             />
             <label
               
-                for="navtree-68b84803" class="flex justify-between align-center"
+                for="navtree-c092b0c8" class="flex justify-between align-center"
               
             >
               
@@ -8689,13 +9077,49 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-2cdb9fc5"
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/2Computer-Science/%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E7%A0%81%E5%93%88%E5%B8%8C%E6%BC%94%E8%BF%9B%E7%AE%80%E5%8F%B2/"
+                    class="gdoc-nav__entry"
+                  >
+                    编码，加密，与密码哈希演进简史
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-24a49080"
                 
               
             />
             <label
               
-                for="navtree-2cdb9fc5" class="flex justify-between align-center"
+                for="navtree-24a49080" class="flex justify-between align-center"
               
             >
               
@@ -8825,13 +9249,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-ea7db3fe"
+                class="gdoc-nav__toggle" id="navtree-6bc485fe"
                 
               
             />
             <label
               
-                for="navtree-ea7db3fe" class="flex justify-between align-center"
+                for="navtree-6bc485fe" class="flex justify-between align-center"
               
             >
               
@@ -8925,13 +9349,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-7070e678"
+                class="gdoc-nav__toggle" id="navtree-ddf590a1"
                 
               
             />
             <label
               
-                for="navtree-7070e678" class="flex justify-between align-center"
+                for="navtree-ddf590a1" class="flex justify-between align-center"
               
             >
               
@@ -9925,13 +10349,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-f5c65f8d"
+                class="gdoc-nav__toggle" id="navtree-eccacb39"
                 
               
             />
             <label
               
-                for="navtree-f5c65f8d" class="flex justify-between align-center"
+                for="navtree-eccacb39" class="flex justify-between align-center"
               
             >
               
@@ -10090,13 +10514,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-6cab0ef1"
+                class="gdoc-nav__toggle" id="navtree-91c86ce3"
                 
               
             />
             <label
               
-                for="navtree-6cab0ef1" class="flex justify-between align-center"
+                for="navtree-91c86ce3" class="flex justify-between align-center"
               
             >
               
@@ -10242,6 +10666,42 @@
           </li>
         
       
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/2Computer-Science/4Operating-System/NTFS/%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%92%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%8B%E7%BB%8D/"
+                    class="gdoc-nav__entry"
+                  >
+                    硬盘分区和文件系统格式化介绍
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
     
   </ul>
 
@@ -10269,13 +10729,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-851830c0"
+                class="gdoc-nav__toggle" id="navtree-3f8a0c9e"
                 
               
             />
             <label
               
-                for="navtree-851830c0" class="flex justify-between align-center"
+                for="navtree-3f8a0c9e" class="flex justify-between align-center"
               
             >
               
@@ -10369,13 +10829,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-e005d0bf"
+                class="gdoc-nav__toggle" id="navtree-2e73d488"
                 
               
             />
             <label
               
-                for="navtree-e005d0bf" class="flex justify-between align-center"
+                for="navtree-2e73d488" class="flex justify-between align-center"
               
             >
               
@@ -10541,13 +11001,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-76fc3aac"
+                class="gdoc-nav__toggle" id="navtree-f5fb44df"
                 
               
             />
             <label
               
-                for="navtree-76fc3aac" class="flex justify-between align-center"
+                for="navtree-f5fb44df" class="flex justify-between align-center"
               
             >
               
@@ -10708,78 +11168,6 @@
               
                 <span class="flex">
                   <a
-                    href="/Tech/3Java/Java-Lambda-Expressions/"
-                    class="gdoc-nav__entry"
-                  >
-                    Java Lambda Expressions
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/3Java/Java-Method-References/"
-                    class="gdoc-nav__entry"
-                  >
-                    Java Method References
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
                     href="/Tech/3Java/Java-Regular-Expression/"
                     class="gdoc-nav__entry"
                   >
@@ -10856,42 +11244,6 @@
                     class="gdoc-nav__entry"
                   >
                     Java Util Concurrent
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/3Java/Java-%E4%B8%AD-Stream-%E7%9A%84%E7%94%A8%E6%B3%95/"
-                    class="gdoc-nav__entry"
-                  >
-                    Java 中 Stream 的用法
                   </a>
                 </span>
               
@@ -11176,10 +11528,10 @@
               
                 <span class="flex">
                   <a
-                    href="/Tech/3Java/Java-%E6%B3%9B%E5%9E%8BGenerics-/"
+                    href="/Tech/3Java/Java-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/"
                     class="gdoc-nav__entry"
                   >
-                    Java 泛型( Generics )
+                    Java 类加载机制详解
                   </a>
                 </span>
               
@@ -11216,42 +11568,6 @@
                     class="gdoc-nav__entry"
                   >
                     Java 过滤器与 Spring Mvc拦截器
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/3Java/Java8%E6%96%B0%E6%8F%90%E4%BE%9B%E6%97%B6%E9%97%B4API/"
-                    class="gdoc-nav__entry"
-                  >
-                    Java8新提供时间 API
                   </a>
                 </span>
               
@@ -11419,13 +11735,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-772d34df"
+                class="gdoc-nav__toggle" id="navtree-85bce19c"
                 
               
             />
             <label
               
-                for="navtree-772d34df" class="flex justify-between align-center"
+                for="navtree-85bce19c" class="flex justify-between align-center"
               
             >
               
@@ -11512,13 +11828,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-929ffc05"
+                class="gdoc-nav__toggle" id="navtree-7c646b4d"
                 
               
             />
             <label
               
-                for="navtree-929ffc05" class="flex justify-between align-center"
+                for="navtree-7c646b4d" class="flex justify-between align-center"
               
             >
               
@@ -11612,13 +11928,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-4a423d1b"
+                class="gdoc-nav__toggle" id="navtree-ed36f82a"
                 
               
             />
             <label
               
-                for="navtree-4a423d1b" class="flex justify-between align-center"
+                for="navtree-ed36f82a" class="flex justify-between align-center"
               
             >
               
@@ -11712,13 +12028,365 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-a3dcb4c2"
+                class="gdoc-nav__toggle" id="navtree-62b31383"
                 
               
             />
             <label
               
-                for="navtree-a3dcb4c2" class="flex justify-between align-center"
+                for="navtree-62b31383" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Code
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-Function/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Function
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-Lambda-Expressions/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Lambda Expressions
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-List/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java List
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-Method-References/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Method References
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-%E4%B8%AD-Stream-%E7%9A%84%E7%94%A8%E6%B3%95/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 中 Stream 的用法
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-%E6%B3%9B%E5%9E%8BGenerics-/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 泛型( Generics )
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java8-%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E5%BC%95%E7%94%A8/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java8 方法引用，构造器引用
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/JDK-1.8-4%E5%A4%A7%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/"
+                    class="gdoc-nav__entry"
+                  >
+                    Jdk 1.8 4大函数式接口
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-39e12bd3"
+                
+              
+            />
+            <label
+              
+                for="navtree-39e12bd3" class="flex justify-between align-center"
               
             >
               
@@ -12028,13 +12696,321 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-34729162"
+                class="gdoc-nav__toggle" id="navtree-2a50d22d"
                 
               
             />
             <label
               
-                for="navtree-34729162" class="flex justify-between align-center"
+                for="navtree-2a50d22d" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Version
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/Java-%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7%E6%9B%B4%E6%96%B0%E5%88%B0Java20/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 各版本新特性(更新到 Java20)
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/Java8-%E6%96%B0%E6%8F%90%E4%BE%9B%E6%97%B6%E9%97%B4API/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java8 新提供时间 API
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/Java9-%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java9 版本新特性
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/Java9-%E7%89%B9%E6%80%A7-%E5%93%8D%E5%BA%94%E5%BC%8F%E6%B5%81Reactive-Stream/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java9 特性 响应式流( Reactive Stream)
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-8d7af399"
+                
+              
+            />
+            <label
+              
+                for="navtree-8d7af399" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-%E5%91%BD%E4%BB%A4/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 命令
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-%E5%91%BD%E4%BB%A4/Java-%E5%91%BD%E4%BB%A4/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 命令
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-16525981"
+                
+              
+            />
+            <label
+              
+                for="navtree-16525981" class="flex justify-between align-center"
               
             >
               
@@ -12164,13 +13140,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-fd867f00"
+                class="gdoc-nav__toggle" id="navtree-e4d8ba23"
                 
               
             />
             <label
               
-                for="navtree-fd867f00" class="flex justify-between align-center"
+                for="navtree-e4d8ba23" class="flex justify-between align-center"
               
             >
               
@@ -12545,13 +13521,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-60fa667c"
+                class="gdoc-nav__toggle" id="navtree-e0b809cf"
                 
               
             />
             <label
               
-                for="navtree-60fa667c" class="flex justify-between align-center"
+                for="navtree-e0b809cf" class="flex justify-between align-center"
               
             >
               
@@ -12609,6 +13585,158 @@
               
             >
               
+                <span class="flex">Rabbit Mq 1 基本概念</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/MQ/RabbitMQ-2-%E5%AE%89%E8%A3%85/"
+                    class="gdoc-nav__entry"
+                  >
+                    Rabbit Mq 2 安装
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">Rabbit Mq 3 Java Client 源码分析</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">Rabbit Mq 4 应用、工具及二次开发</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">Rabbit Mq 5 其它</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
                 <span class="flex">
                   <a
                     href="/Tech/3Java/MQ/RabbitMQ/"
@@ -12645,13 +13773,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-b4151e31"
+                class="gdoc-nav__toggle" id="navtree-a2d5a6ad"
                 
               
             />
             <label
               
-                for="navtree-b4151e31" class="flex justify-between align-center"
+                for="navtree-a2d5a6ad" class="flex justify-between align-center"
               
             >
               
@@ -12846,13 +13974,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-aecc763a"
+                class="gdoc-nav__toggle" id="navtree-273b4420"
                 
               
             />
             <label
               
-                for="navtree-aecc763a" class="flex justify-between align-center"
+                for="navtree-273b4420" class="flex justify-between align-center"
               
             >
               
@@ -13205,13 +14333,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-58fe5530"
+                class="gdoc-nav__toggle" id="navtree-ab2042cf"
                 
               
             />
             <label
               
-                for="navtree-58fe5530" class="flex justify-between align-center"
+                for="navtree-ab2042cf" class="flex justify-between align-center"
               
             >
               
@@ -13559,6 +14687,42 @@
               
                 <span class="flex">
                   <a
+                    href="/Tech/3Java/Spring/%E5%9F%BA%E4%BA%8ESpringBoot-AOP%E6%9D%A1%E4%BB%B6%E4%B8%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E7%8E%B0%E6%B3%A8%E8%A7%A3/"
+                    class="gdoc-nav__entry"
+                  >
+                    基于 Spring Boot Aop条件下自定义、实现注解
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Tech/3Java/Spring/%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8-Spring-Cloud-Stream/"
                     class="gdoc-nav__entry"
                   >
@@ -13658,13 +14822,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-b870c34f"
+                class="gdoc-nav__toggle" id="navtree-ee554e93"
                 
               
             />
             <label
               
-                for="navtree-b870c34f" class="flex justify-between align-center"
+                for="navtree-ee554e93" class="flex justify-between align-center"
               
             >
               
@@ -14082,13 +15246,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-f78b8718"
+                class="gdoc-nav__toggle" id="navtree-88685d74"
                 
               
             />
             <label
               
-                for="navtree-f78b8718" class="flex justify-between align-center"
+                for="navtree-88685d74" class="flex justify-between align-center"
               
             >
               
@@ -14169,6 +15333,178 @@
           </li>
         
       
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-2ac7c623"
+                
+              
+            />
+            <label
+              
+                for="navtree-2ac7c623" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Spring/Spring-Framework/"
+                    class="gdoc-nav__entry"
+                  >
+                    Spring Framework
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Spring/Spring-Framework/Spring-Framework-1-%E6%A6%82%E8%BF%B0/"
+                    class="gdoc-nav__entry"
+                  >
+                    Spring Framework 1 概述
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Spring/Spring-Framework/Spring-Framework-2-%E6%A0%B8%E5%BF%83/"
+                    class="gdoc-nav__entry"
+                  >
+                    Spring Framework 2 核心
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Spring/Spring-Framework/Spring-Framework/"
+                    class="gdoc-nav__entry"
+                  >
+                    Spring Framework
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
     
   </ul>
 
@@ -14189,13 +15525,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-92cd2711"
+                class="gdoc-nav__toggle" id="navtree-14526991"
                 
               
             />
             <label
               
-                for="navtree-92cd2711" class="flex justify-between align-center"
+                for="navtree-14526991" class="flex justify-between align-center"
               
             >
               
@@ -14332,13 +15668,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3b1941e7"
+                class="gdoc-nav__toggle" id="navtree-8c8ded13"
                 
               
             />
             <label
               
-                for="navtree-3b1941e7" class="flex justify-between align-center"
+                for="navtree-8c8ded13" class="flex justify-between align-center"
               
             >
               
@@ -14389,13 +15725,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-f80a7c16"
+                class="gdoc-nav__toggle" id="navtree-33e99110"
                 
               
             />
             <label
               
-                for="navtree-f80a7c16" class="flex justify-between align-center"
+                for="navtree-33e99110" class="flex justify-between align-center"
               
             >
               
@@ -14482,13 +15818,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-a348f404"
+                class="gdoc-nav__toggle" id="navtree-e9e4e81a"
                 
               
             />
             <label
               
-                for="navtree-a348f404" class="flex justify-between align-center"
+                for="navtree-e9e4e81a" class="flex justify-between align-center"
               
             >
               
@@ -14575,13 +15911,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-fea2e734"
+                class="gdoc-nav__toggle" id="navtree-a9ae67cf"
                 
               
             />
             <label
               
-                for="navtree-fea2e734" class="flex justify-between align-center"
+                for="navtree-a9ae67cf" class="flex justify-between align-center"
               
             >
               
@@ -14668,13 +16004,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3e6fe09e"
+                class="gdoc-nav__toggle" id="navtree-6f88af7f"
                 
               
             />
             <label
               
-                for="navtree-3e6fe09e" class="flex justify-between align-center"
+                for="navtree-6f88af7f" class="flex justify-between align-center"
               
             >
               
@@ -14734,6 +16070,42 @@
               
                 <span class="flex">
                   <a
+                    href="/Tech/4Other-Language/rust/Rust-%E5%9C%A8-Windows-%E4%B8%8A-Release-%E7%BC%96%E8%AF%91%E5%BD%BB%E5%BA%95%E5%8E%BB%E9%99%A4%E8%B0%83%E8%AF%95%E7%AC%A6%E5%8F%B7%E4%BF%A1%E6%81%AF/"
+                    class="gdoc-nav__entry"
+                  >
+                    Rust 在 Windows 上 Release 编译彻底去除调试符号信息
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Tech/4Other-Language/rust/Rust/"
                     class="gdoc-nav__entry"
                   >
@@ -14768,13 +16140,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-b4bd7490"
+                class="gdoc-nav__toggle" id="navtree-b897ab77"
                 
               
             />
             <label
               
-                for="navtree-b4bd7490" class="flex justify-between align-center"
+                for="navtree-b897ab77" class="flex justify-between align-center"
               
             >
               
@@ -14875,13 +16247,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-9af5c600"
+                class="gdoc-nav__toggle" id="navtree-06af73d4"
                 
               
             />
             <label
               
-                for="navtree-9af5c600" class="flex justify-between align-center"
+                for="navtree-06af73d4" class="flex justify-between align-center"
               
             >
               
@@ -15013,6 +16385,42 @@
               
                 <span class="flex">
                   <a
+                    href="/Tech/5English-Learning/Word-List/"
+                    class="gdoc-nav__entry"
+                  >
+                    Word List
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Tech/5English-Learning/WordsBook/"
                     class="gdoc-nav__entry"
                   >
@@ -15040,13 +16448,1042 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-cad316d1"
+                class="gdoc-nav__toggle" id="navtree-d35e6303"
                 
               
             />
             <label
               
-                for="navtree-cad316d1" class="flex justify-between align-center"
+                for="navtree-d35e6303" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-A/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English A
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-B/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English B
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-C/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English C
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-D/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English D
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-E/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English E
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-F/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English F
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-G/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English G
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-H/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English H
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-I/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English I
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-J/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English J
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-K/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English K
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-L/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English L
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-M/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English M
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-N/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English N
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-O/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English O
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-P/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English P
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-Q/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English Q
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-R/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English R
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-S/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English S
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-T/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English T
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-U/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English U
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-V/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English V
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-W/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English W
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-X/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English X
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-Y/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English Y
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-Z/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English Z
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">Coding English</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-bb868bbe"
+                
+              
+            />
+            <label
+              
+                for="navtree-bb868bbe" class="flex justify-between align-center"
               
             >
               
@@ -15097,13 +17534,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-7dc3adc6"
+                class="gdoc-nav__toggle" id="navtree-f5ef1c3c"
                 
               
             />
             <label
               
-                for="navtree-7dc3adc6" class="flex justify-between align-center"
+                for="navtree-f5ef1c3c" class="flex justify-between align-center"
               
             >
               
@@ -15305,13 +17742,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-e4001056"
+                class="gdoc-nav__toggle" id="navtree-9a6ee6f7"
                 
               
             />
             <label
               
-                for="navtree-e4001056" class="flex justify-between align-center"
+                for="navtree-9a6ee6f7" class="flex justify-between align-center"
               
             >
               
@@ -15441,13 +17878,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-26d6fadf"
+                class="gdoc-nav__toggle" id="navtree-ef830b18"
                 
               
             />
             <label
               
-                for="navtree-26d6fadf" class="flex justify-between align-center"
+                for="navtree-ef830b18" class="flex justify-between align-center"
               
             >
               
@@ -15555,13 +17992,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-dcc5739b"
+                class="gdoc-nav__toggle" id="navtree-6c45a303"
                 
               
             />
             <label
               
-                for="navtree-dcc5739b" class="flex justify-between align-center"
+                for="navtree-6c45a303" class="flex justify-between align-center"
               
             >
               
@@ -15612,13 +18049,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-e6ba110c"
+                class="gdoc-nav__toggle" id="navtree-55a09150"
                 
               
             />
             <label
               
-                for="navtree-e6ba110c" class="flex justify-between align-center"
+                for="navtree-55a09150" class="flex justify-between align-center"
               
             >
               
@@ -15712,13 +18149,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-af873c08"
+                class="gdoc-nav__toggle" id="navtree-376d2d86"
                 
               
             />
             <label
               
-                for="navtree-af873c08" class="flex justify-between align-center"
+                for="navtree-376d2d86" class="flex justify-between align-center"
               
             >
               
@@ -15812,13 +18249,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-9034b168"
+                class="gdoc-nav__toggle" id="navtree-13a538b5"
                 
               
             />
             <label
               
-                for="navtree-9034b168" class="flex justify-between align-center"
+                for="navtree-13a538b5" class="flex justify-between align-center"
               
             >
               
@@ -15912,13 +18349,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-80ac7e54"
+                class="gdoc-nav__toggle" id="navtree-1e5c18de"
                 
               
             />
             <label
               
-                for="navtree-80ac7e54" class="flex justify-between align-center"
+                for="navtree-1e5c18de" class="flex justify-between align-center"
               
             >
               
@@ -16048,13 +18485,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-e084869b"
+                class="gdoc-nav__toggle" id="navtree-469662fa"
                 
               
             />
             <label
               
-                for="navtree-e084869b" class="flex justify-between align-center"
+                for="navtree-469662fa" class="flex justify-between align-center"
               
             >
               
@@ -16148,13 +18585,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-1a6f97cc"
+                class="gdoc-nav__toggle" id="navtree-fe04dc14"
                 
               
             />
             <label
               
-                for="navtree-1a6f97cc" class="flex justify-between align-center"
+                for="navtree-fe04dc14" class="flex justify-between align-center"
               
             >
               
@@ -16255,13 +18692,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-090553f5"
+                class="gdoc-nav__toggle" id="navtree-bb4cc053"
                 
               
             />
             <label
               
-                for="navtree-090553f5" class="flex justify-between align-center"
+                for="navtree-bb4cc053" class="flex justify-between align-center"
               
             >
               
@@ -16391,13 +18828,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-241dee54"
+                class="gdoc-nav__toggle" id="navtree-4a37a514"
                 
               
             />
             <label
               
-                for="navtree-241dee54" class="flex justify-between align-center"
+                for="navtree-4a37a514" class="flex justify-between align-center"
               
             >
               
@@ -16448,157 +18885,13 @@
             <input
               type="checkbox"
               
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/8IDE/chrom/"
-                    class="gdoc-nav__entry"
-                  >
-                    Chrom
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/8IDE/Window10%E4%B8%8B-%E6%90%AD%E5%BB%BA-Rust-%E7%8E%AF%E5%A2%83/"
-                    class="gdoc-nav__entry"
-                  >
-                    Window10下 搭建 Rust 环境
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/8IDE/Windward-C-%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
-                    class="gdoc-nav__entry"
-                  >
-                    Windward C 语言开发环境配置
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/8IDE/%E6%82%A8%E7%9A%84%E6%9C%AC%E5%9C%B0-Git-%E6%8F%90%E4%BA%A4%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%E6%9C%AA%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%82%A8%E7%9A%84%E5%B8%90%E6%88%B7/"
-                    class="gdoc-nav__entry"
-                  >
-                    您的本地 Git 提交电子邮件地址未连接到您的帐户
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="gdoc-nav__toggle" id="navtree-27b56937"
+                class="gdoc-nav__toggle" id="navtree-17831cf1"
                 
               
             />
             <label
               
-                for="navtree-27b56937" class="flex justify-between align-center"
+                for="navtree-17831cf1" class="flex justify-between align-center"
               
             >
               
@@ -16685,13 +18978,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-830e2af0"
+                class="gdoc-nav__toggle" id="navtree-a4c2f110"
                 
               
             />
             <label
               
-                for="navtree-830e2af0" class="flex justify-between align-center"
+                for="navtree-a4c2f110" class="flex justify-between align-center"
               
             >
               
@@ -16814,13 +19107,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-fe763231"
+                class="gdoc-nav__toggle" id="navtree-462fe73b"
                 
               
             />
             <label
               
-                for="navtree-fe763231" class="flex justify-between align-center"
+                for="navtree-462fe73b" class="flex justify-between align-center"
               
             >
               
@@ -17130,13 +19423,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-2db1acaa"
+                class="gdoc-nav__toggle" id="navtree-c3d01c8c"
                 
               
             />
             <label
               
-                for="navtree-2db1acaa" class="flex justify-between align-center"
+                for="navtree-c3d01c8c" class="flex justify-between align-center"
               
             >
               
@@ -17345,13 +19638,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-48c65e05"
+                class="gdoc-nav__toggle" id="navtree-5c931c55"
                 
               
             />
             <label
               
-                for="navtree-48c65e05" class="flex justify-between align-center"
+                for="navtree-5c931c55" class="flex justify-between align-center"
               
             >
               
@@ -17474,13 +19767,49 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-258a6bc9"
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Git/%E6%82%A8%E7%9A%84%E6%9C%AC%E5%9C%B0-Git-%E6%8F%90%E4%BA%A4%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%E6%9C%AA%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%82%A8%E7%9A%84%E5%B8%90%E6%88%B7/"
+                    class="gdoc-nav__entry"
+                  >
+                    您的本地 Git 提交电子邮件地址未连接到您的帐户
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-20382324"
                 
               
             />
             <label
               
-                for="navtree-258a6bc9" class="flex justify-between align-center"
+                for="navtree-20382324" class="flex justify-between align-center"
               
             >
               
@@ -17538,7 +19867,14 @@
               
             >
               
-                <span class="flex">Git 命令</span>
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Git/Git-%E5%91%BD%E4%BB%A4/Git-%E5%91%BD%E4%BB%A4/"
+                    class="gdoc-nav__entry"
+                  >
+                    Git 命令
+                  </a>
+                </span>
               
               
             </label>
@@ -17567,13 +19903,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-8781af70"
+                class="gdoc-nav__toggle" id="navtree-8ad62e1b"
                 
               
             />
             <label
               
-                for="navtree-8781af70" class="flex justify-between align-center"
+                for="navtree-8ad62e1b" class="flex justify-between align-center"
               
             >
               
@@ -17674,19 +20010,112 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-44ec7225"
+                class="gdoc-nav__toggle" id="navtree-82c9a4f4"
                 
               
             />
             <label
               
-                for="navtree-44ec7225" class="flex justify-between align-center"
+                for="navtree-82c9a4f4" class="flex justify-between align-center"
               
             >
               
                 <span class="flex">
                   <a
-                    href="/Tech/8IDE/Ubuntu/"
+                    href="/Tech/8IDE/Linux/"
+                    class="gdoc-nav__entry"
+                  >
+                    Linux
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Linux/CentOS-7-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"
+                    class="gdoc-nav__entry"
+                  >
+                    Cent Os 7 开发环境部署
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-a939f73f"
+                
+              
+            />
+            <label
+              
+                for="navtree-a939f73f" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Linux/Ubuntu/"
                     class="gdoc-nav__entry"
                   >
                     Ubuntu
@@ -17740,10 +20169,153 @@
               
                 <span class="flex">
                   <a
-                    href="/Tech/8IDE/Ubuntu/Ubuntu/"
+                    href="/Tech/8IDE/Linux/Ubuntu/Ubuntu-%E5%AE%89%E8%A3%85JDK/"
+                    class="gdoc-nav__entry"
+                  >
+                    Ubuntu 安装 Jdk
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Linux/Ubuntu/Ubuntu/"
                     class="gdoc-nav__entry"
                   >
                     Ubuntu
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-7e48c657"
+                
+              
+            />
+            <label
+              
+                for="navtree-7e48c657" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Redis/"
+                    class="gdoc-nav__entry"
+                  >
+                    Redis
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Redis/Redis/"
+                    class="gdoc-nav__entry"
+                  >
+                    Redis
                   </a>
                 </span>
               
@@ -17774,13 +20346,221 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-a9ed95d3"
+                class="gdoc-nav__toggle" id="navtree-746526dd"
                 
               
             />
             <label
               
-                for="navtree-a9ed95d3" class="flex justify-between align-center"
+                for="navtree-746526dd" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/"
+                    class="gdoc-nav__entry"
+                  >
+                    Window
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/Window-Mark/"
+                    class="gdoc-nav__entry"
+                  >
+                    Window Mark
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/Window10-%E4%B8%8B%E6%90%AD%E5%BB%BA-Rust-%E7%8E%AF%E5%A2%83/"
+                    class="gdoc-nav__entry"
+                  >
+                    Window10 下搭建 Rust 环境
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/Windows-%E5%91%BD%E4%BB%A4/"
+                    class="gdoc-nav__entry"
+                  >
+                    Windows 命令
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/Windward-C-%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+                    class="gdoc-nav__entry"
+                  >
+                    Windward C 语言开发环境配置
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-66702721"
+                
+              
+            />
+            <label
+              
+                for="navtree-66702721" class="flex justify-between align-center"
               
             >
               
@@ -17946,13 +20726,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-71f0622e"
+                class="gdoc-nav__toggle" id="navtree-9e462569"
                 
               
             />
             <label
               
-                for="navtree-71f0622e" class="flex justify-between align-center"
+                for="navtree-9e462569" class="flex justify-between align-center"
               
             >
               
@@ -18033,6 +20813,142 @@
           </li>
         
       
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-84b7586d"
+                
+              
+            />
+            <label
+              
+                for="navtree-84b7586d" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/%E6%B5%8F%E8%A7%88%E5%99%A8/"
+                    class="gdoc-nav__entry"
+                  >
+                    浏览器
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/%E6%B5%8F%E8%A7%88%E5%99%A8/chrom/"
+                    class="gdoc-nav__entry"
+                  >
+                    Chrom
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B5%8F%E8%A7%88%E5%99%A8/"
+                    class="gdoc-nav__entry"
+                  >
+                    浏览器
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
     
   </ul>
 
@@ -18053,13 +20969,13 @@
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-353cb4fa"
+                class="gdoc-nav__toggle" id="navtree-5fabfd53"
                 
               
             />
             <label
               
-                for="navtree-353cb4fa" class="flex justify-between align-center"
+                for="navtree-5fabfd53" class="flex justify-between align-center"
               
             >
               
@@ -18123,6 +21039,42 @@
                     class="gdoc-nav__entry"
                   >
                     CPU 高负载排查实践
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/9Archive/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AE%80%E5%8F%B2/"
+                    class="gdoc-nav__entry"
+                  >
+                    Web 浏览器简史
                   </a>
                 </span>
               
@@ -18425,7 +21377,144 @@
 </div>
 <p>关于依赖数据报模式的网络的<em>数据平面</em>，最后但重要的一点是它们的寻址方案。在上面的示例中，我们使用字母来表示主机和网络节点的地址。实际上，所有地址都被编码为位串。大多数网络技术使用固定大小的位串来表示源地址和目标地址。这些地址可以以两种不同的方式组织。</p>
 <p>第一个组织，也是我们迄今为止隐含假设的组织，是<em>平面寻址</em>方案。在这种方案下，每个主机和网络节点都有一个唯一的地址。地址的唯一性对于网络的运行很重要。如果两台主机具有相同的地址，网络将很难将数据包转发到该目的地。<em>平面地址</em>通常用于网络节点和主机需要能够立即与唯一地址通信的情况。这些<em>平面地址</em>通常嵌入在网络接口卡中。网卡制造商为每个接口创建一个唯一的地址，该地址存储在接口的只读存储器中。这种寻址方案的一个优点是它很容易支持非结构化和移动网络。当主机移动时，它可以连接到另一个网络，并确信其地址是唯一的，并使其能够在新网络内进行通信。</p>
-<p>使用<em>平面寻址</em>，转发表中的查找操作可以实现为精确匹配。<em>转发表</em>包含所有已知目标地址的（排序的）列表。当一个数据包到达时，网络节点只需要检查这个地址是否包含在转发表中。在软件中，如果列表已排序，这是一个O(log(n))操作。在硬件中，内容可寻址存储器可以有效地执行这种查找操作，但它们的大小通常是有限的。</p>
+<p>使用<em>平面寻址</em>，转发表中的查找操作可以实现为精确匹配。<em>转发表</em>包含所有已知目标地址的（排序的）列表。当一个数据包到达时，网络节点只需要检查这个地址是否包含在转发表中。在软件中，如果列表已排序，这是一个O(log(n))操作。在硬件中，内容可寻址存储器 (Content Addressable Memories)可以有效地执行这种查找操作，但它们的大小通常是有限的。</p>
+<p><em>平面寻址</em>方案的缺点是转发表随着网络中主机和路由器的数量线性增长。使用此寻址方案，每个转发表必须包含一个条目，该条目指向网络内部可到达的每个地址。由于大型网络可能包含数千万甚至更多的主机，这对于需要能够快速转发数据包的路由器来说是一个主要问题。作为说明，考虑以 10 Gbps 运行的接口的情况很有趣。如今，在高端服务器和各种路由器中都可以找到此类接口。假设数据包大小为 1000 位，这是一个相当大且保守的数字，这样的接口每秒必须转发一千万个数据包。这意味着通过此类链路接收数据包的路由器必须每 100 纳秒转发一个 1000 位的数据包。</p>
+<p>一种广泛使用的<em>平面寻址</em>方案的替代方案是<em>分层寻址</em>方案。这种寻址方案建立在网络通常包含比路由器多得多的主机这一事实的基础上。在这种情况下，减少转发表大小的第一个解决方案是创建地址层次结构。这是邮局选择的解决方案，因为邮政地址包含国家（有时是州或省）、城市、街道，最后是门牌号。当一个信封被异地的邮局转寄时，它只看目的地国家，而同省的邮局会看城市信息。只有负责给定城市的邮局才会查看街道名称，并且只有邮递员会使用街道号码。<em>分层地址</em>为网络地址提供了类似的解决方案。例如，连接到校园网络的 Internet 主机的地址可以在高阶位中包含为校园网络提供服务的 Internet 服务提供商 (ISP) 的标识。然后，随后的位块标识校园网，它是 ISP 的客户之一。最后，地址的低位标识校园网中的主机。</p>
+<p>这种分层的地址分配可以应用于任何类型的网络。实际上，地址的分配必须遵循网络拓扑。通常，这是通过将寻址空间划分为连续的块，然后将这些块分配给网络的不同部分来实现的。在小型网络中，最简单的解决方案是为每个网络节点分配一个地址块，并从所连接的节点分配主机地址。</p>
+<p><img
+  src="https://nostyling-1256016577.cos.ap-beijing.myqcloud.com/tikz-c04a1f15d55dac386cc694c077858bfcb89d3230.png"
+  alt="具有两台主机和四台路由器的简单网络"
+  
+/></p>
+<p>在上图中，假设网络使用 16 位地址，并且前缀 01001010 已分配给整个网络。由于网络包含四个路由器，网络运营商可以为每个路由器分配一组 64 个地址。R1 将使用地址 0100101000000000 而 A 可以使用地址 0100101000000001。可以为 R2 分配从 0100101001000000 到 0100101001111111 的所有地址。R4 然后可以使用 0100101011000000 并将 0100101011000001 分配给 B . 其他分配方案也是可能的。例如，可以为 R3 分配比 R2 更大的地址块，并且 R4 可以使用 R3 的地址块中的子块。</p>
+<div class="table-wrap"> <table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>0100101000000000</td>
+</tr>
+<tr>
+<td>A</td>
+<td>0100101000000001</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>0100101001000000</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>0100101001111111</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>0100101011000000</td>
+</tr>
+<tr>
+<td>B</td>
+<td>0100101011000001</td>
+</tr>
+</tbody>
+</table> </div>
+<p>分层地址的主要优点是可以显着减小转发表的大小。在许多网络中，路由器的数量可能比主机的数量少几个数量级。一个校园网可能包含十几台路由器和几千台主机。最大的 Internet 服务提供商通常包含不超过几万个路由器，但仍为数千万或数亿主机提供服务。</p>
+<p>尽管它们很受欢迎，但<em>分层地址</em>有一些缺点。他们的第一个缺点是转发表中的查找比使用<em>平面地址</em>时更复杂. 例如，在互联网上，网络节点必须执行最长匹配来转发每个数据包。这通过转发表大小的减少得到部分补偿，但是查找操作的额外复杂性一直是实现数据包转发的硬件支持的困难。使用分层地址的第二个缺点是当主机第一次连接到网络时，它必须联系一个路由器以确定它自己的地址。这需要在主机和一些路由器之间进行一些数据包交换。此外，如果主机移动并连接到另一台路由器，其网络地址也会发生变化。这可能是某些移动主机的问题。</p>
+<div class="gdoc-page__anchorwrap">
+    <h3 id="处理异构数据链路层">
+        处理异构数据链路层
+        <a data-clipboard-text="https://www.saveload.cn/Tech/1Book/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8D%8F%E8%AE%AE%E5%92%8C%E5%AE%9E%E8%B7%B5%E7%AC%AC%E4%B8%89%E7%89%88/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8D%8F%E8%AE%AE%E5%92%8C%E5%AE%9E%E8%B7%B5%E7%AC%AC%E4%B8%89%E7%89%88-%E7%AC%AC-1-%E9%83%A8%E5%88%86%E5%8E%9F%E5%88%99-2-%E5%BB%BA%E7%AB%8B%E7%BD%91%E7%BB%9C/#处理异构数据链路层" class="gdoc-page__anchor clip flex align-center" title="锚定到： 处理异构数据链路层" aria-label="锚定到： 处理异构数据链路层" href="#%e5%a4%84%e7%90%86%e5%bc%82%e6%9e%84%e6%95%b0%e6%8d%ae%e9%93%be%e8%b7%af%e5%b1%82">
+            <svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"></use></svg>
+        </a>
+    </h3>
+</div>
+<p>有时，网络层需要处理异构数据链路层。例如，连接到不同数据链路层的两台主机通过使用其他类型数据链路层的路由器交换数据包。多亏了网络层，这种数据包交换是可能的，前提是每个数据包在传输之前都可以放在数据链路层帧中。如果所有数据链路层都支持相同的帧大小，这很简单。当一个节点收到一个帧时，它解封装它包含的数据包，检查报头并将它转发，封装在另一个帧中，到传出接口。不幸的是，封装操作并不总是可行的。每个数据链路层都以其支持的最大帧大小为特征。数据链路层通常支持最多包含数百或数千字节的帧。给定数据链路层支持的最大帧大小取决于其底层技术。不幸的是，大多数数据链路层支持不同的最大帧大小。这意味着当主机将帧内的大数据包发送到其下一跳路由器时，存在该数据包必须穿越无法在单个帧内转发数据包的链路的风险。原则上，存在三种可能来解决这个问题。为了讨论它们，我们考虑一个简单的场景，其中两台主机连接到路由器，如下图所示。这意味着当主机将帧内的大数据包发送到其下一跳路由器时，存在该数据包必须穿越无法在单个帧内转发数据包的链路的风险。原则上，存在三种可能来解决这个问题。为了讨论它们，我们考虑一个简单的场景，其中两台主机连接到路由器，如下图所示。这意味着当主机将帧内的大数据包发送到其下一跳路由器时，存在该数据包必须穿越无法在单个帧内转发数据包的链路的风险。原则上，存在三种可能来解决这个问题。为了讨论它们，我们考虑一个简单的场景，其中两台主机连接到路由器，如下图所示。</p>
+<p><img
+  src="https://nostyling-1256016577.cos.ap-beijing.myqcloud.com/tikz-2be59711e723184b601c2a2708ec85630a287b51.png"
+  alt="一个简单的异构网络"
+  
+/></p>
+<p>考虑在上面的网络中，主机 A 想要通过路由器 R1 向主机 B 发送一个 900 字节的数据包（870 字节的有效载荷和 30 字节的标头）。主机A将此数据包封装在一个帧中。该帧由提取数据包的路由器R1接收。路由器R1有三个可能的选项来处理此数据包。</p>
+<blockquote>
+<ol>
+<li>数据包太大，路由器R1无法将其转发到路由器R2。它拒绝数据包并将控制数据包发送回源（主机A）以指示它不能转发长度超过 500 字节（减去数据包标头）的数据包。源可以通过在较小的数据包中重新传输信息来对此控制数据包做出反应。</li>
+<li>网络层能够对数据包进行分段。在我们的示例中，路由器可以将数据包分成两部分。第一部分包含有效载荷的开头，第二部分包含结尾。有两种可能的方法来执行此分段。</li>
+<li>路由器R1将数据包分成两个片段，然后将它们传输到路由器R2。路由器R2将两个数据包片段重新组装成一个更大的数据包，然后在链路上将它们传输到主机B。</li>
+<li>每个数据包片段都是一个有效的数据包，其中包含带有源（主机A）和目标（主机B）地址的标头。当路由器R2收到数据包片段时，它将此数据包视为常规数据包并将其转发到最终目的地（主机B）。主机B重新组装接收到的片段。</li>
+</ol>
+</blockquote>
+<p>这三种解决方案各有优缺点。使用第一种解决方案，路由器仍然很简单，不需要执行任何分片操作。当路由器主要以硬件实现时，这一点很重要。然而，主机必须是复杂的，因为如果它们需要通过不支持大数据包的链路，它们需要存储它们产生的数据包。这会增加主机所需的缓冲。</p>
+<p>此外，单个大数据包可能需要多次重传。例如，考虑一个与上图类似但有四个路由器的网络。假设链路 R1-&gt;R2 支持 1000 字节数据包，链路 R2-&gt;R3 支持 800 字节数据包，链路 R3-&gt;R4 支持 600 字节数据包。连接到 R1 的发送大数据包的主机必须首先尝试 1000 字节，然后是 800 字节，最后是 600 字节。幸运的是，这种情况在实践中并不经常发生，这就是为什么在实际网络中使用该解决方案的原因。</p>
+<p>以每个链路为基础对数据包进行分段，如第二种解决方案所示，可以最大限度地减少传输开销，因为数据包仅在需要分段的链路上进行分段。大数据包可以继续在仅接受小数据包的链路的下游使用。然而，这种开销的减少带来了两个缺点。首先，分段数据包（可能在所有链路上）会增加路由器的处理时间和缓冲区要求。其次，此解决方案会导致更长的端到端延迟，因为下游路由器必须在转发数据包之前重新组装所有数据包片段。</p>
+<p>最后一个解决方案是其他两个之间的折衷方案。路由器需要执行分片，但不需要重新组装数据包片段。只有主机需要有缓冲区来重组接收到的片段。该解决方案具有较低的端到端延迟，并且需要较少的路由器处理时间和内存。</p>
+<p>上面提出的分段问题的第一个解决方案建议使用控制数据包来通知源接收到一个太长的数据包。这只是网络层控制协议执行的功能之一。其他功能包括：</p>
+<blockquote>
+<ul>
+<li>如果路由器收到的数据包在其转发表中没有有效条目，则将控制数据包发送回源</li>
+<li>如果路由器检测到数据包在网络内部循环，则将控制数据包发送回源</li>
+<li>验证数据包是否可以到达给定的目的地</li>
+</ul>
+</blockquote>
+<p>当我们描述在 TCP/IP 协议族的网络层中使用的协议时，我们将更详细地讨论这些功能。</p>
+<div class="gdoc-page__anchorwrap">
+    <h3 id="虚电路组织">
+        虚电路组织
+        <a data-clipboard-text="https://www.saveload.cn/Tech/1Book/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8D%8F%E8%AE%AE%E5%92%8C%E5%AE%9E%E8%B7%B5%E7%AC%AC%E4%B8%89%E7%89%88/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86%E5%8D%8F%E8%AE%AE%E5%92%8C%E5%AE%9E%E8%B7%B5%E7%AC%AC%E4%B8%89%E7%89%88-%E7%AC%AC-1-%E9%83%A8%E5%88%86%E5%8E%9F%E5%88%99-2-%E5%BB%BA%E7%AB%8B%E7%BD%91%E7%BB%9C/#虚电路组织" class="gdoc-page__anchor clip flex align-center" title="锚定到： 虚电路组织" aria-label="锚定到： 虚电路组织" href="#%e8%99%9a%e7%94%b5%e8%b7%af%e7%bb%84%e7%bb%87">
+            <svg class="gdoc-icon gdoc_link"><use xlink:href="#gdoc_link"></use></svg>
+        </a>
+    </h3>
+</div>
+<p>网络层的第二种组织方式，称为<em>虚电路</em>, 受到电话网络组织的启发。电话网络被设计用来承载通常持续几分钟的电话呼叫。每部电话都由电话号码标识，并连接到电话交换机。要发起电话呼叫，电话首先需要将目的地的电话号码发送到其本地交换机。该交换机与网络中的其他交换机协作，通过网络在两部电话之间创建双向通道。该信道将在通话期间由两部电话使用，并在通话结束时释放。直到 1960 年代，这些频道中的大部分都是由电话接线员根据呼叫者的要求手动创建的。今天的电话网络使用自动交换机并允许在同一物理链路上传输多个信道，</p>
+<p>在使用虚电路的网络中，所有的主机也用一个网络层地址来标识。然而，数据包转发并不是通过查看每个数据包的目的地地址来执行的。采用<em>虚电路</em>组织，每个数据包包含一个标签[1]。标签是一个整数，它是数据包标头的一部分。路由器实现标签交换来转发带标签的数据包。收到数据包后，路由器会查询其标签转发表以找到该数据包的传出接口。与数据报模式相比，这种查找非常简单。标签转发表是一个存储在内存中的数组，传入数据包的标签是访问该数组的索引。这意味着与其他数据包转发技术相比，查找操作的复杂度为O(1) 。为确保每个节点上的数据包标签是标签转发表中的一个索引，每个转发数据包的路由器都将转发数据包的标签替换为在标签转发表中找到的标签。标签转发表的每个条目包含两条信息：</p>
+<blockquote>
+<ul>
+<li>数据包的传出接口</li>
+<li>传出数据包的标签</li>
+</ul>
+</blockquote>
+<p>例如，考虑下面网络节点的<em>标签转发表</em>。</p>
+<div class="table-wrap"> <table>
+<thead>
+<tr>
+<th>指数</th>
+<th>出接口</th>
+<th>标签</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>南</td>
+<td>7</td>
+</tr>
+<tr>
+<td>1个</td>
+<td>没有任何</td>
+<td>没有任何</td>
+</tr>
+<tr>
+<td>2个</td>
+<td>西方</td>
+<td>2个</td>
+</tr>
+<tr>
+<td>3个</td>
+<td>东方</td>
+<td>2个</td>
+</tr>
+</tbody>
+</table> </div>
+<p>如果此节点收到标签为 2 的数据包，它会在其西向接口上转发该数据包，并将传出数据包的标签设置为2。如果接收到的数据包的标签设置为3 ，则数据包通过East接口转发，而传出数据包的标签设置为2。如果接收到标签字段设置为1 的数据包，则丢弃该数据包，因为相应的<em>标签转发表</em>条目无效。</p>
+<p><em>标签交换</em>可以完全控制网络内数据包所遵循的路径。考虑下面的网络并假设我们要使用两个虚拟电路：R1-&gt;R3-&gt;R4-&gt;R2-&gt;R5和R2-&gt;R1-&gt;R3-&gt;R4-&gt;R5。</p>
+<p><img
+  src="https://nostyling-1256016577.cos.ap-beijing.myqcloud.com/tikz-c7e42778efde8ac0b6565b3b8e59ac271314812e.png"
+  alt="可以应用标签交换来调整其路径的网络示例"
+  
+/></p>
+<hr>
 <p>平面寻址（Flat addressing）VS 分层寻址（Hierarchical addressing）</p>
 <div class="table-wrap"> <table>
 <thead>

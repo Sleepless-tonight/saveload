@@ -2,7 +2,7 @@
 
 标签：网络、安全
 时间：2019年2月15日01:08:40
-连接：http://www.saveload.cn/html/technology/networkSecurity.txt
+连接：https://www.saveload.cn/html/technology/networkSecurity.txt
 备注：本笔记的内容来自于：中国科学技术大学 计算机科学与技术学院，曾凡平老师的研究生课程：网络安全
 
 第1讲 网络安全概述

@@ -22,7 +22,12 @@ artifactId 这是工程的标识。它通常是工程的名称。例如，消费
 version 是工程的版本号。在 artifact 的仓库中，它用来区分不同的版本。
 name 此元素指示用于项目的显示名称
 url 此元素指示可以在何处找到项目的网站
-&amp;lt;project xmlns = &amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;xmlns:xsi = &amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;xsi:schemaLocation = &amp;#34;http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&amp;gt;&amp;lt;!-- 模型版本 --&amp;gt;&amp;lt;modelVersion&amp;gt;4.</description>
+&amp;lt;project xmlns = &amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;
+xmlns:xsi = &amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;
+xsi:schemaLocation = &amp;#34;http://maven.apache.org/POM/4.0.0
+http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&amp;gt;
+&amp;lt;!-- 模型版本 --&amp;gt;
+&amp;lt;modelVersion&amp;gt;4.</description>
     </item>
     
     <item>
@@ -36,13 +41,34 @@ url 此元素指示可以在何处找到项目的网站
 来源：博客园
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 1、settings.xml的作用 它是用来设置 Maven 参数的配置文件。并且，settings.xml是Maven的全局配置文件。settings.xml中包含类似本地仓库、远程仓库和联网使用的代理信息等配置。
-二、settings.xml元素详解 &amp;lt;settings xmlns=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0&amp;#34;xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;xsi:schemaLocation=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0https://maven.apache.org/xsd/settings-1.0.0.xsd&amp;#34;&amp;gt;&amp;lt;localRepository/&amp;gt;&amp;lt;interactiveMode/&amp;gt;&amp;lt;usePluginRegistry/&amp;gt;&amp;lt;offline/&amp;gt;&amp;lt;pluginGroups/&amp;gt;&amp;lt;servers/&amp;gt;&amp;lt;mirrors/&amp;gt;&amp;lt;proxies/&amp;gt;&amp;lt;profiles/&amp;gt;&amp;lt;activeProfiles/&amp;gt;&amp;lt;/settings&amp;gt; 1.1、LocalRepository 作用：该值表示构建系统本地仓库的路径。 其默认值：~/.m2/repository。
+二、settings.xml元素详解 &amp;lt;settings xmlns=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0&amp;#34;
+xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;
+xsi:schemaLocation=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0
+https://maven.apache.org/xsd/settings-1.0.0.xsd&amp;#34;&amp;gt;
+&amp;lt;localRepository/&amp;gt;
+&amp;lt;interactiveMode/&amp;gt;
+&amp;lt;usePluginRegistry/&amp;gt;
+&amp;lt;offline/&amp;gt;
+&amp;lt;pluginGroups/&amp;gt;
+&amp;lt;servers/&amp;gt;
+&amp;lt;mirrors/&amp;gt;
+&amp;lt;proxies/&amp;gt;
+&amp;lt;profiles/&amp;gt;
+&amp;lt;activeProfiles/&amp;gt;
+&amp;lt;/settings&amp;gt; 1.1、LocalRepository 作用：该值表示构建系统本地仓库的路径。 其默认值：~/.m2/repository。
 &amp;lt;localRepository&amp;gt;${user.home}/.m2/repository&amp;lt;/localRepository&amp;gt; 1.2、InteractiveMode 作用：表示maven是否需要和用户交互以获得输入。 如果maven需要和用户交互以获得输入，则设置成true，反之则应为false。默认为true。
 &amp;lt;interactiveMode&amp;gt;true&amp;lt;/interactiveMode&amp;gt; 1.3、UsePluginRegistry 作用：maven是否需要使用plugin-registry.xml文件来管理插件版本。 如果需要让maven使用文件~/.m2/plugin-registry.xml来管理插件版本，则设为true。默认为false。
 &amp;lt;usePluginRegistry&amp;gt;false&amp;lt;/usePluginRegistry&amp;gt; 1.4、Offline 作用：这个属性表示在Maven进行项目编译和部署等操作时是否允许Maven进行联网来下载所需要的信息。 如果构建系统需要在离线模式下运行，则为true，默认为false。 当由于网络设置原因或者安全因素，构建服务器不能连接远程仓库的时候，该配置就十分有用。
 &amp;lt;offline&amp;gt;false&amp;lt;/offline&amp;gt; 1.5、PluginGroups 作用：在pluginGroups元素下面可以定义一系列的pluginGroup元素。表示当通过plugin的前缀来解析plugin的时候到哪里寻找。pluginGroup元素指定的是plugin的groupId。默认情况下，Maven会自动把 org.apache.maven.plugins 和 org.codehaus.mojo 添加到pluginGroups下。
-&amp;lt;pluginGroups&amp;gt;&amp;lt;!--plugin的组织Id（groupId） --&amp;gt;&amp;lt;pluginGroup&amp;gt;org.codehaus.mojo&amp;lt;/pluginGroup&amp;gt;&amp;lt;/pluginGroups&amp;gt; 1.6、Servers 作用：一般，仓库的下载和部署是在pom.xml文件中的 repositories 和 distributionManagement 元素中定义的。然而，一般类似用户名、密码（有些仓库访问是需要安全认证的）等信息不应该在pom.xml文件中配置，这些信息可以配置在 settings.xml 中。
-&amp;lt;!--配置服务端的一些设置。一些设置如安全证书不应该和pom.xml一起分发。这种类型的信息应该存在于构建服务器上的settings.xml文件中。 --&amp;gt;&amp;lt;servers&amp;gt;&amp;lt;!--服务器元素包含配置服务器时需要的信息 --&amp;gt;&amp;lt;server&amp;gt;&amp;lt;!</description>
+&amp;lt;pluginGroups&amp;gt;
+&amp;lt;!--plugin的组织Id（groupId） --&amp;gt;
+&amp;lt;pluginGroup&amp;gt;org.codehaus.mojo&amp;lt;/pluginGroup&amp;gt;
+&amp;lt;/pluginGroups&amp;gt; 1.6、Servers 作用：一般，仓库的下载和部署是在pom.xml文件中的 repositories 和 distributionManagement 元素中定义的。然而，一般类似用户名、密码（有些仓库访问是需要安全认证的）等信息不应该在pom.xml文件中配置，这些信息可以配置在 settings.xml 中。
+&amp;lt;!--配置服务端的一些设置。一些设置如安全证书不应该和pom.xml一起分发。这种类型的信息应该存在于构建服务器上的settings.xml文件中。 --&amp;gt;
+&amp;lt;servers&amp;gt;
+&amp;lt;!--服务器元素包含配置服务器时需要的信息 --&amp;gt;
+&amp;lt;server&amp;gt;
+&amp;lt;!</description>
     </item>
     
     <item>
@@ -60,7 +86,11 @@ Maven 仓库有三种类型：
 运行 Maven 的时候，Maven 所需要的任何构件都是直接从本地仓库获取的。如果本地仓库没有，它会首先尝试从远程仓库下载构件至本地仓库，然后再使用本地仓库的构件。
 默认情况下，不管Linux还是 Windows，每个用户在自己的用户目录下都有一个路径名为 .m2/repository/ 的仓库目录。
 Maven 本地仓库默认被创建在 %USER_HOME% 目录下。要修改默认位置，在 %M2_HOME%\conf 目录中的 Maven 的 settings.xml 文件中 localRepository 定义另一个路径。
-&amp;lt;settings xmlns=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0&amp;#34;xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;xsi:schemaLocation=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&amp;#34;&amp;gt;&amp;lt;localRepository&amp;gt;C:/MyLocalRepository&amp;lt;/localRepository&amp;gt;&amp;lt;/settings&amp;gt; 当你运行 Maven 命令，Maven 将下载依赖的文件到你指定的路径中。
+&amp;lt;settings xmlns=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0&amp;#34;
+xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;
+xsi:schemaLocation=&amp;#34;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&amp;#34;&amp;gt;
+&amp;lt;localRepository&amp;gt;C:/MyLocalRepository&amp;lt;/localRepository&amp;gt;
+&amp;lt;/settings&amp;gt; 当你运行 Maven 命令，Maven 将下载依赖的文件到你指定的路径中。
 中央仓库 Maven 中央仓库是由 Maven 社区提供的仓库，其中包含了大量常用的库。
 中央仓库包含了绝大多数流行的开源Java构件，以及源码、作者信息、SCM、信息、许可证信息等。一般来说，简单的Java项目依赖的构件都可以在这里下载到。
 中央仓库的关键概念：
@@ -87,8 +117,40 @@ Maven 本地仓库默认被创建在 %USER_HOME% 目录下。要修改默认位�
       <description> Maven 引入本地 jar pom.xml 的 dependencies 列表列出了我们的项目需要构建的所有外部依赖项。
 要添加依赖项，我们一般是先在 src 文件夹下添加 lib 文件夹，然后将你工程需要的 jar 文件复制到 lib 文件夹下。
 然后添加以下依赖到 pom.xml 文件中：
-&amp;lt;dependencies&amp;gt;&amp;lt;!-- 在这里添加你的依赖 --&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;ldapjdk&amp;lt;/groupId&amp;gt; &amp;lt;!-- 库名称，也可以自定义 --&amp;gt;&amp;lt;artifactId&amp;gt;ldapjdk&amp;lt;/artifactId&amp;gt; &amp;lt;!--库名称，也可以自定义--&amp;gt;&amp;lt;version&amp;gt;1.0&amp;lt;/version&amp;gt; &amp;lt;!--版本号--&amp;gt;&amp;lt;scope&amp;gt;system&amp;lt;/scope&amp;gt; &amp;lt;!--作用域--&amp;gt;&amp;lt;systemPath&amp;gt;${basedir}\src\lib\ldapjdk.jar&amp;lt;/systemPath&amp;gt; &amp;lt;!--项目根目录下的lib文件夹下--&amp;gt;&amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; pom.xml 文件完整代码如下：
-&amp;lt;project xmlns=&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34; xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;xsi:schemaLocation=&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&amp;#34;&amp;gt;&amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt;&amp;lt;groupId&amp;gt;com.companyname.bank&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;consumerBanking&amp;lt;/artifactId&amp;gt;&amp;lt;packaging&amp;gt;jar&amp;lt;/packaging&amp;gt;&amp;lt;version&amp;gt;1.0-SNAPSHOT&amp;lt;/version&amp;gt;&amp;lt;name&amp;gt;consumerBanking&amp;lt;/name&amp;gt;&amp;lt;url&amp;gt;http://maven.apache.org&amp;lt;/url&amp;gt;&amp;lt;dependencies&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;&amp;lt;version&amp;gt;3.8.1&amp;lt;/version&amp;gt;&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;dependency&amp;gt;&amp;lt;groupId&amp;gt;ldapjdk&amp;lt;/groupId&amp;gt;&amp;lt;artifactId&amp;gt;ldapjdk&amp;lt;/artifactId&amp;gt;&amp;lt;scope&amp;gt;system&amp;lt;/scope&amp;gt;&amp;lt;version&amp;gt;1.0&amp;lt;/version&amp;gt;&amp;lt;systemPath&amp;gt;${basedir}\src\lib\ldapjdk.jar&amp;lt;/systemPath&amp;gt;&amp;lt;/dependency&amp;gt;&amp;lt;/dependencies&amp;gt;&amp;lt;/project&amp;gt; </description>
+&amp;lt;dependencies&amp;gt;
+&amp;lt;!-- 在这里添加你的依赖 --&amp;gt;
+&amp;lt;dependency&amp;gt;
+&amp;lt;groupId&amp;gt;ldapjdk&amp;lt;/groupId&amp;gt; &amp;lt;!-- 库名称，也可以自定义 --&amp;gt;
+&amp;lt;artifactId&amp;gt;ldapjdk&amp;lt;/artifactId&amp;gt; &amp;lt;!--库名称，也可以自定义--&amp;gt;
+&amp;lt;version&amp;gt;1.0&amp;lt;/version&amp;gt; &amp;lt;!--版本号--&amp;gt;
+&amp;lt;scope&amp;gt;system&amp;lt;/scope&amp;gt; &amp;lt;!--作用域--&amp;gt;
+&amp;lt;systemPath&amp;gt;${basedir}\src\lib\ldapjdk.jar&amp;lt;/systemPath&amp;gt; &amp;lt;!--项目根目录下的lib文件夹下--&amp;gt;
+&amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; pom.xml 文件完整代码如下：
+&amp;lt;project xmlns=&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34; xmlns:xsi=&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;
+xsi:schemaLocation=&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&amp;#34;&amp;gt;
+&amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt;
+&amp;lt;groupId&amp;gt;com.companyname.bank&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;consumerBanking&amp;lt;/artifactId&amp;gt;
+&amp;lt;packaging&amp;gt;jar&amp;lt;/packaging&amp;gt;
+&amp;lt;version&amp;gt;1.0-SNAPSHOT&amp;lt;/version&amp;gt;
+&amp;lt;name&amp;gt;consumerBanking&amp;lt;/name&amp;gt;
+&amp;lt;url&amp;gt;http://maven.apache.org&amp;lt;/url&amp;gt;
+&amp;lt;dependencies&amp;gt;
+&amp;lt;dependency&amp;gt;
+&amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
+&amp;lt;version&amp;gt;3.8.1&amp;lt;/version&amp;gt;
+&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&amp;lt;dependency&amp;gt;
+&amp;lt;groupId&amp;gt;ldapjdk&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;ldapjdk&amp;lt;/artifactId&amp;gt;
+&amp;lt;scope&amp;gt;system&amp;lt;/scope&amp;gt;
+&amp;lt;version&amp;gt;1.0&amp;lt;/version&amp;gt;
+&amp;lt;systemPath&amp;gt;${basedir}\src\lib\ldapjdk.jar&amp;lt;/systemPath&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&amp;lt;/dependencies&amp;gt;
+&amp;lt;/project&amp;gt; </description>
     </item>
     
     <item>
@@ -112,7 +174,16 @@ Maven 本地仓库默认被创建在 %USER_HOME% 目录下。要修改默认位�
 SNAPSHOT作用： 标识这个jar是一个不稳定的jar，是一个标识版本的作用。
 使用了SNAPSHOT之后，maven会经常去私服或是中央仓库中拉取最新 的这个jar的版本；而没有SNAPSHOT的jar，则会从本地仓库中查找，本地不存在，才去中央仓库中拉取。
 更新频率：需要在pom.xml文件中进行配置。 updatePolicy: always代表经常性的去拉取最新的jar， daily代表每天拉取一次，interval： 分钟； nerver： 和正式版本一致，不会去拉取最新的jar。
-&amp;lt;repositorys&amp;gt;&amp;lt;repository&amp;gt;&amp;lt;id&amp;gt;****&amp;lt;/id&amp;gt;&amp;lt;url&amp;gt;***&amp;lt;/url&amp;gt;&amp;lt;snapshots&amp;gt;&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;&amp;lt;updatePolicy&amp;gt;(always/ daliy/ interval/ nrever)&amp;lt;/updatePolicy&amp;gt;&amp;lt;/snapshot&amp;gt;&amp;lt;/repository&amp;gt;&amp;lt;/repository&amp;gt; Maven 中的仓库分为两种，snapshot 快照仓库和 release 发布仓库。 snapshot 快照仓库用于保存开发过程中的不稳定版本， release 正式仓库则是用来保存稳定的发行版本。 定义一个组件/模块为快照版本，只需要在pom文件中在该模块的版本号后加上-SNAPSHOT即可(注意这里必须是大写) maven2 会根据模块的版本号(pom文件中的version)中是否带有-SNAPSHOT来判断是快照版本还是正式版本。如果是快照版本，那么在mvn deploy时会自动发布到快照版本库中，而使用快照版本的模块，在不更改版本号的情况下，直接编译打包时，maven会自动从镜像服务器上下载最新的快照版本。如果是正式发布版本，那么在mvn deploy时会自动发布到正式版本库中，而使用正式版本的模块，在不更改版本号的情况下，编译打包时如果本地已经存在该版本的模块则不会主动去镜像服务器上下载。
+&amp;lt;repositorys&amp;gt;
+&amp;lt;repository&amp;gt;
+&amp;lt;id&amp;gt;****&amp;lt;/id&amp;gt;
+&amp;lt;url&amp;gt;***&amp;lt;/url&amp;gt;
+&amp;lt;snapshots&amp;gt;
+&amp;lt;enabled&amp;gt;true&amp;lt;/enabled&amp;gt;
+&amp;lt;updatePolicy&amp;gt;(always/ daliy/ interval/ nrever)&amp;lt;/updatePolicy&amp;gt;
+&amp;lt;/snapshot&amp;gt;
+&amp;lt;/repository&amp;gt;
+&amp;lt;/repository&amp;gt; Maven 中的仓库分为两种，snapshot 快照仓库和 release 发布仓库。 snapshot 快照仓库用于保存开发过程中的不稳定版本， release 正式仓库则是用来保存稳定的发行版本。 定义一个组件/模块为快照版本，只需要在pom文件中在该模块的版本号后加上-SNAPSHOT即可(注意这里必须是大写) maven2 会根据模块的版本号(pom文件中的version)中是否带有-SNAPSHOT来判断是快照版本还是正式版本。如果是快照版本，那么在mvn deploy时会自动发布到快照版本库中，而使用快照版本的模块，在不更改版本号的情况下，直接编译打包时，maven会自动从镜像服务器上下载最新的快照版本。如果是正式发布版本，那么在mvn deploy时会自动发布到正式版本库中，而使用正式版本的模块，在不更改版本号的情况下，编译打包时如果本地已经存在该版本的模块则不会主动去镜像服务器上下载。
 在java开发过程中，我们经常会看到代码仓库中的某些项目版本以release或snapshots结尾,现在说说这两个版本之间有什么区别.
 一般来说 snapshots 版本代表正在开发中的版本,release 代表比较稳定的发布版本.</description>
     </item>
@@ -126,10 +197,37 @@ SNAPSHOT作用： 标识这个jar是一个不稳定的jar，是一个标识版�
       <description>Maven 转自：Apache Maven
 链接：https://maven.apache.org/index.html
 Maven 生命周期
-1、clean ：清理上一次构建生成的所有文件；2、validate3、compile ：编译项目的源代码；4、test ：运行测试代码；5、package ：打包成jar或者war或者其他格式的分发包；6、verify7、install ：将打好的包安装到本地仓库，供其他项目使用；8、site ：生成项目的站点文档；9、deploy ：将打好的包安装到远程仓库，供其他项目使用； Maven 目录分析
-1:Maven 目录分析bin：含有mvn运行的脚本boot：含有plexus-classworlds类加载器框架conf：含有settings.xml配置文件lib：含有Maven运行时所需要的java类库Settings.xml 中默认的用户库: ${user.home}/.m2/repository[通过maven下载的jar包都会存储到指定的个人仓库中]Maven默认仓库下载地址在: maven的lib目录下maven-model-builder-3.0.4.jar的pom.xml中 IDEA 自带 Maven 配置
-标签： Java环境变量在环境变量的系统变量中添加MAVEN_HOME：F:\IntelliJ IDEA 2019.2.3\plugins\maven\lib\maven3（你的maven所在位置）MAVEN_OPTS：-Xms128m -Xmx1024m在环境变量的用户变量中的Path中添加：%MAVEN_HOME%\bin Maven 创建项目目录结构
-my-app|-- pom.xml`-- src|-- main| `-- java| `-- com| `-- mycompany| `-- app| `-- App.</description>
+1、clean ：清理上一次构建生成的所有文件；
+2、validate
+3、compile ：编译项目的源代码；
+4、test ：运行测试代码；
+5、package ：打包成jar或者war或者其他格式的分发包；
+6、verify
+7、install ：将打好的包安装到本地仓库，供其他项目使用；
+8、site ：生成项目的站点文档；
+9、deploy ：将打好的包安装到远程仓库，供其他项目使用； Maven 目录分析
+1:Maven 目录分析
+bin：含有mvn运行的脚本
+boot：含有plexus-classworlds类加载器框架
+conf：含有settings.xml配置文件
+lib：含有Maven运行时所需要的java类库
+Settings.xml 中默认的用户库: ${user.home}/.m2/repository[通过maven下载的jar包都会存储到指定的个人仓库中]
+Maven默认仓库下载地址在: maven的lib目录下maven-model-builder-3.0.4.jar的pom.xml中 IDEA 自带 Maven 配置
+标签： Java
+环境变量
+在环境变量的系统变量中添加
+MAVEN_HOME：F:\IntelliJ IDEA 2019.2.3\plugins\maven\lib\maven3（你的maven所在位置）
+MAVEN_OPTS：-Xms128m -Xmx1024m
+在环境变量的用户变量中的Path中添加：%MAVEN_HOME%\bin Maven 创建项目目录结构
+my-app
+|-- pom.xml
+`-- src
+|-- main
+| `-- java
+| `-- com
+| `-- mycompany
+| `-- app
+| `-- App.</description>
     </item>
     
     <item>
@@ -140,7 +238,8 @@ my-app|-- pom.xml`-- src|-- main| `-- java| `-- com| `-- mycompany| `-- a
       <guid>https://www.saveload.cn/Tech/3Java/maven/%E6%B8%85%E9%99%A4lastUpdated%E6%96%87%E4%BB%B6/</guid>
       <description>maven:清除lastUpdated文件 项目使用maven管理jar包，很容易因为各种原因(网速慢、断网)导致jar包下载不下来，出现很多.lastUpdated文件。这些文件一个一个删除太麻烦。下面是全部删除的方法
 windows系统
-cd %userprofile%\.m2\repositoryfor /r %i in (*.lastUpdated) do del %i linux系统
+cd %userprofile%\.m2\repository
+for /r %i in (*.lastUpdated) do del %i linux系统
 find /app/maven/localRepository -name &amp;#34;*.lastUpdated&amp;#34; -exec grep -q &amp;#34;Could not transfer&amp;#34; {} \; -print -exec rm {} \; 删除 Maven 下载的半成品
 cd %userprofile%\.m2\repository for /r %i in (*.lastUpdated) do del %i 唉，大数据本意是能有效处理巨量信息，比如一个几万人的小区水电煤气、蔬菜、粮食、医药资源、如果被封控了怎么进行资源、运力、人力、调配补给，在哪些地点设置核酸检测点能有效的减少时间资源浪费（几千几万人去检测，他们利用这些时间无论是工作还是休闲娱乐，都比在排队上面有价值），比如卖家通过分析过去一年中的几百万订单货品，在全国各地分配分仓货品设置</description>
     </item>

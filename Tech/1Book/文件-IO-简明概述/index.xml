@@ -14,7 +14,10 @@
       <description>文件 I/O 简明概述 转自： Spongecaptain
 链接：https://spongecaptain.cool/SimpleClearFileIO/
 Linux 的 Page Cache 1. Page Cache 1.1 Page Cache 是什么？ 为了理解 Page Cache，我们不妨先看一下 Linux 的文件 I/O 系统，如下图所示： Figure1. Linux 文件 I/O 系统
-VFS 虚拟文件系统(Virtual File System)Device Driver 设备驱动程序I/O Scheduler I/O 调度器Block I/O Layer 块 I/O 层 上图中，红色部分为 Page Cache。可见 Page Cache 的本质是由 Linux 内核管理的内存区域。我们通过 mmap 以及 buffered I/O 将文件读取到内存空间实际上都是读取到 Page Cache 中。
+VFS 虚拟文件系统(Virtual File System)
+Device Driver 设备驱动程序
+I/O Scheduler I/O 调度器
+Block I/O Layer 块 I/O 层 上图中，红色部分为 Page Cache。可见 Page Cache 的本质是由 Linux 内核管理的内存区域。我们通过 mmap 以及 buffered I/O 将文件读取到内存空间实际上都是读取到 Page Cache 中。
 1.2 如何查看系统的 Page Cache？ 通过读取 /proc/meminfo 文件，能够实时获取系统内存情况：</description>
     </item>
     

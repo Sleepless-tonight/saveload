@@ -21,7 +21,8 @@
       
       <guid>https://www.saveload.cn/Tech/2Computer-Science/4Operating-System/NTFS/window/</guid>
       <description>偶然发现两个注册表分支中含有当前用户运行过的exe文件名，会在一定程度上造成信息泄露（仅在Windows10系统中测试过）
-HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Compatibility AssistantHKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FeatureUsage\AppSwitched chkdsk d: /r
+HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Compatibility Assistant
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FeatureUsage\AppSwitched chkdsk d: /r
 OSK.EXE 屏幕键盘 “osk.exe” 在命令提示符窗口输入&amp;quot;explorer.exe&amp;quot;启动桌面,成功进入SYSTEM账户桌面后按下“微软键+R&amp;quot;打开运行框,点击其中的“浏览&amp;quot; ,在打开的图形化窗口即可进行文件查找、浏览等操作</description>
     </item>
     
@@ -31,16 +32,31 @@ OSK.EXE 屏幕键盘 “osk.exe” 在命令提示符窗口输入&amp;quot;explo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.saveload.cn/Tech/2Computer-Science/4Operating-System/NTFS/Windows-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</guid>
-      <description>分区表 转载自：嘿_lele链接：https://www.jianshu.com/p/8471b7f4152a来源：简书 1、硬盘基础知识 硬盘上的一个物理记录块要用三个参数来定位：柱面号、扇区号、磁头号。
+      <description>分区表 转载自：嘿_lele
+链接：https://www.jianshu.com/p/8471b7f4152a
+来源：简书 1、硬盘基础知识 硬盘上的一个物理记录块要用三个参数来定位：柱面号、扇区号、磁头号。
 磁头数(Heads)： 表示硬盘总共有几个磁头,也就是有几面盘片， 最大为 255 (用 8 个二进制位存储)；
 磁道： 当磁盘旋转时，磁头若保持在一个位置上，则每个磁头都会在磁盘表面划出一个圆形轨迹，这些圆形轨迹就叫做磁道。
-扇区数(Sectors)： 磁盘上的每个磁道被等分为若干个弧段，这些弧段便是磁盘的扇区，表示每一条磁道上有几个扇区, 最大为 63(用 6个二进制位存储)；每个扇区一般是 512个字节，理论上讲这不是必须的，但（由于不断提高磁盘的大小，部分厂商设定每个扇区的大小是4096字节）。距离轴心近的磁道上包含的扇区比远的磁道要少很多
+扇区数(Sectors)： 磁盘上的每个磁道被等分为若干个弧段，这些弧段便是磁盘的扇区，表示每一条磁道上有几个扇区, 最大为 63(用 6个二进制位存储)；每个扇区一般是 512个字节，理论上讲这不是必须的，但（由于不断提高磁盘的大小，部分厂商设定每个扇区的大小是4096字节）。距离轴心近的磁道上包含的扇区比远的磁道要少很多。硬盘的读写以扇区为基本单位。
 柱面数（Cylinders）： 是指硬盘多个盘片上相同磁道的组合，盘片上的同心圆（磁道）圈数即是柱面数。表示硬盘每一面盘片上有几条磁道；硬盘通常由重叠的一组盘片构成，每个盘面都被划分为数目相等的磁道，并从外缘的“0”开始编号，具有相同编号的磁道形成一个圆柱，称之为磁盘的柱面。磁盘的柱面数与一个盘面上的磁道数是相等的。由于每个盘面都有自己的磁头，因此，盘面数等于总的磁头数。当向一个磁盘读写数据的时候,如果是连续IO,磁盘会比较倾向于按照柱面来进行,因为写完一个盘片的磁道,切换到另外一个盘片的相同磁道,只需要切换磁头就可以了,如果是连续在一个盘片上写几个磁道,就涉及到磁臂换道,这个是机械动作 ,就慢的多了,如果是离散IO,那磁臂基本就像振动的蜜蜂翅膀.
 低级格式化: 磁盘生产出来的时候,上面是没有什么磁道,扇区的东西的,低级格式化就是在每个盘片上划分,标明这些东西,而高级格式化,比如 WINDOWS 里面的格式化,他是绝对不会影响一个磁盘的磁道,扇区结构的,这好比低级格式化是造房子,打框架,高级格式化是给房子里面做装潢
 磁盘容量计算： 所以磁盘一柱面：512byte x 63 x 255＝8225280bytes ＝7.84423828125 MB
 硬盘容量 = 磁头数 × 柱面数（磁道数）× 扇区数 × 512字节，扇区越多，容量越大。
 块/簇： 磁盘块/簇（虚拟出来的）。 块是操作系统中最小的逻辑存储单位。操作系统与磁盘打交道的最小单位是磁盘块。通俗的来讲，在 Windows 下如 NTFS 等文件系统中叫做簇；在 Linux 下如 Ext4 等文件系统中叫做块（block）。每个簇或者块可以包括2、4、8、16、32、64…2的n次方个扇区
 2、扇区、块/簇、page 的关系 扇区： 硬盘的最小读写单元 块/簇： 是操作系统针对硬盘读写的最小单元 page： 是内存与操作系统之间操作的最小单元。 扇区 &amp;lt;= 块/簇 &amp;lt;= page 3、分区表基础知识 分区表是将大表的数据分成称为分区的许多小的子集，类型有 FAT32, NTFST32,NTFS。另外，分区表的种类划分主要有：range，list，和hash分区。划分依据主要是根据其表内部属性。同时，分区表可以创建其独特的分区索引。倘若硬盘丢失了分区表，数据就无法按顺序读取和写入，导致无法操作。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/2Computer-Science/4Operating-System/NTFS/%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%92%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/2Computer-Science/4Operating-System/NTFS/%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%92%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%8B%E7%BB%8D/</guid>
+      <description>硬盘分区和文件系统格式化介绍 作者：rosy_dawn 链接：https://www.jianshu.com/p/670a22556868
+分区 全新硬盘装系统之前，必须对其进行分区，硬盘分区初始化的格式主要有两种：传统的 MBR（Master Boot Record ，即主引导记录） 和新的 GPT（ GUID Partition Table）。后者功能更强大，解决了 MBR 的许多限制。
+MBR MBR 早在 1983 年 IBM PC DOS 2.0 中就已经提出。之所以叫“主引导记录”，是因为它位于驱动器开始部分的主引导扇区，是硬盘的第一扇区。它由三个部分组成：Boot loader、硬盘分区表 DPT 和结束标志字。
+第一部分为 Boot loader，位于主引导扇区的前 446 个字节，偏移地址为 0000H&amp;ndash;0088H，是一小段代码，用于加载硬盘上其他分区上更大的加载器（如操作系统的启动加载器）。如果你安装了 Windows，Windows 启动加载器的初始信息就放在这个区域里。如果 MBR 的信息被覆盖导致 Windows不能启动，你就需要使用启动优盘中 DiskGenius 软件提供的重建 MBR 功能来使其恢复正常。如果你安装了 Linux，则这里通常存储的是 GRUB 启动加载器的初始信息。该区域主要提供以下三个功能：
+提供启动引导菜单：使用者可以在该菜单中选择启动不同的开机项。在系统未加载前按下主板快速启动的快捷键就可以看到该菜单； 指向开机所需的核心文件来启动操作系统； 还可将开机引导权交给其它 loader。每个分区也拥有自己的启动扇区（Boot sector），开机引导程序除了可以装在这里外，还可装在各分区的启动扇区。 第二部分为 Disk partition table 区（DPT 分区表），占 64 个字节，偏移地址为 01BEH&amp;ndash;01FDH，记录整个磁盘分区的状态，每 16 个字节标记一个分区，因此最多可记录 4 个分区。分区的单位是柱面，每个 16 字节的记录区记录了该分区从开始到结束的柱面号。所谓的分区操作即是对分区表进行设置，当文件系统要写入磁盘时，首先会参考分区表。在 MBR 分区表中，逻辑块地址采用 32 位二进制数表示，因此一共可表示 2 的 32 次方个逻辑块地址，所以，MBR 硬盘最大分区容量仅为 2.</description>
     </item>
     
   </channel>

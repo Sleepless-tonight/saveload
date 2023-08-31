@@ -24,7 +24,17 @@ MyBatis 的核心组件 1、SQLSessionFactoryBuilder(构造器):它会根据配�
       
       <guid>https://www.saveload.cn/Tech/3Java/MyBatis/MyBatis-%E6%95%99%E7%A8%8B/MyBatis-1-select-%E6%A0%87%E7%AD%BE/</guid>
       <description>在MyBatis中实现SQL映射的常见标签有：
-select标签（映射查询语句）、 insert标签（映射插入语句）、 update标签（映射更新语句）、 delete标签（映射删除语句）、 sql标签（可被其他语句引用的可重用语句块） select标签的属性介绍 &amp;lt;selectid=&amp;#34;selectUser&amp;#34;parameterType=&amp;#34;int&amp;#34;resultType=&amp;#34;hashmap&amp;#34;resultMap=&amp;#34;userResultMap&amp;#34;flushCache=&amp;#34;false&amp;#34;useCache=&amp;#34;true&amp;#34;timeout=&amp;#34;10000&amp;#34;fetchsize=&amp;#34;256&amp;#34;statementType=&amp;#34;PREPARED&amp;#34;resultsetType=&amp;#34;FORMARD ONLY&amp;#34;&amp;gt; id：命名空间中唯一的标识符，可以被用来引用这条语句。
+select标签（映射查询语句）、 insert标签（映射插入语句）、 update标签（映射更新语句）、 delete标签（映射删除语句）、 sql标签（可被其他语句引用的可重用语句块） select标签的属性介绍 &amp;lt;select
+id=&amp;#34;selectUser&amp;#34;
+parameterType=&amp;#34;int&amp;#34;
+resultType=&amp;#34;hashmap&amp;#34;
+resultMap=&amp;#34;userResultMap&amp;#34;
+flushCache=&amp;#34;false&amp;#34;
+useCache=&amp;#34;true&amp;#34;
+timeout=&amp;#34;10000&amp;#34;
+fetchsize=&amp;#34;256&amp;#34;
+statementType=&amp;#34;PREPARED&amp;#34;
+resultsetType=&amp;#34;FORMARD ONLY&amp;#34;&amp;gt; id：命名空间中唯一的标识符，可以被用来引用这条语句。
 parameterType：将会传入这条语句的参数类的完全限定名或别名。这个属性是可选的，因为MyBatis可以通过TypeHandler推断出具体传入语句的参数，默认值为unset。
 resultType：从这条语句中返回的期望类型的类的完全限定名或别名。
 注意：如果返回值是集合类型，那应该是集合可以包含的类型，而不能是集合本身的类型。返回时可以使用resultType或resultMap，但不能同时使用。
@@ -49,9 +59,27 @@ resultSets：这个设置仅对多结果集的情况适用，它将列出语句�
       <description> MyBatis-2-sql 标签 sql元素可以被用来定义可重用的SQL代码段，可以包含在其他语句中。它可以被静态地(在加载参数时) 参数化。不同的属性值通过包含的实例发生变化。例如:
 &amp;lt;sql id=&amp;#34;userColumns&amp;#34;&amp;gt; ${alias}.id,${alias}.username,${alias}.password &amp;lt;/sql&amp;gt; 取值的正确方式是${prop},而不是#{prop}
 这个SQL片段可以被包含在其他语句中，例如:
-&amp;lt;select id=&amp;#34;selectUsers&amp;#34; resultType=&amp;#34;map&amp;#34;&amp;gt;select&amp;lt;include refid=&amp;#34;userColumns&amp;#34; &amp;gt;&amp;lt;property name=&amp;#34;alias&amp;#34; value=&amp;#34;t1&amp;#34; /&amp;gt;&amp;lt;/include&amp;gt;from some_table tl&amp;lt;/select&amp;gt; 注意观察在include 标签内引用时，通过property标签动态给alias赋值
+&amp;lt;select id=&amp;#34;selectUsers&amp;#34; resultType=&amp;#34;map&amp;#34;&amp;gt;
+select
+&amp;lt;include refid=&amp;#34;userColumns&amp;#34; &amp;gt;&amp;lt;property name=&amp;#34;alias&amp;#34; value=&amp;#34;t1&amp;#34; /&amp;gt;&amp;lt;/include&amp;gt;
+from some_table tl
+&amp;lt;/select&amp;gt; 注意观察在include 标签内引用时，通过property标签动态给alias赋值
 属性值可以用于包含的refid属性或者包含的字句里面的属性，例如:
-&amp;lt;sql id=&amp;#34;sometable&amp;#34;&amp;gt;${prefix}Table&amp;lt;/sql&amp;gt;&amp;lt;sql id=&amp;#34;someinclude&amp;#34;&amp;gt;from&amp;lt;include refid=&amp;#34;${include_target}&amp;#34;/&amp;gt;&amp;lt;/sql&amp;gt;&amp;lt;select id=&amp;#34;select&amp;#34; resultType=&amp;#34;map&amp;#34;&amp;gt;selectfieldl,field2,field3&amp;lt;include refid=&amp;#34;someinclude&amp;#34;&amp;gt;&amp;lt;property name=&amp;#34;prefix&amp;#34; value=&amp;#34;some&amp;#34;/&amp;gt;&amp;lt;property name=&amp;#34; include_target &amp;#34;value=&amp;#34;sometable&amp;#34; /&amp;gt;&amp;lt;/include&amp;gt;&amp;lt;/select&amp;gt; </description>
+&amp;lt;sql id=&amp;#34;sometable&amp;#34;&amp;gt;
+${prefix}Table
+&amp;lt;/sql&amp;gt;
+&amp;lt;sql id=&amp;#34;someinclude&amp;#34;&amp;gt;
+from
+&amp;lt;include refid=&amp;#34;${include_target}&amp;#34;/&amp;gt;
+&amp;lt;/sql&amp;gt;
+&amp;lt;select id=&amp;#34;select&amp;#34; resultType=&amp;#34;map&amp;#34;&amp;gt;
+select
+fieldl,field2,field3
+&amp;lt;include refid=&amp;#34;someinclude&amp;#34;&amp;gt;
+&amp;lt;property name=&amp;#34;prefix&amp;#34; value=&amp;#34;some&amp;#34;/&amp;gt;
+&amp;lt;property name=&amp;#34; include_target &amp;#34;value=&amp;#34;sometable&amp;#34; /&amp;gt;
+&amp;lt;/include&amp;gt;
+&amp;lt;/select&amp;gt; </description>
     </item>
     
     <item>
@@ -65,7 +93,22 @@ JdbcTransaction：单独使用Mybatis时，默认的事务管理实现类，就�
 ManagedTransaction：含义为托管事务，空壳事务管理器，皮包公司。仅是提醒用户，在其它环境中应用时，把事务托管给其它框架，比如托管给Spring，让Spring去管理事务。
 事务工厂 TransactionFactory SpringManagedTransaction 当Spring与Mybatis一起使用时，Spring提供了一个实现类 SpringManagedTransaction。它其实也是通过使用JDBC来进行事务管理的，当Spring的事务管理有效时，不需要操作commit、rollback、close，Spring事务管理会自动帮我们完成。
 配置事务管理方式 mybatis-config.xml 配置文件内，可配置事务管理类型。
-&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&amp;lt;!DOCTYPE configuration PUBLIC &amp;#34;-//mybatis.org//DTD Config 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-config.dtd&amp;#34;&amp;gt;&amp;lt;configuration&amp;gt;&amp;lt;environments default=&amp;#34;development&amp;#34;&amp;gt;&amp;lt;environment id=&amp;#34;development&amp;#34;&amp;gt;&amp;lt;!--配置事务的管理方式--&amp;gt;&amp;lt;transactionManager type=&amp;#34;JDBC&amp;#34; /&amp;gt;&amp;lt;!-- 配置数据库连接信息 --&amp;gt;&amp;lt;dataSource type=&amp;#34;POOLED&amp;#34;&amp;gt;&amp;lt;property name=&amp;#34;driver&amp;#34; value=&amp;#34;com.mysql.jdbc.Driver&amp;#34; /&amp;gt;&amp;lt;property name=&amp;#34;url&amp;#34; value=&amp;#34;jdbc:mysql://localhost:3306/mybatis&amp;#34; /&amp;gt;&amp;lt;property name=&amp;#34;username&amp;#34; value=&amp;#34;root&amp;#34; /&amp;gt;&amp;lt;property name=&amp;#34;password&amp;#34; value=&amp;#34;root&amp;#34; /&amp;gt;&amp;lt;/dataSource&amp;gt;&amp;lt;/environment&amp;gt;&amp;lt;/environments&amp;gt; &amp;lt;/configuration&amp;gt; </description>
+&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;
+&amp;lt;!DOCTYPE configuration PUBLIC &amp;#34;-//mybatis.org//DTD Config 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-config.dtd&amp;#34;&amp;gt;
+&amp;lt;configuration&amp;gt;
+&amp;lt;environments default=&amp;#34;development&amp;#34;&amp;gt;
+&amp;lt;environment id=&amp;#34;development&amp;#34;&amp;gt;
+&amp;lt;!--配置事务的管理方式--&amp;gt;
+&amp;lt;transactionManager type=&amp;#34;JDBC&amp;#34; /&amp;gt;
+&amp;lt;!-- 配置数据库连接信息 --&amp;gt;
+&amp;lt;dataSource type=&amp;#34;POOLED&amp;#34;&amp;gt;
+&amp;lt;property name=&amp;#34;driver&amp;#34; value=&amp;#34;com.mysql.jdbc.Driver&amp;#34; /&amp;gt;
+&amp;lt;property name=&amp;#34;url&amp;#34; value=&amp;#34;jdbc:mysql://localhost:3306/mybatis&amp;#34; /&amp;gt;
+&amp;lt;property name=&amp;#34;username&amp;#34; value=&amp;#34;root&amp;#34; /&amp;gt;
+&amp;lt;property name=&amp;#34;password&amp;#34; value=&amp;#34;root&amp;#34; /&amp;gt;
+&amp;lt;/dataSource&amp;gt;
+&amp;lt;/environment&amp;gt;
+&amp;lt;/environments&amp;gt; &amp;lt;/configuration&amp;gt; </description>
     </item>
     
     <item>
@@ -89,8 +132,14 @@ import java.io.IOException; import java.io.InputStream; import org.apache.ibatis
       <guid>https://www.saveload.cn/Tech/3Java/MyBatis/MyBatis-%E6%95%99%E7%A8%8B/MyBatis-5-SqlSession/</guid>
       <description>MyBatis SqlSession SqlSession 是 MyBatis 的关键对象，通过这个接口可以操作命令，管理事务等。
 注意：虽然SqlSession提供select/insert/update/delete方法，在旧版本中使用使用SqlSession接口的这些方法，但是新版的Mybatis中就会建议使用Mapper接口的方法。
-1.1、SqlSession旧版本用法： Person p = session.selectOne(&amp;#34;cn.mybatis.mydemo.mapper.PersonMapper.selectPersonById&amp;#34;, 1); 1.2、SqlSession新版本用法（推荐用法）： // 获得mapper接口的代理对象PersonMapper pm = session.getMapper(PersonMapper.class);// 直接调用接口的方法，查询id为1的Peson数据Person p = pm.selectPersonById(1); 2、MyBatis的SqlSession与JDBC的Connection对比 SqlSession对象，该对象中包含了执行SQL语句的所有方法，类似于JDBC里面的Connection。这种“类似”体现在以下几个方面：
-（1）在JDBC中，Connection不直接执行SQL方法，而是生成Statement或者PrepareStatement对象，利用Statement或者PrepareStatement来执行增删改查方法。 （2）在MyBatis中，SqlSession可以直接执行增删改查方法，例如： T selectOne(String statement);int insert(String statement, Object parameter);等，也可以获取映射器Mapper： T getMapper(Class type);然后通过映射器来执行增删改查操作。如下代码所示： // 获得mapper接口的代理对象PersonMapper pm = session.getMapper(PersonMapper.class);// 直接调用接口的方法，查询id为1的Peson数据Person p = pm.selectPersonById(1); 3、SqlSession 线程安全性分析 SqlSession 是应用程序与持久存储层之间执行交互操作的一个单线程对象，也是MyBatis执行持久化操作的关键对象。
+1.1、SqlSession旧版本用法： Person p = session.selectOne(&amp;#34;cn.mybatis.mydemo.mapper.PersonMapper.selectPersonById&amp;#34;, 1); 1.2、SqlSession新版本用法（推荐用法）： // 获得mapper接口的代理对象
+PersonMapper pm = session.getMapper(PersonMapper.class);
+// 直接调用接口的方法，查询id为1的Peson数据
+Person p = pm.selectPersonById(1); 2、MyBatis的SqlSession与JDBC的Connection对比 SqlSession对象，该对象中包含了执行SQL语句的所有方法，类似于JDBC里面的Connection。这种“类似”体现在以下几个方面：
+（1）在JDBC中，Connection不直接执行SQL方法，而是生成Statement或者PrepareStatement对象，利用Statement或者PrepareStatement来执行增删改查方法。 （2）在MyBatis中，SqlSession可以直接执行增删改查方法，例如： T selectOne(String statement);int insert(String statement, Object parameter);等，也可以获取映射器Mapper： T getMapper(Class type);然后通过映射器来执行增删改查操作。如下代码所示： // 获得mapper接口的代理对象
+PersonMapper pm = session.getMapper(PersonMapper.class);
+// 直接调用接口的方法，查询id为1的Peson数据
+Person p = pm.selectPersonById(1); 3、SqlSession 线程安全性分析 SqlSession 是应用程序与持久存储层之间执行交互操作的一个单线程对象，也是MyBatis执行持久化操作的关键对象。
 SqlSession 对象完全包含以数据库为背景的所有执行SQL操作的方法，它的底层封装了JDBC连接，可以用 SqlSession 实例来直接执行已映射的SQL语句。
 SqlSession 的实例不是线程安全的，因此是不能被共享的，所以它的最佳的作用域是请求或方法作用域。绝对不能将 SqlSession 实例的引用放在一个类的静态域，甚至一个类的实例变量也不行。也不能将 SqlSession 实例的引用放在任何类型的托管作用域中，比如 Servlet 框架中的 HttpSession。如果你现在正在使用一种 Web 框架，要考虑 SqlSession 放在一个和 HTTP 请求对象相似的作用域中。换句话说，每次收到的 HTTP 请求，就可以打开一个 SqlSession，返回一个响应，就关闭它。这个关闭操作是很重要的，你应该把这个关闭操作放到 finally 块中以确保每次都能执行关闭。</description>
     </item>
@@ -102,7 +151,13 @@ SqlSession 的实例不是线程安全的，因此是不能被共享的，所以
       
       <guid>https://www.saveload.cn/Tech/3Java/MyBatis/MyBatis-%E6%95%99%E7%A8%8B/MyBatis-6-MyBatis%E5%88%9D%E5%A7%8B%E5%8C%96%E8%BF%87%E7%A8%8B%E5%88%9B%E5%BB%BASession-%E5%AE%9E%E4%BE%8B%E7%9A%84%E8%BF%87%E7%A8%8B/</guid>
       <description>MyBatis初始化过程：创建Session 实例的过程 我们知道MyBatis的持久化操作离不开SqlSessionFactory对象，该对象由SqlSessionFactoryBuilde加载MyBatis的配置文件产生。SqlSessionFactory对象的openSession方法可以打开SqlSession对象。具体代码如下所示:
-// 读取mybatis-config.xml 文件Inputstream inputStream= Resources.getResourceAsStream(&amp;#34;mybatis-config.xml&amp;#34;);// 初始化mybatis// 创建SqlSessionFactory 类的实例SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);// 创建Session 实例SqlSession session= sqlSessionFactory.openSession(); 上述代码的功能是根据配置文件mybatis-config.xml，创建SqlSessionFactory 对象，然后产生SqlSession，执行SQL语句。而MyBatis的初始化就发生在第三句:
+// 读取mybatis-config.xml 文件
+Inputstream inputStream= Resources.getResourceAsStream(&amp;#34;mybatis-config.xml&amp;#34;);
+// 初始化mybatis
+// 创建SqlSessionFactory 类的实例
+SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+// 创建Session 实例
+SqlSession session= sqlSessionFactory.openSession(); 上述代码的功能是根据配置文件mybatis-config.xml，创建SqlSessionFactory 对象，然后产生SqlSession，执行SQL语句。而MyBatis的初始化就发生在第三句:
 SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 现在就让我们看看第三句到底发生了什么。
 MyBatis初始化基本过程: SqlSessionFactoryBuilder 根据传入的数据流生成 Configuration 对象，然后根据 Configuration 对象创建默认的 SqlSessionFactory 实例。
@@ -117,8 +172,24 @@ MyBatis初始化基本过程: SqlSessionFactoryBuilder 根据传入的数据流�
       
       <guid>https://www.saveload.cn/Tech/3Java/MyBatis/MyBatis-%E6%95%99%E7%A8%8B/MyBatis-7-MyBatis-ObjectFactory-%E5%AF%B9%E8%B1%A1%E5%B7%A5%E5%8E%82/</guid>
       <description>MyBatis ObjectFactory 对象工厂 ObjectFactory 简介 MyBatis每次创建结果对象的新实例时，它都会使用一个对象工厂(ObjectFactory) 实例来完成。默认的对象工厂需要做的仅仅是实例化目标类，要么通过默认构造方法，要么在参数映射存在的时候通过参数构造方法来实例化。如果想覆盖对象工厂的默认行为，则可以通过创建自己的对象工厂来实现。
-// 自定义对象工厂public class ExampleObjectFactory extends DefaultObjectFactory {public Object create(Class type) {return super.create (type) ;}public object create (Class type,List&amp;lt;Class&amp;gt; constructorArgTypes,List&amp;lt;Object&amp;gt; constructorArgs) {return super.create (type,constructorargTypes,constructorArgs) ;}public void setProperties (Properties properties) {super.setProperties(properties) ;}public &amp;lt;T&amp;gt; boolean isCollection (Class&amp;lt;T&amp;gt; type){return Collection.class.isAssignableFrom(type);} 在MyBatis配置文件中配置自定义对象工厂，如下所示：
-&amp;lt;objectFactory type=&amp;#34;cn.mybatis.factory.ExampleObjectFactory&amp;lt;Property names=&amp;#34;someProperty&amp;#34; value=&amp;#34;100&amp;#34; /&amp;gt;&amp;lt;/objectFactory&amp;gt; ObjectFactory接口很简单，它包含两个创建对象的方法：一个是默认构造方法的；另外一个是处理带参数的构造方法的。setProperties方法可以被用来配置ObjctFactory，在初始化 ObjectFactory 实例后，ObjectFactory 元素体中定义的属性会被传递给 setProperties 方法。</description>
+// 自定义对象工厂
+public class ExampleObjectFactory extends DefaultObjectFactory {
+public Object create(Class type) {
+return super.create (type) ;
+}
+public object create (Class type,List&amp;lt;Class&amp;gt; constructorArgTypes,List&amp;lt;Object&amp;gt; constructorArgs) {
+return super.create (type,constructorargTypes,constructorArgs) ;
+}
+public void setProperties (Properties properties) {
+super.setProperties(properties) ;
+}
+public &amp;lt;T&amp;gt; boolean isCollection (Class&amp;lt;T&amp;gt; type)
+{
+return Collection.class.isAssignableFrom(type);
+} 在MyBatis配置文件中配置自定义对象工厂，如下所示：
+&amp;lt;objectFactory type=&amp;#34;cn.mybatis.factory.ExampleObjectFactory
+&amp;lt;Property names=&amp;#34;someProperty&amp;#34; value=&amp;#34;100&amp;#34; /&amp;gt;
+&amp;lt;/objectFactory&amp;gt; ObjectFactory接口很简单，它包含两个创建对象的方法：一个是默认构造方法的；另外一个是处理带参数的构造方法的。setProperties方法可以被用来配置ObjctFactory，在初始化 ObjectFactory 实例后，ObjectFactory 元素体中定义的属性会被传递给 setProperties 方法。</description>
     </item>
     
   </channel>

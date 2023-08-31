@@ -11,7 +11,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.saveload.cn/Tech/2Computer-Science/Computer-Science/</guid>
-      <description>Computer Science 标签：计算机科学、《数据结构》、《计算机网络》、《计算机组成原理》、《计算机操作系统》、《离散数学》、《线性代数》、《编译原理》、《数据库原理》、《软件工程》、《软件系统设计》 时间：2020年8月7日17:33:00 连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk 清华课程表</description>
+      <description>Computer Science 标签：计算机科学、《数据结构》、《计算机网络》、《计算机组成原理》、《计算机操作系统》、《离散数学》、《线性代数》、《编译原理》、《数据库原理》、《软件工程》、《软件系统设计》 时间：2020年8月7日17:33:00 连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk 清华课程表</description>
     </item>
     
     <item>
@@ -53,7 +53,39 @@ SSH 最初由芬兰计算机科学家 Tatu Ylönen 于 1995 年设计。协议�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.saveload.cn/Tech/2Computer-Science/UnicodeUTF-8UTF-16/</guid>
-      <description> Unicode、UTF-8、UTF-16 </description>
+      <description>ASCII、Unicode、UTF-8、UTF-16 ASCII 计算机只能理解二进制，二进制语言是面向机器的语言，人类能理解的是字符，编码 实际是一种 二进制 与 字符 的映射关系。 ASCII 码实际上是一种映射关系的具体实现，是从二进制字符到字母数字字符的映射
+Base64 Base64 也称为 Base64 内容传输编码。Base64 是将二进制数据编码为 ASCII 文本。但它只使用了 64 个字符，再加上大多数字符集中存在的一个填充字符。所以它是一种仅使用可打印字符表示二进制数据的方法。Base64 常用于在通常处理文本数据的场景，表示、传输、存储一些二进制数据，包括MIME的电子邮件及XML的一些复杂数据。
+Base64 编码用于通过不能正确处理二进制数据的介质传输数据。因此，对数据进行 Base64 编码以确保数据完整，无需通过此介质进行任何修改。
+Unicode Unicode 是另一种字符编码（映射关系的具体实现），它仍然是：位查找 -&amp;gt; 字符，由 Unicode Consortium 维护，其负责制定国际使用的软件标准。IT 行业将 Unicode 标准化以对计算机和其他电子和通信设备中的字符进行编码和表示。
+Unicode 由许多代码点组成（将来自世界各地的大量字符映射到所有计算机都可以引用的键），代码点的集合称为字符集，这就是 Unicode。开发 Unicode 的目标是通过一种独特的方式将世界上任何语言的任何字符或符号转换成唯一的数字。可以在 unicode.org 上查找任何 Unicode 字符的编号，包括表情符号！
+Unicode ASCII 含义 通用字符集 美国信息交换标准代码 用法 由IT行业标准化,用于在计算机中编码和表示字符。 用于电子通信和HTML等编程语言。 表示内容 表示大量字符、公式、数学符号和来自不同语言的文本。 ASCII用于表示英文字母、数字、一些数学符号和语法符号,如标点符号、感叹号等 编码位数 使用四种编码格式，即UTF-7、UTF-8、UTF-16、UTF-32，分别使用7、8、16和32位。 使用 7 位或 8 位来表示各种字符。 内存占用 Unicode 的UTF-8、UTF-16 和UTF-32 编码方案分别使用8、16和32 位，因此占用的内存较多。 在编码中使用 7 或 8 位；因此，它在内存中占用的空间较小。 UTF-8、UTF-16、UTF-32 （1）基本概念 UTF 是 Unicode 编码方式的一种。UTF 编码由 Unicode 标准定义，能够对需要的每个 Unicode 代码点进行编码。Unicode 编码方案根据用于对字符进行编码的位数进行分类。目前使用的 Unicode 编码方案有 UTF-7、UTF-8、UTF-16 和 UTF-32 ，分别使用 7 位、8 位、16 位和 32 位来表示字符。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/2Computer-Science/%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E7%A0%81%E5%93%88%E5%B8%8C%E6%BC%94%E8%BF%9B%E7%AE%80%E5%8F%B2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/2Computer-Science/%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E7%A0%81%E5%93%88%E5%B8%8C%E6%BC%94%E8%BF%9B%E7%AE%80%E5%8F%B2/</guid>
+      <description>编码，加密，与密码哈希演进简史 转自：编码，加密，与密码哈希演进简史
+作者：logto
+链接：https://www.v2ex.com/t/957713#reply18
+来源：V2EX
+前言 字如其名，密码哈希是从密码计算哈希值的过程。哈希值通常存储在数据库中，在登录过程中，用户输入的密码的哈希值会被计算并与存储在数据库中的哈希值进行比较。如果匹配成功，则验证通过。
+在我们深入了解密码哈希算法的演进之前，我们先简单探讨一下为什么需要它。
+明文密码：一个重大的安全风险 想象一下，你是一个网站的用户，并在该网站注册了一个账户。有一天，该网站被黑客攻击，数据库泄漏了。如果网站以明文形式存储密码，黑客可以直接访问你的密码。由于许多人在多个网站上重复使用密码，黑客可以使用这个密码来未经授权地访问你的其他账户。如果你在电子邮件账户上使用相同或类似的密码，情况会变得更糟，因为黑客可以重置你的密码并接管你所有关联的账户。
+即使没有数据泄漏，在大型团队中，任何有数据库访问权限的人都可以看到密码。与其他信息相比，密码具有高度敏感性，你绝对不希望任何人能够访问它们。
+很明显，明文存储密码是一个业余的错误。不幸的是，如果你搜索“password leak plaintext”，你会发现像 Facebook、DailyQuiz 和 GoDaddy 这样的大公司都曾遭遇明文密码泄漏。很可能还有许多其他公司犯了同样的错误。
+编码（ encoding ），加密（ encryption ），哈希（ hashing ） 这三个术语经常被混淆，但它们是不同的概念。
+编码（ encoding ） 编码是密码存储中首先要排除的内容。例如，Base64 是一种编码算法，将二进制数据转换为字符字符串（ Node.js ）：
+const data = &amp;#39;Hello, world!&amp;#39;;
+const encoded = Buffer.from(data).toString(&amp;#39;base64&amp;#39;);
+console.log(encoded); // SGVsbG8sIHdvcmxkIQ== 知道编码算法后，任何人都可以解码编码后的字符串并恢复原始数据：
+const encoded = &amp;#39;SGVsbG8sIHdvcmxkIQ==&amp;#39;;
+const data = Buffer.from(encoded, &amp;#39;base64&amp;#39;).toString();
+console.log(data); // Hello, world! 对于黑客来说，大多数编码算法等同于明文。常见的编码有 ASCII、UTF－8、Unicode、Base64 等.
+加密（ encryption ） 在哈希算法流行之前，加密也被用于存储密码，例如使用 AES 。加密涉及使用密钥（或一对密钥）对数据进行加密和解密。
+加密的问题在于“解密”一词。这意味着加密是可逆的，如果黑客获得密钥，他们可以解密密码并获取明文密码。</description>
     </item>
     
   </channel>

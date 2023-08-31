@@ -11,7 +11,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.saveload.cn/Tech/1Book/The-Rust-Programming-Language/rust/</guid>
-      <description>Rust编程语言 标签：Rust、基础、 时间：2020年8月6日6:25:00 连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk 前言 介绍 第 1章 入门 1.1。安装 1.2。你好，世界！ 1.3。您好，货运！ 第 2章 编写猜谜游戏 第 3章 通用编程概念 3.1。变量和可变性 3.2。资料类型 3.3。功能 3.4。注释 3.5。控制流 第 4章 了解所有权 4.1。什么是所有权？ 4.2。参考和借阅 4.3。切片类型 第 5章 使用结构来构造相关数据 5.1。定义和实例化结构 5.2。使用结构的示例程序 5.3。方法语法 第 6章 枚举和模式匹配 6.1。定义枚举 6.2。匹配控制流运算符 6.3。如果让简洁控制流 第 7 章 使用软件包，板条箱和模块管理不断增长的项目 Rust 中有三和重要的组织概念：包、箱、模块。
+      <description>Rust编程语言 标签：Rust、基础、 时间：2020年8月6日6:25:00 连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk 前言 介绍 第 1章 入门 1.1。安装 1.2。你好，世界！ 1.3。您好，货运！ 第 2章 编写猜谜游戏 第 3章 通用编程概念 3.1。变量和可变性 3.2。资料类型 3.3。功能 3.4。注释 3.5。控制流 第 4章 了解所有权 4.1。什么是所有权？ 4.2。参考和借阅 4.3。切片类型 第 5章 使用结构来构造相关数据 5.1。定义和实例化结构 5.2。使用结构的示例程序 5.3。方法语法 第 6章 枚举和模式匹配 6.1。定义枚举 6.2。匹配控制流运算符 6.3。如果让简洁控制流 第 7 章 使用软件包，板条箱和模块管理不断增长的项目 Rust 中有三和重要的组织概念：包、箱、模块。
 Packages: A Cargo feature that lets you build, test, and share crates 包装：货运功能，可让您构建，测试和共享包装箱 Crates: A tree of modules that produces a library or executable 板条箱：产生库或可执行文件的模块树 Modules and use: Let you control the organization, scope, and privacy of paths 模块和用途：让您控制路径的组织，范围和隐私 Paths: A way of naming an item, such as a struct, function, or module 路径：一种命名项目的方法，例如结构，函数或模块 7.</description>
     </item>
     
@@ -115,10 +115,14 @@ Packages: A Cargo feature that lets you build, test, and share crates 包装：�
 更新和卸载 通过安装Rust后rustup，轻松更新到最新版本。在您的外壳中，运行以下更新脚本：
 $ rustup update 要卸载Rust和rustup，请从您的外壳运行以下卸载脚本：
 $ rustup self uninstall 本地文件 运行rustup doc以在浏览器中打开本地文档。
-1.2。你好，世界！ fn main() {println!(&amp;#34;Hello, world!&amp;#34;);} 编译和运行 &amp;gt;$ rustc main.rs&amp;gt;.\main.exe Rust程序剖析 第一行声明一个名为的函数main，该函数不带参数且不返回任何内容。如果有参数，它们将放在括号内()。该main功能很特殊：它始终是每个可执行Rust程序中运行的第一个代码。 函数主体用大括号括起来{}。 println!调用Rust宏。如果改为调用函数，则将其输入为println（不带!）。 我们用分号（;）结束该行，这表明该表达式已结束，下一个表达式可以开始了。Rust代码的大多数行以分号结尾。 Rust风格是缩进四个空格，而不是制表符。
+1.2。你好，世界！ fn main() {
+println!(&amp;#34;Hello, world!&amp;#34;);
+} 编译和运行 &amp;gt;$ rustc main.rs
+&amp;gt;.\main.exe Rust程序剖析 第一行声明一个名为的函数main，该函数不带参数且不返回任何内容。如果有参数，它们将放在括号内()。该main功能很特殊：它始终是每个可执行Rust程序中运行的第一个代码。 函数主体用大括号括起来{}。 println!调用Rust宏。如果改为调用函数，则将其输入为println（不带!）。 我们用分号（;）结束该行，这表明该表达式已结束，下一个表达式可以开始了。Rust代码的大多数行以分号结尾。 Rust风格是缩进四个空格，而不是制表符。
 1.3。Hello, Cargo! 您好，货运！ Cargo是Rust的构建系统和包管理器。大多数Rustacean使用此工具来管理他们的Rust项目，因为Cargo会为您处理很多任务，例如:
 构建代码， 下载代码所依赖的库以及构建这些库。（我们称库为您的代码需要依赖项。） 请在终端中输入以下内容，检查是否已安装Cargo：
-$ cargo --version 用 Cargo 创建项目 $ cargo new hello_cargo$ cd hello_cargo 第一个命令创建一个名为hello_cargo的新目录。我们已将项目命名为hello_cargo，并且Cargo在同名目录中创建其文件。
+$ cargo --version 用 Cargo 创建项目 $ cargo new hello_cargo
+$ cd hello_cargo 第一个命令创建一个名为hello_cargo的新目录。我们已将项目命名为hello_cargo，并且Cargo在同名目录中创建其文件。
 进入hello_cargo目录并列出文件。您会看到Cargo为我们生成了两个文件和一个目录：一个Cargo.toml文件和一个其中带有main.rs文件的 src目录。</description>
     </item>
     
@@ -146,7 +150,16 @@ $ cargo --version 用 Cargo 创建项目 $ cargo new hello_cargo$ cd hello_carg
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.saveload.cn/Tech/1Book/The-Rust-Programming-Language/The-Rust-Programming-Language-%E7%AC%AC-2%E7%AB%A0-%E7%BC%96%E5%86%99%E7%8C%9C%E8%B0%9C%E6%B8%B8%E6%88%8F/</guid>
-      <description>第 2章 编写猜谜游戏 use std::io;fn main() {println!(&amp;#34;Guess the number!&amp;#34;);println!(&amp;#34;Please input your guess.&amp;#34;);let mut guess = String::new();io::stdin().read_line(&amp;amp;mut guess).expect(&amp;#34;Failed to read line&amp;#34;);println!(&amp;#34;You guessed: {}&amp;#34;, guess);} 让我们逐行进行介绍。为了获得用户输入，然后将结果打印为输出，我们需要将 io(input/output)库纳入范围。该io库来自标准库（称为std）：
+      <description>第 2章 编写猜谜游戏 use std::io;
+fn main() {
+println!(&amp;#34;Guess the number!&amp;#34;);
+println!(&amp;#34;Please input your guess.&amp;#34;);
+let mut guess = String::new();
+io::stdin()
+.read_line(&amp;amp;mut guess)
+.expect(&amp;#34;Failed to read line&amp;#34;);
+println!(&amp;#34;You guessed: {}&amp;#34;, guess);
+} 让我们逐行进行介绍。为了获得用户输入，然后将结果打印为输出，我们需要将 io(input/output)库纳入范围。该io库来自标准库（称为std）：
 use std::io; Rust 的标准库，有一个 prelude 子模块，这里面包含了默认导入（std 库是默认导入的，然后 std 库中的 prelude 下面的东西也是默认导入的）的所有符号。
 use 关键字 use 关键字能够将模块标识符引入当前作用域,这样就解决了局部模块路径过长的问题。 所有的系统库模块都是被默认导入的，所以在使用的时候只需要使用 use 关键字简化路径就可以方便的使用了。 当然，有些情况下存在两个相同的名称，且同样需要导入，我们可以使用 as 关键字为标识符添加别名</description>
     </item>
@@ -221,7 +234,7 @@ Packages: A Cargo feature that lets you build, test, and share crates 包装：�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.saveload.cn/Tech/1Book/The-Rust-Programming-Language/%E6%A0%87%E9%A2%98/</guid>
-      <description> Rust编程语言 标签：Rust、基础、 时间：2020年8月6日6:25:00 连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk 前言 介绍 </description>
+      <description> Rust编程语言 标签：Rust、基础、 时间：2020年8月6日6:25:00 连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk 前言 介绍 </description>
     </item>
     
   </channel>

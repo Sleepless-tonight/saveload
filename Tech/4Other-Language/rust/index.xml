@@ -7,6 +7,24 @@
     <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/4Other-Language/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
+      <link>https://www.saveload.cn/Tech/4Other-Language/rust/Rust-%E5%9C%A8-Windows-%E4%B8%8A-Release-%E7%BC%96%E8%AF%91%E5%BD%BB%E5%BA%95%E5%8E%BB%E9%99%A4%E8%B0%83%E8%AF%95%E7%AC%A6%E5%8F%B7%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/4Other-Language/rust/Rust-%E5%9C%A8-Windows-%E4%B8%8A-Release-%E7%BC%96%E8%AF%91%E5%BD%BB%E5%BA%95%E5%8E%BB%E9%99%A4%E8%B0%83%E8%AF%95%E7%AC%A6%E5%8F%B7%E4%BF%A1%E6%81%AF/</guid>
+      <description>Rust 在 Windows 上 Release 编译彻底去除调试符号信息 转自：一年又一年
+链接：https://iyn.me/i/post-42.html
+本文介绍如何让 Rust 在以 Windows 为目标平台的 Release 编译的基础上，通过配置链接参数进一步彻底去除多余的调试符号信息，针对的工具链包括 GNU 和 MSVC。
+去除额外的符号信息能减小最终生成程序的体积。如果是在 Windows 上使用 GNU 工具链，那么这一点会很明显。
+一个 Rust 的 Hello World 程序，在 Windows 下，使用 GNU 工具链，即便是 Release 编译，最后生成的程序体积也有 3 MB 多。其中调试符号信息占了大部分体积；如果去除，程序体积可以下降至 600+ KB。好在如果使用的是 MSVC 工具链编译，调试符号会另存于 .pdb 文件，程序本体没有这样的体积问题。
+在 Linux 下，如果编译时带上了符号信息，编译完还可以用 strip 工具解决这个问题，但是 Windows 下呢？
+去除符号信息可以减小 Rust 程序体积，但本文不打算探讨减小 Rust 程序体积的各种技巧，本文只打算纯粹地介绍在 Windows 目标平台上编译 Rust 程序时如何去除额外的调试符号信息。
+读者如果想进一步研究如何减小 Rust 生成程序的体积，可以参考网上已有的讲解得很具体和专业的精彩文章。在这里笔者也列举一些供读者参考：
+优化 Rust 程序编译体积.[https://www.aloxaf.com/2018/09/reduce_rust_size/]
+Minimizing Rust Binary Size.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://www.saveload.cn/Tech/4Other-Language/rust/Rust/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -15,9 +33,16 @@
 声明变量，需要使用 let 关键字
 let a = 123; a 就被确定为整型数字，不能把字符串类型的值赋给它。
 使变量变得&amp;quot;可变&amp;quot;（mutable）只需一个 mut 关键字。
-let mut a = 123;a = 456; 变量的值可以&amp;quot;重新绑定&amp;quot;，但在&amp;quot;重新绑定&amp;quot;以前不能私自被改变，
+let mut a = 123;
+a = 456; 变量的值可以&amp;quot;重新绑定&amp;quot;，但在&amp;quot;重新绑定&amp;quot;以前不能私自被改变，
 重影（Shadowing） 重影就是刚才讲述的所谓&amp;quot;重新绑定&amp;quot;，重影就是指变量的名称可以被重新使用的机制。
-fn main() {let x = 5;let x = x + 1;let x = x * 2;println!(&amp;#34;The value of x is: {}&amp;#34;, x);// The value of x is: 12} 重影与可变变量的赋值不是一个概念，重影是指用同一个名字重新代表另一个变量实体，其类型、可变属性和值都可以变化。但可变变量赋值仅能发生值的变化。
+fn main() {
+let x = 5;
+let x = x + 1;
+let x = x * 2;
+println!(&amp;#34;The value of x is: {}&amp;#34;, x);
+// The value of x is: 12
+} 重影与可变变量的赋值不是一个概念，重影是指用同一个名字重新代表另一个变量实体，其类型、可变属性和值都可以变化。但可变变量赋值仅能发生值的变化。
 常量 const a: i32 = 123; 比那辆可以允许重影</description>
     </item>
     

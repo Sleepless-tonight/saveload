@@ -14,7 +14,10 @@
       <description>Apache Shiro Apache Shiro（发音为“shee-roh”，日语中的&amp;rsquo;castle&amp;rsquo;）是一个功能强大且易于使用的Java安全框架，可执行身份验证，授权，加密和会话管理，并可用于保护任何应用程序。
 核心概念：Subject, SecurityManager, and Realms Subject Subject这个词是一个安全术语，基本上是指“当前正在执行的用户”。它只是不被称为“用户”，因为“用户”这个词通常与人类有关。在安全的世界，术语“主题”可以指一个人，但也有可能是会谈进程，守护进程帐户，或任何类似。它只是意味着“当前与软件交互的东西”。可以将其视为Shiro的“用户”概念。可以在代码中的任何位置轻松获取Shiro Subject。
 例如：
-import org.apache.shiro.subject.Subject;import org.apache.shiro.SecurityUtils;...Subject currentUser = SecurityUtils.getSubject(); 获得 Subject 后，您可以立即访问当前用户希望使用Shiro执行的所有操作的90％，例如登录，注销，访问其会话，执行授权检查等等
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.SecurityUtils;
+...
+Subject currentUser = SecurityUtils.getSubject(); 获得 Subject 后，您可以立即访问当前用户希望使用Shiro执行的所有操作的90％，例如登录，注销，访问其会话，执行授权检查等等
 SecurityManager 安全管理器 Subject 的“幕后”对应物是SecurityManager。当Subject表示当前用户的安全操作时，SecurityManager管理所有用户的安全操作。它是Shiro架构的核心，充当一种“伞形”对象，它引用了许多形成对象图的内部嵌套安全组件。但是，一旦配置了SecurityManager及其内部对象图，通常就会将其保留，应用程序开发人员几乎将所有时间花在Subject API上。
 Realms Shiro的第三个也是最后一个核心概念是一个领域。Realm充当Shiro与应用程序安全数据之间的“桥接”或“连接器”。也就是说，当实际与安全相关的数据（如用户帐户）进行交互以执行身份验证（登录）和授权（访问控制）时，Shiro会从为应用程序配置的一个或多个领域中查找许多这些内容。
 从这个意义上讲，Realm本质上是一个特定于安全性的DAO：它封装了数据源的连接细节，并根据需要使相关数据可用于Shiro。配置Shiro时，必须至少指定一个Realm用于身份验证和/或授权。可以配置多个Realm，但至少需要一个。
@@ -22,7 +25,12 @@ Shiro提供了开箱即用的Realms，可以连接到许多安全数据源（也
 认证 身份验证是验证用户身份的过程。也就是说，当用户使用应用程序进行身份验证时，他们证明他们实际上是他们所说的人。这有时也被称为“登录”。这通常是一个三步过程。
 收集用户的标识信息，称为主体，并支持身份证明，称为凭证。 将主体和凭据提交给系统。 如果提交的凭据与系统对该用户标识（主体）的期望值匹配，则认为该用户已通过身份验证。如果它们不匹配，则不会将用户视为已通过身份验证。 Shiro有一个以 Subject 为中心的API - 几乎所有你在运行时用Shiro做的事都是通过与当前正在执行的 Subject 进行交互来实现的。因此，要登录 Subject ，只需调用其登录方法，传递一个AuthenticationToken实例，该实例表示提交的主体和凭据（在本例中为用户名和密码）。
 例如：
-//1. Acquire submitted principals and credentials:AuthenticationToken token =new UsernamePasswordToken(username, password);//2. Get the current Subject:Subject currentUser = SecurityUtils.getSubject();//3.</description>
+//1. Acquire submitted principals and credentials:
+AuthenticationToken token =
+new UsernamePasswordToken(username, password);
+//2. Get the current Subject:
+Subject currentUser = SecurityUtils.getSubject();
+//3.</description>
     </item>
     
   </channel>

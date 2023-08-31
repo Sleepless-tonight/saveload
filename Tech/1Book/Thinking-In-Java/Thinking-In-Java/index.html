@@ -12,7 +12,7 @@
 <meta name="generator" content="Hugo 0.107.0">
 
 
-  <meta name="description" content="Thinking In Java 标签：Java、基础、thinking-in-java、源码解读、进阶、Java开源框架 时间：2018年7月17日19:20:24 连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk 第 1 章：对象入门 面向对象编程（OOP）
+  <meta name="description" content="Thinking In Java 标签：Java、基础、thinking-in-java、源码解读、进阶、Java开源框架 时间：2018年7月17日19:20:24 连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk 第 1 章：对象入门 面向对象编程（OOP）
 1.1 抽象的进步 所有编程语言的最终目的都是提供一种“抽象”方法。面向对象的程序设计是一大进步，我们将问题空间中的元素以及它们在方案空间的表示物称作“对象”（Object）。所有东西都是对象。程序是一大堆对象的组合。每个对象都有自己的存储空间，可容纳其他对象。每个对象都有一种类型。一个类最重要的特征就是“能将什么消息发给它？”。 同一类所有对象都能接收相同的消息。
 1.2 对象的接口 我们向对象发出的请求是通过它的“接口”（Interface）定义的，对象的“类型”或“类”则规定了它的接口形式。“类型”与“接口”的等价或对应关系是面向对象程序设计的基础。接口定义了一类对象能接收的信息，做哪些事情。
 1.3 实现方案的隐藏 “接口”（Interface）规定了可对一个特定的对象发出哪些请求。在某个地方存在着一些代码，以便满足这些请求。这些代码与那些隐藏起来的数据便叫作“隐藏的实现”。“接口”（Interface）重要一点是让牵连到的所有成员都遵守相同的规则。进行访问控制，第一个原因是防止程序员接触他们不该接触的东西。第二个原因是允许库设计人员修改内部结构，不用担心它会对客户程序员造成什么影响。一个继承的类可访问受保护的成员，但不能访问私有成员。
@@ -29,7 +29,36 @@
 1.6.2 抽象的基础类和接口 设计程序时，我们经常都希望基础类只为自己的衍生类提供一个接口，而不是实际创建基础类的一个对象，为达到这个目的，需要把那个类变成“抽象”的——使用abstract关键字。
 亦可用abstract关键字描述一个尚未实现的方法，指出：“这是适用于从这个类继承的所有类型的一个接口函数，但目前尚没有对它进行任何形式的实现。抽象方法也许只能在一个抽象类里创建。继承了一个类后，那个方法就必须实现，否则继承的类也会变成“抽象”类。
 interface（接口）关键字将抽象类的概念更延伸了一步，它完全禁止了所有的函数定义。“接口”是一种相当有效和常用的工具。另外如果自己愿意，亦可将多个接口都合并到一起（不能从多个普通class或abstract class中继承）。
-备注：这是一段个人的总结：interface（接口）更倾向于表明这个类是能干什么事，也就是说这类的类实现了哪些方法及继承与此接口的类必需要实现哪些方法；接口更像一个规范文件(协议)。abstract（抽象）更倾向于表明一类类的共有特性，由基础类或一个接口衍生的一系列类的共有特性，所以不仅仅表明这个类能干哪些事。也就是说 interface（接口）的方法都可以在接口中无实现，只规定了子类必须需要实现哪些方法，而 abstract（抽象）可以把子类相同实现的方法在抽象类里实现，子类各自特别且必须的方法用抽象方法规定然后在子类里各自实现。abstract（抽象）可以看为一种跟 public、static 同级别的修饰符（修饰了类（class）和方法），而 interface（接口）可以看为一种跟 class 同级别的修饰符，标志着质的改变。interface（接口）可以说是对 abstract（抽象）的抽象。interface（接口）帮助了对象的分层，各组件之间的松耦合。interface 语法要求：1、接口可以包含：静态常量、方法（抽象）、内部类（接口、枚举）、默认方法（类方法）2、接口只可以继承多个父接口（之间用英文逗号“,”隔开），不能继承类。3、接口修饰符可以是 public 或者省略，如果省略了 public 访问控制符，则默认采用包权限访问控制符，即只有相同包结构下才可以访问该接口。4、接口内的所有成员都是 public 访问权限，可省略，如果指定则只可使用 public 访问修饰符。5、接口的成员变量均为静态常量，不管是否使用 public static final 修饰符都认为只可做如此修饰。6、接口的方法只能是抽象、类方法、默认方法，如果不是默认方法，系统将自动为普通方法增加 public abstract 修饰符，且不能有方法实现（方法体），类方法、默认方法必须有方法实现（方法体）。7、定义默认方法，需要用 default 修饰且默认添加 public 修饰 ，默认方法不能用 static 修饰，所以不能直接用接口来调用默认方法，由接口的实现类的实例来调用这些默认方法。8、类方法需用 static 修饰 ，可用接口直接调用。9、接口的内部类（接口、枚举）默认采用 public static 修饰符。10、接口可看做为特殊的类，受限于一个源文件只能有一个 public 修饰。11、接口不能创建实例，作为声明引用类型变量时此接口必须有其实现类。abstract 语法要求：1、有抽象方法的类只能是抽象类2、抽象类里可没有抽象方法有普通方法3、抽象类不能被实例化4、抽象类可以包含：成员变量、方法（普通、抽象）、构造器、初始化快、内部类（接口、枚举）、抽象类的构造器不能用于创造实列，主要用于被其子类调用5、抽象不能修饰变量（成员、局部），不能修饰构造器，抽象类里的构造器只能是普通的构造器。总结如下：1、抽象类与普通类相比“一得一失”：1、“得”可包含抽象方法。2、“失”无法被实列化。2、抽象类是用来被它的子类继承的，方法由子类实现。而 final 修饰的类不能被继承， final 修饰的方法不能被重写，所以 final 和 abstract 是互斥的。3、static 修饰方法是属于这个类本身的（类Class和实列Object的区别），如果该方法被定义成抽象方法，通过类调用的时候也会出错，因为调用了一个没有方法实体的方法，所以 static 和 abstract 是互斥的（非绝对，可以同时修饰内部类）。4、abstract 修饰的方法必须被之类重写才有意义，因此 abstract 方法不能是私有的，所以 private 和 abstract 是互斥的。 1." />
+备注：这是一段个人的总结：
+interface（接口）更倾向于表明这个类是能干什么事，也就是说这类的类实现了哪些方法及继承与此接口的类必需要实现哪些方法；接口更像一个规范文件(协议)。
+abstract（抽象）更倾向于表明一类类的共有特性，由基础类或一个接口衍生的一系列类的共有特性，所以不仅仅表明这个类能干哪些事。
+也就是说 interface（接口）的方法都可以在接口中无实现，只规定了子类必须需要实现哪些方法，而 abstract（抽象）可以把子类相同实现的方法在抽象类里实现，子类各自特别且必须的方法用抽象方法规定然后在子类里各自实现。
+abstract（抽象）可以看为一种跟 public、static 同级别的修饰符（修饰了类（class）和方法），而 interface（接口）可以看为一种跟 class 同级别的修饰符，标志着质的改变。
+interface（接口）可以说是对 abstract（抽象）的抽象。
+interface（接口）帮助了对象的分层，各组件之间的松耦合。
+interface 语法要求：
+1、接口可以包含：静态常量、方法（抽象）、内部类（接口、枚举）、默认方法（类方法）
+2、接口只可以继承多个父接口（之间用英文逗号“,”隔开），不能继承类。
+3、接口修饰符可以是 public 或者省略，如果省略了 public 访问控制符，则默认采用包权限访问控制符，即只有相同包结构下才可以访问该接口。
+4、接口内的所有成员都是 public 访问权限，可省略，如果指定则只可使用 public 访问修饰符。
+5、接口的成员变量均为静态常量，不管是否使用 public static final 修饰符都认为只可做如此修饰。
+6、接口的方法只能是抽象、类方法、默认方法，如果不是默认方法，系统将自动为普通方法增加 public abstract 修饰符，且不能有方法实现（方法体），类方法、默认方法必须有方法实现（方法体）。
+7、定义默认方法，需要用 default 修饰且默认添加 public 修饰 ，默认方法不能用 static 修饰，所以不能直接用接口来调用默认方法，由接口的实现类的实例来调用这些默认方法。
+8、类方法需用 static 修饰 ，可用接口直接调用。
+9、接口的内部类（接口、枚举）默认采用 public static 修饰符。
+10、接口可看做为特殊的类，受限于一个源文件只能有一个 public 修饰。
+11、接口不能创建实例，作为声明引用类型变量时此接口必须有其实现类。
+abstract 语法要求：
+1、有抽象方法的类只能是抽象类
+2、抽象类里可没有抽象方法有普通方法
+3、抽象类不能被实例化
+4、抽象类可以包含：成员变量、方法（普通、抽象）、构造器、初始化快、内部类（接口、枚举）、抽象类的构造器不能用于创造实列，主要用于被其子类调用
+5、抽象不能修饰变量（成员、局部），不能修饰构造器，抽象类里的构造器只能是普通的构造器。
+总结如下：
+1、抽象类与普通类相比“一得一失”：1、“得”可包含抽象方法。2、“失”无法被实列化。
+2、抽象类是用来被它的子类继承的，方法由子类实现。而 final 修饰的类不能被继承， final 修饰的方法不能被重写，所以 final 和 abstract 是互斥的。
+3、static 修饰方法是属于这个类本身的（类Class和实列Object的区别），如果该方法被定义成抽象方法，通过类调用的时候也会出错，因为调用了一个没有方法实体的方法，所以 static 和 abstract 是互斥的（非绝对，可以同时修饰内部类）。
+4、abstract 修饰的方法必须被之类重写才有意义，因此 abstract 方法不能是私有的，所以 private 和 abstract 是互斥的。 1." />
 
     <title>Thinking in Java | Save Load</title>
 
@@ -55,7 +84,7 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
     content="Thinking in Java"
   />
   <meta property="og:site_name" content="Save Load" />
-  <meta property="og:description" content="Thinking In Java 标签：Java、基础、thinking-in-java、源码解读、进阶、Java开源框架 时间：2018年7月17日19:20:24 连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk 第 1 章：对象入门 面向对象编程（OOP）
+  <meta property="og:description" content="Thinking In Java 标签：Java、基础、thinking-in-java、源码解读、进阶、Java开源框架 时间：2018年7月17日19:20:24 连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk 第 1 章：对象入门 面向对象编程（OOP）
 1.1 抽象的进步 所有编程语言的最终目的都是提供一种“抽象”方法。面向对象的程序设计是一大进步，我们将问题空间中的元素以及它们在方案空间的表示物称作“对象”（Object）。所有东西都是对象。程序是一大堆对象的组合。每个对象都有自己的存储空间，可容纳其他对象。每个对象都有一种类型。一个类最重要的特征就是“能将什么消息发给它？”。 同一类所有对象都能接收相同的消息。
 1.2 对象的接口 我们向对象发出的请求是通过它的“接口”（Interface）定义的，对象的“类型”或“类”则规定了它的接口形式。“类型”与“接口”的等价或对应关系是面向对象程序设计的基础。接口定义了一类对象能接收的信息，做哪些事情。
 1.3 实现方案的隐藏 “接口”（Interface）规定了可对一个特定的对象发出哪些请求。在某个地方存在着一些代码，以便满足这些请求。这些代码与那些隐藏起来的数据便叫作“隐藏的实现”。“接口”（Interface）重要一点是让牵连到的所有成员都遵守相同的规则。进行访问控制，第一个原因是防止程序员接触他们不该接触的东西。第二个原因是允许库设计人员修改内部结构，不用担心它会对客户程序员造成什么影响。一个继承的类可访问受保护的成员，但不能访问私有成员。
@@ -72,7 +101,36 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
 1.6.2 抽象的基础类和接口 设计程序时，我们经常都希望基础类只为自己的衍生类提供一个接口，而不是实际创建基础类的一个对象，为达到这个目的，需要把那个类变成“抽象”的——使用abstract关键字。
 亦可用abstract关键字描述一个尚未实现的方法，指出：“这是适用于从这个类继承的所有类型的一个接口函数，但目前尚没有对它进行任何形式的实现。抽象方法也许只能在一个抽象类里创建。继承了一个类后，那个方法就必须实现，否则继承的类也会变成“抽象”类。
 interface（接口）关键字将抽象类的概念更延伸了一步，它完全禁止了所有的函数定义。“接口”是一种相当有效和常用的工具。另外如果自己愿意，亦可将多个接口都合并到一起（不能从多个普通class或abstract class中继承）。
-备注：这是一段个人的总结：interface（接口）更倾向于表明这个类是能干什么事，也就是说这类的类实现了哪些方法及继承与此接口的类必需要实现哪些方法；接口更像一个规范文件(协议)。abstract（抽象）更倾向于表明一类类的共有特性，由基础类或一个接口衍生的一系列类的共有特性，所以不仅仅表明这个类能干哪些事。也就是说 interface（接口）的方法都可以在接口中无实现，只规定了子类必须需要实现哪些方法，而 abstract（抽象）可以把子类相同实现的方法在抽象类里实现，子类各自特别且必须的方法用抽象方法规定然后在子类里各自实现。abstract（抽象）可以看为一种跟 public、static 同级别的修饰符（修饰了类（class）和方法），而 interface（接口）可以看为一种跟 class 同级别的修饰符，标志着质的改变。interface（接口）可以说是对 abstract（抽象）的抽象。interface（接口）帮助了对象的分层，各组件之间的松耦合。interface 语法要求：1、接口可以包含：静态常量、方法（抽象）、内部类（接口、枚举）、默认方法（类方法）2、接口只可以继承多个父接口（之间用英文逗号“,”隔开），不能继承类。3、接口修饰符可以是 public 或者省略，如果省略了 public 访问控制符，则默认采用包权限访问控制符，即只有相同包结构下才可以访问该接口。4、接口内的所有成员都是 public 访问权限，可省略，如果指定则只可使用 public 访问修饰符。5、接口的成员变量均为静态常量，不管是否使用 public static final 修饰符都认为只可做如此修饰。6、接口的方法只能是抽象、类方法、默认方法，如果不是默认方法，系统将自动为普通方法增加 public abstract 修饰符，且不能有方法实现（方法体），类方法、默认方法必须有方法实现（方法体）。7、定义默认方法，需要用 default 修饰且默认添加 public 修饰 ，默认方法不能用 static 修饰，所以不能直接用接口来调用默认方法，由接口的实现类的实例来调用这些默认方法。8、类方法需用 static 修饰 ，可用接口直接调用。9、接口的内部类（接口、枚举）默认采用 public static 修饰符。10、接口可看做为特殊的类，受限于一个源文件只能有一个 public 修饰。11、接口不能创建实例，作为声明引用类型变量时此接口必须有其实现类。abstract 语法要求：1、有抽象方法的类只能是抽象类2、抽象类里可没有抽象方法有普通方法3、抽象类不能被实例化4、抽象类可以包含：成员变量、方法（普通、抽象）、构造器、初始化快、内部类（接口、枚举）、抽象类的构造器不能用于创造实列，主要用于被其子类调用5、抽象不能修饰变量（成员、局部），不能修饰构造器，抽象类里的构造器只能是普通的构造器。总结如下：1、抽象类与普通类相比“一得一失”：1、“得”可包含抽象方法。2、“失”无法被实列化。2、抽象类是用来被它的子类继承的，方法由子类实现。而 final 修饰的类不能被继承， final 修饰的方法不能被重写，所以 final 和 abstract 是互斥的。3、static 修饰方法是属于这个类本身的（类Class和实列Object的区别），如果该方法被定义成抽象方法，通过类调用的时候也会出错，因为调用了一个没有方法实体的方法，所以 static 和 abstract 是互斥的（非绝对，可以同时修饰内部类）。4、abstract 修饰的方法必须被之类重写才有意义，因此 abstract 方法不能是私有的，所以 private 和 abstract 是互斥的。 1." />
+备注：这是一段个人的总结：
+interface（接口）更倾向于表明这个类是能干什么事，也就是说这类的类实现了哪些方法及继承与此接口的类必需要实现哪些方法；接口更像一个规范文件(协议)。
+abstract（抽象）更倾向于表明一类类的共有特性，由基础类或一个接口衍生的一系列类的共有特性，所以不仅仅表明这个类能干哪些事。
+也就是说 interface（接口）的方法都可以在接口中无实现，只规定了子类必须需要实现哪些方法，而 abstract（抽象）可以把子类相同实现的方法在抽象类里实现，子类各自特别且必须的方法用抽象方法规定然后在子类里各自实现。
+abstract（抽象）可以看为一种跟 public、static 同级别的修饰符（修饰了类（class）和方法），而 interface（接口）可以看为一种跟 class 同级别的修饰符，标志着质的改变。
+interface（接口）可以说是对 abstract（抽象）的抽象。
+interface（接口）帮助了对象的分层，各组件之间的松耦合。
+interface 语法要求：
+1、接口可以包含：静态常量、方法（抽象）、内部类（接口、枚举）、默认方法（类方法）
+2、接口只可以继承多个父接口（之间用英文逗号“,”隔开），不能继承类。
+3、接口修饰符可以是 public 或者省略，如果省略了 public 访问控制符，则默认采用包权限访问控制符，即只有相同包结构下才可以访问该接口。
+4、接口内的所有成员都是 public 访问权限，可省略，如果指定则只可使用 public 访问修饰符。
+5、接口的成员变量均为静态常量，不管是否使用 public static final 修饰符都认为只可做如此修饰。
+6、接口的方法只能是抽象、类方法、默认方法，如果不是默认方法，系统将自动为普通方法增加 public abstract 修饰符，且不能有方法实现（方法体），类方法、默认方法必须有方法实现（方法体）。
+7、定义默认方法，需要用 default 修饰且默认添加 public 修饰 ，默认方法不能用 static 修饰，所以不能直接用接口来调用默认方法，由接口的实现类的实例来调用这些默认方法。
+8、类方法需用 static 修饰 ，可用接口直接调用。
+9、接口的内部类（接口、枚举）默认采用 public static 修饰符。
+10、接口可看做为特殊的类，受限于一个源文件只能有一个 public 修饰。
+11、接口不能创建实例，作为声明引用类型变量时此接口必须有其实现类。
+abstract 语法要求：
+1、有抽象方法的类只能是抽象类
+2、抽象类里可没有抽象方法有普通方法
+3、抽象类不能被实例化
+4、抽象类可以包含：成员变量、方法（普通、抽象）、构造器、初始化快、内部类（接口、枚举）、抽象类的构造器不能用于创造实列，主要用于被其子类调用
+5、抽象不能修饰变量（成员、局部），不能修饰构造器，抽象类里的构造器只能是普通的构造器。
+总结如下：
+1、抽象类与普通类相比“一得一失”：1、“得”可包含抽象方法。2、“失”无法被实列化。
+2、抽象类是用来被它的子类继承的，方法由子类实现。而 final 修饰的类不能被继承， final 修饰的方法不能被重写，所以 final 和 abstract 是互斥的。
+3、static 修饰方法是属于这个类本身的（类Class和实列Object的区别），如果该方法被定义成抽象方法，通过类调用的时候也会出错，因为调用了一个没有方法实体的方法，所以 static 和 abstract 是互斥的（非绝对，可以同时修饰内部类）。
+4、abstract 修饰的方法必须被之类重写才有意义，因此 abstract 方法不能是私有的，所以 private 和 abstract 是互斥的。 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.saveload.cn/Tech/1Book/Thinking-In-Java/Thinking-In-Java/" />
 
@@ -81,7 +139,7 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
 
   <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Thinking in Java" />
-  <meta name="twitter:description" content="Thinking In Java 标签：Java、基础、thinking-in-java、源码解读、进阶、Java开源框架 时间：2018年7月17日19:20:24 连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk 第 1 章：对象入门 面向对象编程（OOP）
+  <meta name="twitter:description" content="Thinking In Java 标签：Java、基础、thinking-in-java、源码解读、进阶、Java开源框架 时间：2018年7月17日19:20:24 连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk 第 1 章：对象入门 面向对象编程（OOP）
 1.1 抽象的进步 所有编程语言的最终目的都是提供一种“抽象”方法。面向对象的程序设计是一大进步，我们将问题空间中的元素以及它们在方案空间的表示物称作“对象”（Object）。所有东西都是对象。程序是一大堆对象的组合。每个对象都有自己的存储空间，可容纳其他对象。每个对象都有一种类型。一个类最重要的特征就是“能将什么消息发给它？”。 同一类所有对象都能接收相同的消息。
 1.2 对象的接口 我们向对象发出的请求是通过它的“接口”（Interface）定义的，对象的“类型”或“类”则规定了它的接口形式。“类型”与“接口”的等价或对应关系是面向对象程序设计的基础。接口定义了一类对象能接收的信息，做哪些事情。
 1.3 实现方案的隐藏 “接口”（Interface）规定了可对一个特定的对象发出哪些请求。在某个地方存在着一些代码，以便满足这些请求。这些代码与那些隐藏起来的数据便叫作“隐藏的实现”。“接口”（Interface）重要一点是让牵连到的所有成员都遵守相同的规则。进行访问控制，第一个原因是防止程序员接触他们不该接触的东西。第二个原因是允许库设计人员修改内部结构，不用担心它会对客户程序员造成什么影响。一个继承的类可访问受保护的成员，但不能访问私有成员。
@@ -98,7 +156,36 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
 1.6.2 抽象的基础类和接口 设计程序时，我们经常都希望基础类只为自己的衍生类提供一个接口，而不是实际创建基础类的一个对象，为达到这个目的，需要把那个类变成“抽象”的——使用abstract关键字。
 亦可用abstract关键字描述一个尚未实现的方法，指出：“这是适用于从这个类继承的所有类型的一个接口函数，但目前尚没有对它进行任何形式的实现。抽象方法也许只能在一个抽象类里创建。继承了一个类后，那个方法就必须实现，否则继承的类也会变成“抽象”类。
 interface（接口）关键字将抽象类的概念更延伸了一步，它完全禁止了所有的函数定义。“接口”是一种相当有效和常用的工具。另外如果自己愿意，亦可将多个接口都合并到一起（不能从多个普通class或abstract class中继承）。
-备注：这是一段个人的总结：interface（接口）更倾向于表明这个类是能干什么事，也就是说这类的类实现了哪些方法及继承与此接口的类必需要实现哪些方法；接口更像一个规范文件(协议)。abstract（抽象）更倾向于表明一类类的共有特性，由基础类或一个接口衍生的一系列类的共有特性，所以不仅仅表明这个类能干哪些事。也就是说 interface（接口）的方法都可以在接口中无实现，只规定了子类必须需要实现哪些方法，而 abstract（抽象）可以把子类相同实现的方法在抽象类里实现，子类各自特别且必须的方法用抽象方法规定然后在子类里各自实现。abstract（抽象）可以看为一种跟 public、static 同级别的修饰符（修饰了类（class）和方法），而 interface（接口）可以看为一种跟 class 同级别的修饰符，标志着质的改变。interface（接口）可以说是对 abstract（抽象）的抽象。interface（接口）帮助了对象的分层，各组件之间的松耦合。interface 语法要求：1、接口可以包含：静态常量、方法（抽象）、内部类（接口、枚举）、默认方法（类方法）2、接口只可以继承多个父接口（之间用英文逗号“,”隔开），不能继承类。3、接口修饰符可以是 public 或者省略，如果省略了 public 访问控制符，则默认采用包权限访问控制符，即只有相同包结构下才可以访问该接口。4、接口内的所有成员都是 public 访问权限，可省略，如果指定则只可使用 public 访问修饰符。5、接口的成员变量均为静态常量，不管是否使用 public static final 修饰符都认为只可做如此修饰。6、接口的方法只能是抽象、类方法、默认方法，如果不是默认方法，系统将自动为普通方法增加 public abstract 修饰符，且不能有方法实现（方法体），类方法、默认方法必须有方法实现（方法体）。7、定义默认方法，需要用 default 修饰且默认添加 public 修饰 ，默认方法不能用 static 修饰，所以不能直接用接口来调用默认方法，由接口的实现类的实例来调用这些默认方法。8、类方法需用 static 修饰 ，可用接口直接调用。9、接口的内部类（接口、枚举）默认采用 public static 修饰符。10、接口可看做为特殊的类，受限于一个源文件只能有一个 public 修饰。11、接口不能创建实例，作为声明引用类型变量时此接口必须有其实现类。abstract 语法要求：1、有抽象方法的类只能是抽象类2、抽象类里可没有抽象方法有普通方法3、抽象类不能被实例化4、抽象类可以包含：成员变量、方法（普通、抽象）、构造器、初始化快、内部类（接口、枚举）、抽象类的构造器不能用于创造实列，主要用于被其子类调用5、抽象不能修饰变量（成员、局部），不能修饰构造器，抽象类里的构造器只能是普通的构造器。总结如下：1、抽象类与普通类相比“一得一失”：1、“得”可包含抽象方法。2、“失”无法被实列化。2、抽象类是用来被它的子类继承的，方法由子类实现。而 final 修饰的类不能被继承， final 修饰的方法不能被重写，所以 final 和 abstract 是互斥的。3、static 修饰方法是属于这个类本身的（类Class和实列Object的区别），如果该方法被定义成抽象方法，通过类调用的时候也会出错，因为调用了一个没有方法实体的方法，所以 static 和 abstract 是互斥的（非绝对，可以同时修饰内部类）。4、abstract 修饰的方法必须被之类重写才有意义，因此 abstract 方法不能是私有的，所以 private 和 abstract 是互斥的。 1." />
+备注：这是一段个人的总结：
+interface（接口）更倾向于表明这个类是能干什么事，也就是说这类的类实现了哪些方法及继承与此接口的类必需要实现哪些方法；接口更像一个规范文件(协议)。
+abstract（抽象）更倾向于表明一类类的共有特性，由基础类或一个接口衍生的一系列类的共有特性，所以不仅仅表明这个类能干哪些事。
+也就是说 interface（接口）的方法都可以在接口中无实现，只规定了子类必须需要实现哪些方法，而 abstract（抽象）可以把子类相同实现的方法在抽象类里实现，子类各自特别且必须的方法用抽象方法规定然后在子类里各自实现。
+abstract（抽象）可以看为一种跟 public、static 同级别的修饰符（修饰了类（class）和方法），而 interface（接口）可以看为一种跟 class 同级别的修饰符，标志着质的改变。
+interface（接口）可以说是对 abstract（抽象）的抽象。
+interface（接口）帮助了对象的分层，各组件之间的松耦合。
+interface 语法要求：
+1、接口可以包含：静态常量、方法（抽象）、内部类（接口、枚举）、默认方法（类方法）
+2、接口只可以继承多个父接口（之间用英文逗号“,”隔开），不能继承类。
+3、接口修饰符可以是 public 或者省略，如果省略了 public 访问控制符，则默认采用包权限访问控制符，即只有相同包结构下才可以访问该接口。
+4、接口内的所有成员都是 public 访问权限，可省略，如果指定则只可使用 public 访问修饰符。
+5、接口的成员变量均为静态常量，不管是否使用 public static final 修饰符都认为只可做如此修饰。
+6、接口的方法只能是抽象、类方法、默认方法，如果不是默认方法，系统将自动为普通方法增加 public abstract 修饰符，且不能有方法实现（方法体），类方法、默认方法必须有方法实现（方法体）。
+7、定义默认方法，需要用 default 修饰且默认添加 public 修饰 ，默认方法不能用 static 修饰，所以不能直接用接口来调用默认方法，由接口的实现类的实例来调用这些默认方法。
+8、类方法需用 static 修饰 ，可用接口直接调用。
+9、接口的内部类（接口、枚举）默认采用 public static 修饰符。
+10、接口可看做为特殊的类，受限于一个源文件只能有一个 public 修饰。
+11、接口不能创建实例，作为声明引用类型变量时此接口必须有其实现类。
+abstract 语法要求：
+1、有抽象方法的类只能是抽象类
+2、抽象类里可没有抽象方法有普通方法
+3、抽象类不能被实例化
+4、抽象类可以包含：成员变量、方法（普通、抽象）、构造器、初始化快、内部类（接口、枚举）、抽象类的构造器不能用于创造实列，主要用于被其子类调用
+5、抽象不能修饰变量（成员、局部），不能修饰构造器，抽象类里的构造器只能是普通的构造器。
+总结如下：
+1、抽象类与普通类相比“一得一失”：1、“得”可包含抽象方法。2、“失”无法被实列化。
+2、抽象类是用来被它的子类继承的，方法由子类实现。而 final 修饰的类不能被继承， final 修饰的方法不能被重写，所以 final 和 abstract 是互斥的。
+3、static 修饰方法是属于这个类本身的（类Class和实列Object的区别），如果该方法被定义成抽象方法，通过类调用的时候也会出错，因为调用了一个没有方法实体的方法，所以 static 和 abstract 是互斥的（非绝对，可以同时修饰内部类）。
+4、abstract 修饰的方法必须被之类重写才有意义，因此 abstract 方法不能是私有的，所以 private 和 abstract 是互斥的。 1." />
 
 
   <script type="application/ld+json">
@@ -398,13 +485,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3cc3d2c1"
+                class="gdoc-nav__toggle" id="navtree-fe2db443"
                 
               
             />
             <label
               
-                for="navtree-3cc3d2c1" class="flex justify-between align-center"
+                for="navtree-fe2db443" class="flex justify-between align-center"
               
             >
               
@@ -491,13 +578,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-64c2c9fd"
+                class="gdoc-nav__toggle" id="navtree-e5426527"
                 
               
             />
             <label
               
-                for="navtree-64c2c9fd" class="flex justify-between align-center"
+                for="navtree-e5426527" class="flex justify-between align-center"
               
             >
               
@@ -591,13 +678,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-faf43468"
+                class="gdoc-nav__toggle" id="navtree-6f592cfe"
                 
               
             />
             <label
               
-                for="navtree-faf43468" class="flex justify-between align-center"
+                for="navtree-6f592cfe" class="flex justify-between align-center"
               
             >
               
@@ -648,13 +735,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-2ae1a033"
+                class="gdoc-nav__toggle" id="navtree-a399c26b"
                 
               
             />
             <label
               
-                for="navtree-2ae1a033" class="flex justify-between align-center"
+                for="navtree-a399c26b" class="flex justify-between align-center"
               
             >
               
@@ -862,6 +949,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
                     class="gdoc-nav__entry"
                   >
                     减肥、健身
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E5%BE%AE%E5%8D%9A/"
+                    class="gdoc-nav__entry"
+                  >
+                    微博
                   </a>
                 </span>
               
@@ -1137,13 +1260,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-aca31f40"
+                class="gdoc-nav__toggle" id="navtree-0277f23f"
                 
               
             />
             <label
               
-                for="navtree-aca31f40" class="flex justify-between align-center"
+                for="navtree-0277f23f" class="flex justify-between align-center"
               
             >
               
@@ -1347,6 +1470,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E5%81%B6%E5%BE%97/"
+                    class="gdoc-nav__entry"
+                  >
+                    偶得
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E5%85%B8%E5%9E%8B%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF/"
                     class="gdoc-nav__entry"
                   >
@@ -1455,6 +1614,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E5%96%84%E7%9A%84%E6%A6%82%E5%BF%B5/"
+                    class="gdoc-nav__entry"
+                  >
+                    善的概念
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/"
                     class="gdoc-nav__entry"
                   >
@@ -1495,6 +1690,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
                     class="gdoc-nav__entry"
                   >
                     很多年前我对焦虑症的症状描述
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E4%BB%96%E4%BA%BA%E5%AD%98%E6%A1%A3/%E6%88%91%E7%88%B8%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A1%8C%E4%B8%9A%E7%9A%84%E7%9C%8B%E6%B3%95%E6%98%AF%E5%90%A6%E5%87%86%E7%A1%AE/"
+                    class="gdoc-nav__entry"
+                  >
+                    我爸对计算机行业的看法，是否准确？
                   </a>
                 </span>
               
@@ -1662,13 +1893,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-7bdb6418"
+                class="gdoc-nav__toggle" id="navtree-c76b9361"
                 
               
             />
             <label
               
-                for="navtree-7bdb6418" class="flex justify-between align-center"
+                for="navtree-c76b9361" class="flex justify-between align-center"
               
             >
               
@@ -1769,13 +2000,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3fd2aa84"
+                class="gdoc-nav__toggle" id="navtree-092a3f99"
                 
               
             />
             <label
               
-                for="navtree-3fd2aa84" class="flex justify-between align-center"
+                for="navtree-092a3f99" class="flex justify-between align-center"
               
             >
               
@@ -1812,6 +2043,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
         
       
 
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Life/2Diary/-%E9%9A%8F%E7%AC%94/%E6%88%91%E7%9A%84/%E4%BA%BA%E7%B1%BB%E7%AE%80%E5%8F%B2%E4%BB%8E%E5%8A%A8%E7%89%A9%E5%88%B0%E4%B8%8A%E5%B8%9D-%E7%AC%AC12%E7%AB%A0-%E5%AE%97%E6%95%99%E7%9A%84%E6%B3%95%E5%88%99/"
+                    class="gdoc-nav__entry"
+                  >
+                    《人类简史：从动物到上帝》 第12章 宗教的法则
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
       
         
           
@@ -2524,13 +2791,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-68fab7e9"
+                class="gdoc-nav__toggle" id="navtree-f501cdc0"
                 
               
             />
             <label
               
-                for="navtree-68fab7e9" class="flex justify-between align-center"
+                for="navtree-f501cdc0" class="flex justify-between align-center"
               
             >
               
@@ -2660,13 +2927,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-4948519f"
+                class="gdoc-nav__toggle" id="navtree-a23e7d4d"
                 
               
             />
             <label
               
-                for="navtree-4948519f" class="flex justify-between align-center"
+                for="navtree-a23e7d4d" class="flex justify-between align-center"
               
             >
               
@@ -2760,13 +3027,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-b0ba5f50"
+                class="gdoc-nav__toggle" id="navtree-f4069326"
                 
               
             />
             <label
               
-                for="navtree-b0ba5f50" class="flex justify-between align-center"
+                for="navtree-f4069326" class="flex justify-between align-center"
               
             >
               
@@ -3076,13 +3343,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-daaf6bd1"
+                class="gdoc-nav__toggle" id="navtree-1ca821cd"
                 
               
             />
             <label
               
-                for="navtree-daaf6bd1" class="flex justify-between align-center"
+                for="navtree-1ca821cd" class="flex justify-between align-center"
               
             >
               
@@ -3291,13 +3558,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-7299c599"
+                class="gdoc-nav__toggle" id="navtree-d6aeccd6"
                 
               
             />
             <label
               
-                for="navtree-7299c599" class="flex justify-between align-center"
+                for="navtree-d6aeccd6" class="flex justify-between align-center"
               
             >
               
@@ -3398,13 +3665,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3915b10b"
+                class="gdoc-nav__toggle" id="navtree-36a8ca77"
                 checked
               
             />
             <label
               
-                for="navtree-3915b10b" class="flex justify-between align-center"
+                for="navtree-36a8ca77" class="flex justify-between align-center"
               
             >
               
@@ -3455,13 +3722,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-c0ca2bc1"
+                class="gdoc-nav__toggle" id="navtree-bb1177b7"
                 checked
               
             />
             <label
               
-                for="navtree-c0ca2bc1" class="flex justify-between align-center"
+                for="navtree-bb1177b7" class="flex justify-between align-center"
               
             >
               
@@ -3512,13 +3779,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-6fb22e70"
+                class="gdoc-nav__toggle" id="navtree-36e80970"
                 
               
             />
             <label
               
-                for="navtree-6fb22e70" class="flex justify-between align-center"
+                for="navtree-36e80970" class="flex justify-between align-center"
               
             >
               
@@ -4152,13 +4419,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-a58b8741"
+                class="gdoc-nav__toggle" id="navtree-5c22d487"
                 
               
             />
             <label
               
-                for="navtree-a58b8741" class="flex justify-between align-center"
+                for="navtree-5c22d487" class="flex justify-between align-center"
               
             >
               
@@ -4756,13 +5023,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-ef553d00"
+                class="gdoc-nav__toggle" id="navtree-b21a4e39"
                 
               
             />
             <label
               
-                for="navtree-ef553d00" class="flex justify-between align-center"
+                for="navtree-b21a4e39" class="flex justify-between align-center"
               
             >
               
@@ -5648,13 +5915,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-1ca3c3d2"
+                class="gdoc-nav__toggle" id="navtree-a0854cc8"
                 checked
               
             />
             <label
               
-                for="navtree-1ca3c3d2" class="flex justify-between align-center"
+                for="navtree-a0854cc8" class="flex justify-between align-center"
               
             >
               
@@ -6396,13 +6663,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-f1e4ba24"
+                class="gdoc-nav__toggle" id="navtree-2b569e10"
                 
               
             />
             <label
               
-                for="navtree-f1e4ba24" class="flex justify-between align-center"
+                for="navtree-2b569e10" class="flex justify-between align-center"
               
             >
               
@@ -6496,13 +6763,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-c693007e"
+                class="gdoc-nav__toggle" id="navtree-5e8850d6"
                 
               
             />
             <label
               
-                for="navtree-c693007e" class="flex justify-between align-center"
+                for="navtree-5e8850d6" class="flex justify-between align-center"
               
             >
               
@@ -6704,13 +6971,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3db3d9b4"
+                class="gdoc-nav__toggle" id="navtree-38c50775"
                 
               
             />
             <label
               
-                for="navtree-3db3d9b4" class="flex justify-between align-center"
+                for="navtree-38c50775" class="flex justify-between align-center"
               
             >
               
@@ -6804,13 +7071,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-1a947666"
+                class="gdoc-nav__toggle" id="navtree-5bb8978a"
                 
               
             />
             <label
               
-                for="navtree-1a947666" class="flex justify-between align-center"
+                for="navtree-5bb8978a" class="flex justify-between align-center"
               
             >
               
@@ -7408,13 +7675,149 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-cd939af2"
+                class="gdoc-nav__toggle" id="navtree-cc414335"
                 
               
             />
             <label
               
-                for="navtree-cd939af2" class="flex justify-between align-center"
+                for="navtree-cc414335" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/1Book/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"
+                    class="gdoc-nav__entry"
+                  >
+                    深入理解计算机系统
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/1Book/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/"
+                    class="gdoc-nav__entry"
+                  >
+                    深入理解计算机系统 第1章 计算机系统漫游
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/1Book/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"
+                    class="gdoc-nav__entry"
+                  >
+                    深入理解计算机系统
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-b126a2ef"
+                
+              
+            />
+            <label
+              
+                for="navtree-b126a2ef" class="flex justify-between align-center"
               
             >
               
@@ -7544,13 +7947,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-29bd2b5f"
+                class="gdoc-nav__toggle" id="navtree-8d03daf7"
                 
               
             />
             <label
               
-                for="navtree-29bd2b5f" class="flex justify-between align-center"
+                for="navtree-8d03daf7" class="flex justify-between align-center"
               
             >
               
@@ -7680,13 +8083,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-dc91ca4a"
+                class="gdoc-nav__toggle" id="navtree-d2338873"
                 
               
             />
             <label
               
-                for="navtree-dc91ca4a" class="flex justify-between align-center"
+                for="navtree-d2338873" class="flex justify-between align-center"
               
             >
               
@@ -7859,13 +8262,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-bbbdd5b4"
+                class="gdoc-nav__toggle" id="navtree-47f505a4"
                 
               
             />
             <label
               
-                for="navtree-bbbdd5b4" class="flex justify-between align-center"
+                for="navtree-47f505a4" class="flex justify-between align-center"
               
             >
               
@@ -8177,6 +8580,78 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
+                    href="/Tech/10Miscellaneous/%E6%89%B9%E5%A4%84%E7%90%86%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/"
+                    class="gdoc-nav__entry"
+                  >
+                    批处理操作指南
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/10Miscellaneous/%E6%8B%89%E5%8D%95%E6%A8%A1%E5%9D%97%E4%B8%9A%E5%8A%A1%E8%AF%B4%E6%98%8E/"
+                    class="gdoc-nav__entry"
+                  >
+                    拉单模块业务说明
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Tech/10Miscellaneous/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/"
                     class="gdoc-nav__entry"
                   >
@@ -8312,13 +8787,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-6d1faa3e"
+                class="gdoc-nav__toggle" id="navtree-4c0b21c4"
                 
               
             />
             <label
               
-                for="navtree-6d1faa3e" class="flex justify-between align-center"
+                for="navtree-4c0b21c4" class="flex justify-between align-center"
               
             >
               
@@ -8491,13 +8966,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-68b84803"
+                class="gdoc-nav__toggle" id="navtree-c092b0c8"
                 
               
             />
             <label
               
-                for="navtree-68b84803" class="flex justify-between align-center"
+                for="navtree-c092b0c8" class="flex justify-between align-center"
               
             >
               
@@ -8692,13 +9167,49 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-2cdb9fc5"
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/2Computer-Science/%E7%BC%96%E7%A0%81%E5%8A%A0%E5%AF%86%E4%B8%8E%E5%AF%86%E7%A0%81%E5%93%88%E5%B8%8C%E6%BC%94%E8%BF%9B%E7%AE%80%E5%8F%B2/"
+                    class="gdoc-nav__entry"
+                  >
+                    编码，加密，与密码哈希演进简史
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-24a49080"
                 
               
             />
             <label
               
-                for="navtree-2cdb9fc5" class="flex justify-between align-center"
+                for="navtree-24a49080" class="flex justify-between align-center"
               
             >
               
@@ -8828,13 +9339,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-ea7db3fe"
+                class="gdoc-nav__toggle" id="navtree-6bc485fe"
                 
               
             />
             <label
               
-                for="navtree-ea7db3fe" class="flex justify-between align-center"
+                for="navtree-6bc485fe" class="flex justify-between align-center"
               
             >
               
@@ -8928,13 +9439,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-7070e678"
+                class="gdoc-nav__toggle" id="navtree-ddf590a1"
                 
               
             />
             <label
               
-                for="navtree-7070e678" class="flex justify-between align-center"
+                for="navtree-ddf590a1" class="flex justify-between align-center"
               
             >
               
@@ -9928,13 +10439,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-f5c65f8d"
+                class="gdoc-nav__toggle" id="navtree-eccacb39"
                 
               
             />
             <label
               
-                for="navtree-f5c65f8d" class="flex justify-between align-center"
+                for="navtree-eccacb39" class="flex justify-between align-center"
               
             >
               
@@ -10093,13 +10604,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-6cab0ef1"
+                class="gdoc-nav__toggle" id="navtree-91c86ce3"
                 
               
             />
             <label
               
-                for="navtree-6cab0ef1" class="flex justify-between align-center"
+                for="navtree-91c86ce3" class="flex justify-between align-center"
               
             >
               
@@ -10245,6 +10756,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
           </li>
         
       
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/2Computer-Science/4Operating-System/NTFS/%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%92%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%8B%E7%BB%8D/"
+                    class="gdoc-nav__entry"
+                  >
+                    硬盘分区和文件系统格式化介绍
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
     
   </ul>
 
@@ -10272,13 +10819,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-851830c0"
+                class="gdoc-nav__toggle" id="navtree-3f8a0c9e"
                 
               
             />
             <label
               
-                for="navtree-851830c0" class="flex justify-between align-center"
+                for="navtree-3f8a0c9e" class="flex justify-between align-center"
               
             >
               
@@ -10372,13 +10919,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-e005d0bf"
+                class="gdoc-nav__toggle" id="navtree-2e73d488"
                 
               
             />
             <label
               
-                for="navtree-e005d0bf" class="flex justify-between align-center"
+                for="navtree-2e73d488" class="flex justify-between align-center"
               
             >
               
@@ -10544,13 +11091,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-76fc3aac"
+                class="gdoc-nav__toggle" id="navtree-f5fb44df"
                 
               
             />
             <label
               
-                for="navtree-76fc3aac" class="flex justify-between align-center"
+                for="navtree-f5fb44df" class="flex justify-between align-center"
               
             >
               
@@ -10711,78 +11258,6 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
-                    href="/Tech/3Java/Java-Lambda-Expressions/"
-                    class="gdoc-nav__entry"
-                  >
-                    Java Lambda Expressions
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/3Java/Java-Method-References/"
-                    class="gdoc-nav__entry"
-                  >
-                    Java Method References
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
                     href="/Tech/3Java/Java-Regular-Expression/"
                     class="gdoc-nav__entry"
                   >
@@ -10859,42 +11334,6 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
                     class="gdoc-nav__entry"
                   >
                     Java Util Concurrent
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/3Java/Java-%E4%B8%AD-Stream-%E7%9A%84%E7%94%A8%E6%B3%95/"
-                    class="gdoc-nav__entry"
-                  >
-                    Java 中 Stream 的用法
                   </a>
                 </span>
               
@@ -11179,10 +11618,10 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
-                    href="/Tech/3Java/Java-%E6%B3%9B%E5%9E%8BGenerics-/"
+                    href="/Tech/3Java/Java-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/"
                     class="gdoc-nav__entry"
                   >
-                    Java 泛型( Generics )
+                    Java 类加载机制详解
                   </a>
                 </span>
               
@@ -11219,42 +11658,6 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
                     class="gdoc-nav__entry"
                   >
                     Java 过滤器与 Spring Mvc拦截器
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/3Java/Java8%E6%96%B0%E6%8F%90%E4%BE%9B%E6%97%B6%E9%97%B4API/"
-                    class="gdoc-nav__entry"
-                  >
-                    Java8新提供时间 API
                   </a>
                 </span>
               
@@ -11422,13 +11825,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-772d34df"
+                class="gdoc-nav__toggle" id="navtree-85bce19c"
                 
               
             />
             <label
               
-                for="navtree-772d34df" class="flex justify-between align-center"
+                for="navtree-85bce19c" class="flex justify-between align-center"
               
             >
               
@@ -11515,13 +11918,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-929ffc05"
+                class="gdoc-nav__toggle" id="navtree-7c646b4d"
                 
               
             />
             <label
               
-                for="navtree-929ffc05" class="flex justify-between align-center"
+                for="navtree-7c646b4d" class="flex justify-between align-center"
               
             >
               
@@ -11615,13 +12018,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-4a423d1b"
+                class="gdoc-nav__toggle" id="navtree-ed36f82a"
                 
               
             />
             <label
               
-                for="navtree-4a423d1b" class="flex justify-between align-center"
+                for="navtree-ed36f82a" class="flex justify-between align-center"
               
             >
               
@@ -11715,13 +12118,365 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-a3dcb4c2"
+                class="gdoc-nav__toggle" id="navtree-62b31383"
                 
               
             />
             <label
               
-                for="navtree-a3dcb4c2" class="flex justify-between align-center"
+                for="navtree-62b31383" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Code
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-Function/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Function
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-Lambda-Expressions/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Lambda Expressions
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-List/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java List
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-Method-References/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Method References
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-%E4%B8%AD-Stream-%E7%9A%84%E7%94%A8%E6%B3%95/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 中 Stream 的用法
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java-%E6%B3%9B%E5%9E%8BGenerics-/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 泛型( Generics )
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/Java8-%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E5%BC%95%E7%94%A8/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java8 方法引用，构造器引用
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Code/JDK-1.8-4%E5%A4%A7%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/"
+                    class="gdoc-nav__entry"
+                  >
+                    Jdk 1.8 4大函数式接口
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-39e12bd3"
+                
+              
+            />
+            <label
+              
+                for="navtree-39e12bd3" class="flex justify-between align-center"
               
             >
               
@@ -12031,13 +12786,321 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-34729162"
+                class="gdoc-nav__toggle" id="navtree-2a50d22d"
                 
               
             />
             <label
               
-                for="navtree-34729162" class="flex justify-between align-center"
+                for="navtree-2a50d22d" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java Version
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/Java-%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7%E6%9B%B4%E6%96%B0%E5%88%B0Java20/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 各版本新特性(更新到 Java20)
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/Java8-%E6%96%B0%E6%8F%90%E4%BE%9B%E6%97%B6%E9%97%B4API/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java8 新提供时间 API
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/Java9-%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java9 版本新特性
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-Version/Java9-%E7%89%B9%E6%80%A7-%E5%93%8D%E5%BA%94%E5%BC%8F%E6%B5%81Reactive-Stream/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java9 特性 响应式流( Reactive Stream)
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-8d7af399"
+                
+              
+            />
+            <label
+              
+                for="navtree-8d7af399" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-%E5%91%BD%E4%BB%A4/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 命令
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Java-%E5%91%BD%E4%BB%A4/Java-%E5%91%BD%E4%BB%A4/"
+                    class="gdoc-nav__entry"
+                  >
+                    Java 命令
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-16525981"
+                
+              
+            />
+            <label
+              
+                for="navtree-16525981" class="flex justify-between align-center"
               
             >
               
@@ -12167,13 +13230,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-fd867f00"
+                class="gdoc-nav__toggle" id="navtree-e4d8ba23"
                 
               
             />
             <label
               
-                for="navtree-fd867f00" class="flex justify-between align-center"
+                for="navtree-e4d8ba23" class="flex justify-between align-center"
               
             >
               
@@ -12548,13 +13611,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-60fa667c"
+                class="gdoc-nav__toggle" id="navtree-e0b809cf"
                 
               
             />
             <label
               
-                for="navtree-60fa667c" class="flex justify-between align-center"
+                for="navtree-e0b809cf" class="flex justify-between align-center"
               
             >
               
@@ -12612,6 +13675,158 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
             >
               
+                <span class="flex">Rabbit Mq 1 基本概念</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/MQ/RabbitMQ-2-%E5%AE%89%E8%A3%85/"
+                    class="gdoc-nav__entry"
+                  >
+                    Rabbit Mq 2 安装
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">Rabbit Mq 3 Java Client 源码分析</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">Rabbit Mq 4 应用、工具及二次开发</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">Rabbit Mq 5 其它</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
                 <span class="flex">
                   <a
                     href="/Tech/3Java/MQ/RabbitMQ/"
@@ -12648,13 +13863,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-b4151e31"
+                class="gdoc-nav__toggle" id="navtree-a2d5a6ad"
                 
               
             />
             <label
               
-                for="navtree-b4151e31" class="flex justify-between align-center"
+                for="navtree-a2d5a6ad" class="flex justify-between align-center"
               
             >
               
@@ -12849,13 +14064,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-aecc763a"
+                class="gdoc-nav__toggle" id="navtree-273b4420"
                 
               
             />
             <label
               
-                for="navtree-aecc763a" class="flex justify-between align-center"
+                for="navtree-273b4420" class="flex justify-between align-center"
               
             >
               
@@ -13208,13 +14423,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-58fe5530"
+                class="gdoc-nav__toggle" id="navtree-ab2042cf"
                 
               
             />
             <label
               
-                for="navtree-58fe5530" class="flex justify-between align-center"
+                for="navtree-ab2042cf" class="flex justify-between align-center"
               
             >
               
@@ -13562,6 +14777,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
+                    href="/Tech/3Java/Spring/%E5%9F%BA%E4%BA%8ESpringBoot-AOP%E6%9D%A1%E4%BB%B6%E4%B8%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E7%8E%B0%E6%B3%A8%E8%A7%A3/"
+                    class="gdoc-nav__entry"
+                  >
+                    基于 Spring Boot Aop条件下自定义、实现注解
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Tech/3Java/Spring/%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8-Spring-Cloud-Stream/"
                     class="gdoc-nav__entry"
                   >
@@ -13661,13 +14912,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-b870c34f"
+                class="gdoc-nav__toggle" id="navtree-ee554e93"
                 
               
             />
             <label
               
-                for="navtree-b870c34f" class="flex justify-between align-center"
+                for="navtree-ee554e93" class="flex justify-between align-center"
               
             >
               
@@ -14085,13 +15336,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-f78b8718"
+                class="gdoc-nav__toggle" id="navtree-88685d74"
                 
               
             />
             <label
               
-                for="navtree-f78b8718" class="flex justify-between align-center"
+                for="navtree-88685d74" class="flex justify-between align-center"
               
             >
               
@@ -14172,6 +15423,178 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
           </li>
         
       
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-2ac7c623"
+                
+              
+            />
+            <label
+              
+                for="navtree-2ac7c623" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Spring/Spring-Framework/"
+                    class="gdoc-nav__entry"
+                  >
+                    Spring Framework
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Spring/Spring-Framework/Spring-Framework-1-%E6%A6%82%E8%BF%B0/"
+                    class="gdoc-nav__entry"
+                  >
+                    Spring Framework 1 概述
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Spring/Spring-Framework/Spring-Framework-2-%E6%A0%B8%E5%BF%83/"
+                    class="gdoc-nav__entry"
+                  >
+                    Spring Framework 2 核心
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/3Java/Spring/Spring-Framework/Spring-Framework/"
+                    class="gdoc-nav__entry"
+                  >
+                    Spring Framework
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
     
   </ul>
 
@@ -14192,13 +15615,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-92cd2711"
+                class="gdoc-nav__toggle" id="navtree-14526991"
                 
               
             />
             <label
               
-                for="navtree-92cd2711" class="flex justify-between align-center"
+                for="navtree-14526991" class="flex justify-between align-center"
               
             >
               
@@ -14335,13 +15758,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3b1941e7"
+                class="gdoc-nav__toggle" id="navtree-8c8ded13"
                 
               
             />
             <label
               
-                for="navtree-3b1941e7" class="flex justify-between align-center"
+                for="navtree-8c8ded13" class="flex justify-between align-center"
               
             >
               
@@ -14392,13 +15815,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-f80a7c16"
+                class="gdoc-nav__toggle" id="navtree-33e99110"
                 
               
             />
             <label
               
-                for="navtree-f80a7c16" class="flex justify-between align-center"
+                for="navtree-33e99110" class="flex justify-between align-center"
               
             >
               
@@ -14485,13 +15908,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-a348f404"
+                class="gdoc-nav__toggle" id="navtree-e9e4e81a"
                 
               
             />
             <label
               
-                for="navtree-a348f404" class="flex justify-between align-center"
+                for="navtree-e9e4e81a" class="flex justify-between align-center"
               
             >
               
@@ -14578,13 +16001,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-fea2e734"
+                class="gdoc-nav__toggle" id="navtree-a9ae67cf"
                 
               
             />
             <label
               
-                for="navtree-fea2e734" class="flex justify-between align-center"
+                for="navtree-a9ae67cf" class="flex justify-between align-center"
               
             >
               
@@ -14671,13 +16094,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-3e6fe09e"
+                class="gdoc-nav__toggle" id="navtree-6f88af7f"
                 
               
             />
             <label
               
-                for="navtree-3e6fe09e" class="flex justify-between align-center"
+                for="navtree-6f88af7f" class="flex justify-between align-center"
               
             >
               
@@ -14737,6 +16160,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
+                    href="/Tech/4Other-Language/rust/Rust-%E5%9C%A8-Windows-%E4%B8%8A-Release-%E7%BC%96%E8%AF%91%E5%BD%BB%E5%BA%95%E5%8E%BB%E9%99%A4%E8%B0%83%E8%AF%95%E7%AC%A6%E5%8F%B7%E4%BF%A1%E6%81%AF/"
+                    class="gdoc-nav__entry"
+                  >
+                    Rust 在 Windows 上 Release 编译彻底去除调试符号信息
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Tech/4Other-Language/rust/Rust/"
                     class="gdoc-nav__entry"
                   >
@@ -14771,13 +16230,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-b4bd7490"
+                class="gdoc-nav__toggle" id="navtree-b897ab77"
                 
               
             />
             <label
               
-                for="navtree-b4bd7490" class="flex justify-between align-center"
+                for="navtree-b897ab77" class="flex justify-between align-center"
               
             >
               
@@ -14878,13 +16337,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-9af5c600"
+                class="gdoc-nav__toggle" id="navtree-06af73d4"
                 
               
             />
             <label
               
-                for="navtree-9af5c600" class="flex justify-between align-center"
+                for="navtree-06af73d4" class="flex justify-between align-center"
               
             >
               
@@ -15016,6 +16475,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
+                    href="/Tech/5English-Learning/Word-List/"
+                    class="gdoc-nav__entry"
+                  >
+                    Word List
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
                     href="/Tech/5English-Learning/WordsBook/"
                     class="gdoc-nav__entry"
                   >
@@ -15043,13 +16538,1042 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-cad316d1"
+                class="gdoc-nav__toggle" id="navtree-d35e6303"
                 
               
             />
             <label
               
-                for="navtree-cad316d1" class="flex justify-between align-center"
+                for="navtree-d35e6303" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-A/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English A
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-B/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English B
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-C/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English C
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-D/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English D
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-E/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English E
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-F/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English F
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-G/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English G
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-H/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English H
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-I/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English I
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-J/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English J
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-K/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English K
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-L/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English L
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-M/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English M
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-N/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English N
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-O/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English O
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-P/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English P
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-Q/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English Q
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-R/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English R
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-S/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English S
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-T/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English T
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-U/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English U
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-V/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English V
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-W/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English W
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-X/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English X
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-Y/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English Y
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/5English-Learning/Coding-English/Coding-English-Z/"
+                    class="gdoc-nav__entry"
+                  >
+                    Coding English Z
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">Coding English</span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-bb868bbe"
+                
+              
+            />
+            <label
+              
+                for="navtree-bb868bbe" class="flex justify-between align-center"
               
             >
               
@@ -15100,13 +17624,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-7dc3adc6"
+                class="gdoc-nav__toggle" id="navtree-f5ef1c3c"
                 
               
             />
             <label
               
-                for="navtree-7dc3adc6" class="flex justify-between align-center"
+                for="navtree-f5ef1c3c" class="flex justify-between align-center"
               
             >
               
@@ -15308,13 +17832,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-e4001056"
+                class="gdoc-nav__toggle" id="navtree-9a6ee6f7"
                 
               
             />
             <label
               
-                for="navtree-e4001056" class="flex justify-between align-center"
+                for="navtree-9a6ee6f7" class="flex justify-between align-center"
               
             >
               
@@ -15444,13 +17968,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-26d6fadf"
+                class="gdoc-nav__toggle" id="navtree-ef830b18"
                 
               
             />
             <label
               
-                for="navtree-26d6fadf" class="flex justify-between align-center"
+                for="navtree-ef830b18" class="flex justify-between align-center"
               
             >
               
@@ -15558,13 +18082,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-dcc5739b"
+                class="gdoc-nav__toggle" id="navtree-6c45a303"
                 
               
             />
             <label
               
-                for="navtree-dcc5739b" class="flex justify-between align-center"
+                for="navtree-6c45a303" class="flex justify-between align-center"
               
             >
               
@@ -15615,13 +18139,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-e6ba110c"
+                class="gdoc-nav__toggle" id="navtree-55a09150"
                 
               
             />
             <label
               
-                for="navtree-e6ba110c" class="flex justify-between align-center"
+                for="navtree-55a09150" class="flex justify-between align-center"
               
             >
               
@@ -15715,13 +18239,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-af873c08"
+                class="gdoc-nav__toggle" id="navtree-376d2d86"
                 
               
             />
             <label
               
-                for="navtree-af873c08" class="flex justify-between align-center"
+                for="navtree-376d2d86" class="flex justify-between align-center"
               
             >
               
@@ -15815,13 +18339,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-9034b168"
+                class="gdoc-nav__toggle" id="navtree-13a538b5"
                 
               
             />
             <label
               
-                for="navtree-9034b168" class="flex justify-between align-center"
+                for="navtree-13a538b5" class="flex justify-between align-center"
               
             >
               
@@ -15915,13 +18439,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-80ac7e54"
+                class="gdoc-nav__toggle" id="navtree-1e5c18de"
                 
               
             />
             <label
               
-                for="navtree-80ac7e54" class="flex justify-between align-center"
+                for="navtree-1e5c18de" class="flex justify-between align-center"
               
             >
               
@@ -16051,13 +18575,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-e084869b"
+                class="gdoc-nav__toggle" id="navtree-469662fa"
                 
               
             />
             <label
               
-                for="navtree-e084869b" class="flex justify-between align-center"
+                for="navtree-469662fa" class="flex justify-between align-center"
               
             >
               
@@ -16151,13 +18675,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-1a6f97cc"
+                class="gdoc-nav__toggle" id="navtree-fe04dc14"
                 
               
             />
             <label
               
-                for="navtree-1a6f97cc" class="flex justify-between align-center"
+                for="navtree-fe04dc14" class="flex justify-between align-center"
               
             >
               
@@ -16258,13 +18782,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-090553f5"
+                class="gdoc-nav__toggle" id="navtree-bb4cc053"
                 
               
             />
             <label
               
-                for="navtree-090553f5" class="flex justify-between align-center"
+                for="navtree-bb4cc053" class="flex justify-between align-center"
               
             >
               
@@ -16394,13 +18918,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-241dee54"
+                class="gdoc-nav__toggle" id="navtree-4a37a514"
                 
               
             />
             <label
               
-                for="navtree-241dee54" class="flex justify-between align-center"
+                for="navtree-4a37a514" class="flex justify-between align-center"
               
             >
               
@@ -16451,157 +18975,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/8IDE/chrom/"
-                    class="gdoc-nav__entry"
-                  >
-                    Chrom
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/8IDE/Window10%E4%B8%8B-%E6%90%AD%E5%BB%BA-Rust-%E7%8E%AF%E5%A2%83/"
-                    class="gdoc-nav__entry"
-                  >
-                    Window10下 搭建 Rust 环境
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/8IDE/Windward-C-%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
-                    class="gdoc-nav__entry"
-                  >
-                    Windward C 语言开发环境配置
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="hidden"
-              
-            />
-            <label
-              
-            >
-              
-                <span class="flex">
-                  <a
-                    href="/Tech/8IDE/%E6%82%A8%E7%9A%84%E6%9C%AC%E5%9C%B0-Git-%E6%8F%90%E4%BA%A4%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%E6%9C%AA%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%82%A8%E7%9A%84%E5%B8%90%E6%88%B7/"
-                    class="gdoc-nav__entry"
-                  >
-                    您的本地 Git 提交电子邮件地址未连接到您的帐户
-                  </a>
-                </span>
-              
-              
-            </label>
-
-            
-          </li>
-        
-      
-        
-          
-          
-          
-          
-          
-          
-
-
-          <li>
-            <input
-              type="checkbox"
-              
-                class="gdoc-nav__toggle" id="navtree-27b56937"
+                class="gdoc-nav__toggle" id="navtree-17831cf1"
                 
               
             />
             <label
               
-                for="navtree-27b56937" class="flex justify-between align-center"
+                for="navtree-17831cf1" class="flex justify-between align-center"
               
             >
               
@@ -16688,13 +19068,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-830e2af0"
+                class="gdoc-nav__toggle" id="navtree-a4c2f110"
                 
               
             />
             <label
               
-                for="navtree-830e2af0" class="flex justify-between align-center"
+                for="navtree-a4c2f110" class="flex justify-between align-center"
               
             >
               
@@ -16817,13 +19197,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-fe763231"
+                class="gdoc-nav__toggle" id="navtree-462fe73b"
                 
               
             />
             <label
               
-                for="navtree-fe763231" class="flex justify-between align-center"
+                for="navtree-462fe73b" class="flex justify-between align-center"
               
             >
               
@@ -17133,13 +19513,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-2db1acaa"
+                class="gdoc-nav__toggle" id="navtree-c3d01c8c"
                 
               
             />
             <label
               
-                for="navtree-2db1acaa" class="flex justify-between align-center"
+                for="navtree-c3d01c8c" class="flex justify-between align-center"
               
             >
               
@@ -17348,13 +19728,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-48c65e05"
+                class="gdoc-nav__toggle" id="navtree-5c931c55"
                 
               
             />
             <label
               
-                for="navtree-48c65e05" class="flex justify-between align-center"
+                for="navtree-5c931c55" class="flex justify-between align-center"
               
             >
               
@@ -17477,13 +19857,49 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-258a6bc9"
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Git/%E6%82%A8%E7%9A%84%E6%9C%AC%E5%9C%B0-Git-%E6%8F%90%E4%BA%A4%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%9C%B0%E5%9D%80%E6%9C%AA%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%82%A8%E7%9A%84%E5%B8%90%E6%88%B7/"
+                    class="gdoc-nav__entry"
+                  >
+                    您的本地 Git 提交电子邮件地址未连接到您的帐户
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-20382324"
                 
               
             />
             <label
               
-                for="navtree-258a6bc9" class="flex justify-between align-center"
+                for="navtree-20382324" class="flex justify-between align-center"
               
             >
               
@@ -17541,7 +19957,14 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
             >
               
-                <span class="flex">Git 命令</span>
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Git/Git-%E5%91%BD%E4%BB%A4/Git-%E5%91%BD%E4%BB%A4/"
+                    class="gdoc-nav__entry"
+                  >
+                    Git 命令
+                  </a>
+                </span>
               
               
             </label>
@@ -17570,13 +19993,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-8781af70"
+                class="gdoc-nav__toggle" id="navtree-8ad62e1b"
                 
               
             />
             <label
               
-                for="navtree-8781af70" class="flex justify-between align-center"
+                for="navtree-8ad62e1b" class="flex justify-between align-center"
               
             >
               
@@ -17677,19 +20100,112 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-44ec7225"
+                class="gdoc-nav__toggle" id="navtree-82c9a4f4"
                 
               
             />
             <label
               
-                for="navtree-44ec7225" class="flex justify-between align-center"
+                for="navtree-82c9a4f4" class="flex justify-between align-center"
               
             >
               
                 <span class="flex">
                   <a
-                    href="/Tech/8IDE/Ubuntu/"
+                    href="/Tech/8IDE/Linux/"
+                    class="gdoc-nav__entry"
+                  >
+                    Linux
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Linux/CentOS-7-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"
+                    class="gdoc-nav__entry"
+                  >
+                    Cent Os 7 开发环境部署
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-a939f73f"
+                
+              
+            />
+            <label
+              
+                for="navtree-a939f73f" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Linux/Ubuntu/"
                     class="gdoc-nav__entry"
                   >
                     Ubuntu
@@ -17743,10 +20259,153 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
               
                 <span class="flex">
                   <a
-                    href="/Tech/8IDE/Ubuntu/Ubuntu/"
+                    href="/Tech/8IDE/Linux/Ubuntu/Ubuntu-%E5%AE%89%E8%A3%85JDK/"
+                    class="gdoc-nav__entry"
+                  >
+                    Ubuntu 安装 Jdk
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Linux/Ubuntu/Ubuntu/"
                     class="gdoc-nav__entry"
                   >
                     Ubuntu
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-7e48c657"
+                
+              
+            />
+            <label
+              
+                for="navtree-7e48c657" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Redis/"
+                    class="gdoc-nav__entry"
+                  >
+                    Redis
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Redis/Redis/"
+                    class="gdoc-nav__entry"
+                  >
+                    Redis
                   </a>
                 </span>
               
@@ -17777,13 +20436,221 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-a9ed95d3"
+                class="gdoc-nav__toggle" id="navtree-746526dd"
                 
               
             />
             <label
               
-                for="navtree-a9ed95d3" class="flex justify-between align-center"
+                for="navtree-746526dd" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/"
+                    class="gdoc-nav__entry"
+                  >
+                    Window
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/Window-Mark/"
+                    class="gdoc-nav__entry"
+                  >
+                    Window Mark
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/Window10-%E4%B8%8B%E6%90%AD%E5%BB%BA-Rust-%E7%8E%AF%E5%A2%83/"
+                    class="gdoc-nav__entry"
+                  >
+                    Window10 下搭建 Rust 环境
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/Windows-%E5%91%BD%E4%BB%A4/"
+                    class="gdoc-nav__entry"
+                  >
+                    Windows 命令
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/Window/Windward-C-%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+                    class="gdoc-nav__entry"
+                  >
+                    Windward C 语言开发环境配置
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-66702721"
+                
+              
+            />
+            <label
+              
+                for="navtree-66702721" class="flex justify-between align-center"
               
             >
               
@@ -17949,13 +20816,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-71f0622e"
+                class="gdoc-nav__toggle" id="navtree-9e462569"
                 
               
             />
             <label
               
-                for="navtree-71f0622e" class="flex justify-between align-center"
+                for="navtree-9e462569" class="flex justify-between align-center"
               
             >
               
@@ -18036,6 +20903,142 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
           </li>
         
       
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="gdoc-nav__toggle" id="navtree-84b7586d"
+                
+              
+            />
+            <label
+              
+                for="navtree-84b7586d" class="flex justify-between align-center"
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/%E6%B5%8F%E8%A7%88%E5%99%A8/"
+                    class="gdoc-nav__entry"
+                  >
+                    浏览器
+                  </a>
+                </span>
+              
+              
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_left">
+                  <use xlink:href="#gdoc_keyboard_arrow_left"></use>
+                </svg>
+                <svg class="gdoc-icon toggle gdoc_keyboard_arrow_down">
+                  <use xlink:href="#gdoc_keyboard_arrow_down"></use>
+                </svg>
+              
+            </label>
+
+            
+              
+  
+
+
+  <ul class="gdoc-nav__list">
+    
+    
+      
+
+      
+        
+      
+
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/%E6%B5%8F%E8%A7%88%E5%99%A8/chrom/"
+                    class="gdoc-nav__entry"
+                  >
+                    Chrom
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/8IDE/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B5%8F%E8%A7%88%E5%99%A8/"
+                    class="gdoc-nav__entry"
+                  >
+                    浏览器
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+    
+  </ul>
+
+            
+          </li>
+        
+      
     
   </ul>
 
@@ -18056,13 +21059,13 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
             <input
               type="checkbox"
               
-                class="gdoc-nav__toggle" id="navtree-353cb4fa"
+                class="gdoc-nav__toggle" id="navtree-5fabfd53"
                 
               
             />
             <label
               
-                for="navtree-353cb4fa" class="flex justify-between align-center"
+                for="navtree-5fabfd53" class="flex justify-between align-center"
               
             >
               
@@ -18126,6 +21129,42 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
                     class="gdoc-nav__entry"
                   >
                     CPU 高负载排查实践
+                  </a>
+                </span>
+              
+              
+            </label>
+
+            
+          </li>
+        
+      
+        
+          
+          
+          
+          
+          
+          
+
+
+          <li>
+            <input
+              type="checkbox"
+              
+                class="hidden"
+              
+            />
+            <label
+              
+            >
+              
+                <span class="flex">
+                  <a
+                    href="/Tech/9Archive/Web-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AE%80%E5%8F%B2/"
+                    class="gdoc-nav__entry"
+                  >
+                    Web 浏览器简史
                   </a>
                 </span>
               
@@ -18262,7 +21301,7 @@ interface（接口）关键字将抽象类的概念更延伸了一步，它完�
 <ol>
 <li>标签：Java、基础、thinking-in-java、源码解读、进阶、Java开源框架</li>
 <li>时间：2018年7月17日19:20:24</li>
-<li>连接：http://www.saveload.cn/html/templates/Thinking-In-Java.mk</li>
+<li>连接：https://www.saveload.cn/html/templates/Thinking-In-Java.mk</li>
 </ol>
 <div class="gdoc-page__anchorwrap">
     <h2 id="第-1-章对象入门">

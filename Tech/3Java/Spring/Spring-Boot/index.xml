@@ -12,14 +12,25 @@
       
       <guid>https://www.saveload.cn/Tech/3Java/Spring/Spring-Boot/Spring-Boot-%E6%B3%A8%E8%A7%A3/</guid>
       <description> SpringBoot 注解 @Value List .yml 文件配置：
-test:list:- aaa- bbb- ccc .properties 文件配置：
-test.list[0]=aaatest.list[1]=bbbtest.list[2]=ccc 取值：
-@Value(&amp;#34;${test.list}&amp;#34;)private String[] list; 加默认值取值：
-@Value(&amp;#34;${test.list:}&amp;#34;)private String[] list; EL 表达式：
+test:
+list:
+- aaa
+- bbb
+- ccc .properties 文件配置：
+test.list[0]=aaa
+test.list[1]=bbb
+test.list[2]=ccc 取值：
+@Value(&amp;#34;${test.list}&amp;#34;)
+private String[] list; 加默认值取值：
+@Value(&amp;#34;${test.list:}&amp;#34;)
+private String[] list; EL 表达式：
 设置:
-test:list: aaa,bbb,ccc 取值：
-@Value(&amp;#34;#{&amp;#39;${test.list}&amp;#39;.split(&amp;#39;,&amp;#39;)}&amp;#34;)private List&amp;lt;String&amp;gt; testList; 加默认值取值：
-@Value(&amp;#34;#{&amp;#39;${test.list:}&amp;#39;.split(&amp;#39;,&amp;#39;)}&amp;#34;)private List&amp;lt;String&amp;gt; testList; </description>
+test:
+list: aaa,bbb,ccc 取值：
+@Value(&amp;#34;#{&amp;#39;${test.list}&amp;#39;.split(&amp;#39;,&amp;#39;)}&amp;#34;)
+private List&amp;lt;String&amp;gt; testList; 加默认值取值：
+@Value(&amp;#34;#{&amp;#39;${test.list:}&amp;#39;.split(&amp;#39;,&amp;#39;)}&amp;#34;)
+private List&amp;lt;String&amp;gt; testList; </description>
     </item>
     
     <item>
