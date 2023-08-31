@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git 命令 on Save Load</title>
+    <link>https://www.saveload.cn/Tech/8IDE/Git/Git-%E5%91%BD%E4%BB%A4/</link>
+    <description>Recent content in Git 命令 on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/8IDE/Git/Git-%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Git/Git-%E5%91%BD%E4%BB%A4/Git-%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Git/Git-%E5%91%BD%E4%BB%A4/Git-%E5%91%BD%E4%BB%A4/</guid>
+      <description>Git 命令 创建存储库 # 创建一个新的本地存储库$ git init [项目名称]# 克隆存储库$ git clone &amp;lt;git 仓库 url 地址&amp;gt;# 将存储库克隆到指定目录$ git clone &amp;lt;git 仓库 url 地址&amp;gt; &amp;lt;我的文件夹&amp;gt; 配置 # 设置将附加到您的提交(commit)和标签(tags)的名称$ git config --global user.name &amp;#34;name&amp;#34;# 设置将附加到您的提交(commit)和标签(tags)的电子邮件地址$ git config --global user.email &amp;#34;email&amp;#34;# 启用 Git 输出的一些着色$ git config --global color.ui auto# 在文本编辑器中编辑全局配置文件$ git config --global --edit 变更 # 在工作目录中显示修改后的文件，为您的下一次提交暂存$ git status# 暂存文件，准备提交$ git add [file]# 暂存所有更改的文件，准备提交$ git add .</description>
+    </item>
+    
+  </channel>
+</rss>

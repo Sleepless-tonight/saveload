@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vue on Save Load</title>
+    <link>https://www.saveload.cn/Tech/4Other-Language/Vue/</link>
+    <description>Recent content in Vue on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/4Other-Language/Vue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/4Other-Language/Vue/Vue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/4Other-Language/Vue/Vue/</guid>
+      <description>Vue 学习笔记 1、node.js下载、安装略过 cnpm cache clear -force 清空缓存
+根据install.js，脚本通过http.get下载chromediriver二进制文件。 但是zip文件已被移动，脚本不处理这种情况。
+npm install chromedriver &amp;ndash;chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver
+npm audit npm audit fix
+(use npm audit fix --force to install breaking changes; or refer to npm audit for steps to fix these manually)</description>
+    </item>
+    
+  </channel>
+</rss>

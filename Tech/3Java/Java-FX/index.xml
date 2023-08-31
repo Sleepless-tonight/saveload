@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java FX on Save Load</title>
+    <link>https://www.saveload.cn/Tech/3Java/Java-FX/</link>
+    <description>Recent content in Java FX on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/3Java/Java-FX/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX-Canvas/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX-Canvas/</guid>
+      <description>使用 Canvas 画布 总览 JavaFX Canvas API提供了可以写入的自定义纹理。它是由类中定义Canvas并GraphicsContext在javafx.scene.canvas包中。使用此API涉及创建一个Canvas对象，获取其对象，GraphicsContext并调用绘图操作以在屏幕上呈现您的自定义形状。因为Canvas是Node子类，所以可以在JavaFX scene （场景图）中使用它。
+Canvas Canvas 是可以使用GraphicsContext。提供的图形命令集绘制的图像。
+一个 Canvas节点被构造成具有宽度和高度，指定到其中的画布绘图命令被描绘的图像的大小。所有绘图操作都被裁剪到该图像的边界。
+GraphicsContext Canvas canvas = new Canvas(300, 250); GraphicsContext gc = canvas.getGraphicsContext2D(); This class is used to issue draw calls to a Canvas using a buffer. 此类用于使用缓冲区向画布发出绘制调用。 Each call pushes the necessary parameters onto the buffer where they will be later rendered onto the image of the Canvas node by the rendering thread at the end of a pulse.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFx-Cheat-Sheets-JavaFx-%E9%80%9F%E6%9F%A5%E8%A1%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFx-Cheat-Sheets-JavaFx-%E9%80%9F%E6%9F%A5%E8%A1%A8/</guid>
+      <description>JavaFx Cheat Sheets （JavaFx 速查表) 1、舞台(Stage)，场景(Scene)，容器(Container)，布局(Layout )和控件(Controls)之间的关系：
+在JavaFX中，Stage是应用程序窗口，其中包含称为Scene的空间。 Scene包含界面的组件，如Button，Text，…或容器。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX-Scene/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX-Scene/</guid>
+      <description>Scene Graph 总览 Scene Graph (场景图)是一种类似树的数据结构，其中树中的每个项目都有零个或一个父级和零个或多个子级。
+此软件包中的两个主要类是：
+Scene–定义要渲染的场景。它包含一个fill变量，指定场景的背景，width并height指定场景的大小的变量，以及content包含的“root”的列表序列Nodes将被渲染到场景上。此序列Nodes是为此的场景图Scene。将A Scene呈现到Stage，这是JavaFX内容的顶级容器。 Node–场景图中所有节点的抽象基类。每个节点要么是不具有子节点的“叶”节点，要么是具有零个或多个子节点的“分支”节点。树中的每个节点都有零个或一个父节点。场景图中每个树中只有一个节点将没有父节点，这通常称为“根”节点。场景图中可能有几棵树。有些树可能是的一部分Scene，在这种情况下，它们有资格显示。其他树木可能不属于任何树木Scene。 分支节点是其类型Parent或子类。
+叶节点的类，如 Rectangle，Text， ImageView，MediaView，或其他这样的叶类，其不能具有子。
+一个节点最多可以在场景图中的任何位置出现一次。具体来说，一个节点在a的子代列表中Parent或作为a的剪辑 必须出现不超过一次Node。有关Node这些限制的更多详细信息，请参见该类。
+JavaFX Scene Graph提供了使用CSS（级联样式表）对节点进行样式设置的功能。
+Scene JavaFX Scene类是场景图中所有内容的容器。场景的背景按照fill属性指定的方式填充。 应用程序必须Node通过设置root属性来指定场景图的根。如果将a Group用作根，则场景图的内容将被场景的宽度和高度限制，并且更改场景的大小（如果用户调整舞台的大小）将不会更改场景图的布局。如果将可调整大小的节点（布局Region或 Control）设置为根，则根的大小将跟踪场景的大小，从而根据需要中继内容。
+场景的大小可以在构建过程中由应用程序初始化。如果未指定大小，则场景将根据其内容的首选大小自动计算其初始大小。如果仅指定一个维度，则考虑到根的内容偏差，使用指定的维度来计算另一个维度。
+应用程序可以在创建时请求深度缓冲区支持或场景抗锯齿支持Scene。仅具有2D形状且没有任何3D变换的场景不需要深度缓冲区，也不需要场景抗锯齿支持。包含3D形状或具有3D变换的2D形状的场景可以使用深度缓冲区支持来进行适当的深度排序渲染。为了避免进行深度战斗（也称为Z战斗），请对没有3D变换的2D形状禁用深度测试。请参阅 depthTest以获取更多信息。具有3D形状的场景可以启用场景抗锯齿功能以提高其渲染质量。
+depthBuffer和antiAliasing标志是条件功能。分别具有默认值：false和SceneAntialiasing.DISABLED。请参阅ConditionalFeature.SCENE3D 以获取更多信息。
+默认的头灯将添加到包含一个或多个Shape3D节点但不包含任何灯光节点的场景中 。该光源 Color.WHITE PointLight放置在相机位置。
+Scene可以在任何线程上创建和修改 A ，直到将其附加到Window上showing。之后，必须仅在JavaFX Application Thread上对其进行修改。注意这Scene不是线程安全的。同时修改Scene多个线程上的a 会导致无法预料的结果，因此必须避免。
+JavaFX应用程序线程是在JavaFX运行时启动过程中创建的。有关更多信息，请参见Application类和Platform.startup(Runnable)方法。
+Group 一个Group节点包含一个ObservableList的子节点，每当渲染该节点时，这些子节点就会按顺序渲染。 A Group将承担其子代的集体责任，并且不能直接调整其大小。
+应用于的任何变换，效果或状态Group都将应用于该组的所有子级。此类变换和效果将不包括在该组的布局范围内，但是，如果直接在该组的子级上设置变换和效果，则这些变换和效果将包括在该组的布局范围内。
+默认情况下，a Group将在布局遍历期间将其可调整大小的子控件“自动调整大小”到其首选大小，以确保在区域和控件状态改变时调整其大小。如果应用程序需要禁用此自动调整大小行为，则应将其设置 autoSizeChildren为false并了解，如果子级的首选大小发生更改，则它们将不会自动调整大小（因此请当心！）。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX-Stage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX-Stage/</guid>
+      <description>JavaFX Stage 舞台 总览 JavaFX Stage .类是顶级JavaFX容器。初级阶段由平台构建。Application 可以构造Stage对象。
+Stage 对象必须在JavaFX Application Thread上构造和修改。
+The JavaFX Application Thread is created as part of the startup process for the JavaFX runtime.
+JavaFX Application Thread 是在JavaFX运行时启动过程中创建的。
+许多 Stage 属性是只读的，因为它们可以由基础平台在外部进行更改，因此不能绑定。
+样式 Stage 具有以下样式之一：
+StageStyle.DECORATED -具有纯白色背景和平台装饰的舞台。 StageStyle.UNDECORATED -具有纯白色背景且没有装饰的舞台。 StageStyle.TRANSPARENT -具有透明背景且没有装饰的舞台。 StageStyle.UTILITY -具有纯白色背景和最少平台装饰的舞台。 必须先初始化样式，然后才能使舞台可见。
+在某些平台上，装饰可能不可用。例如，在某些移动或嵌入式设备上。在这些情况下，将接受对DECORATED或UTILITY窗口的请求，但不会显示任何装饰。
+所有者 A stage can optionally have an owner Window. When a window is a stage&amp;rsquo;s owner, it is said to be the parent of that stage.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX-Transformations-Animations-and-Visual-Effects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX-Transformations-Animations-and-Visual-Effects/</guid>
+      <description>JavaFX: Transformations, Animations, and Visual Effects JavaFX：转换，动画和视觉效果
+1、转换概述 所有转换都位于javafx.scene.transform 包中，并且是Transform该类的子类。
+Introducing Transformations 变换 介绍 转换会根据某些参数更改图形对象在坐标系中的位置。JavaFX支持以下类型的转换：
+Translation 转换 Rotation 回转 Scaling 缩放比例 Shearing 剪力 These transformations can be applied to either a standalone node or to groups of nodes. You can apply one transformation at a time or you can combine transformations and apply several transformations to one node. 这些变换可以应用于独立节点或节点组。您可以一次应用一个变换，也可以组合转换并将多个变换应用于一个节点。
+The Transform class implements the concepts of affine transformations. The Affine class extends the Transform class and acts as a superclass to all transformations.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFx/</guid>
+      <description>JavaFX架构 JavaFX公共API下方是运行JavaFX代码的引擎。它由子组件组成，这些子组件包括JavaFX高性能图形引擎Prism；一个小型高效的窗口系统，称为Glass；媒体引擎和Web引擎。尽管这些组件没有公开公开，但是它们的描述可以帮助您更好地了解运行JavaFX应用程序的组件。
+Scene Graph 场景图 Java Public APIs for JavaFX Features 用于JavaFX功能的Java公共API Graphics System 图形系统 Glass Windowing Toolkit 玻璃窗工具包 Media and Images 媒体和图片 Web Component Web组件 CSS CSS引擎 UI Controls UI控件 Layout 布局 2-D and 3-D Transformations 2D和3D转换 Visual Effects 视觉效果 JavaFX体系结构图 JavaFX体系结构图显示了堆栈。顶层显示在一个圆形的栗色框中，表示JavaFX公共API和JavaFX场景图。下一层是圆形的蓝色框中的Quantum Toolkit。第三层在一个圆形的蓝色框中具有称为Prism的图形管道，在一个方形的豌豆绿色框中具有一个玻璃窗口工具包（Glass），在一个方形的鲜绿色框中具有媒体引擎，在一个方形的棕色框中具有Web引擎。第四层由圆形的蓝色框中的Java 2D，OpenGL和Direct3D（D3D）组成。均以圆形蓝色框显示的Quantum Toolkit，Prism，Java 2D，OpenGL和D3D组成了JavaFX图形系统。最低层（以浅紫色显示）是Java虚拟机。Java虚拟机位于JavaFX图形系统，Glass Windowing Toolkit，媒体引擎和Web引擎的下面。
+Scene Graph 场景图 如图2-1的顶层所示，JavaFX场景图是构建JavaFX应用程序的起点。它是节点的分层树，代表应用程序用户界面的所有可视元素。它可以处理输入并可以呈现。
+场景图中的单个元素称为节点。每个节点都有一个ID，样式类和边界量。除了场景图的根节点之外，场景图中的每个节点都有一个父级和零个或多个子级。它还可以具有以下内容：
+效果，例如模糊和阴影 不透明度 变身 事件处理程序（例如鼠标，键和输入法） 特定于应用程序的状态 与Swing和Abstract Window Toolkit（AWT）不同，JavaFX场景图除了具有控件，布局容器，图像和媒体之外，还包括图形基元，例如矩形和文本。
+对于大多数用途，场景图简化了使用UI的工作，尤其是在使用丰富的UI时。使用javafx.animation API可以快速完成对场景图中的各种图形进行动画处理，并且声明性方法（例如XML doc）也可以很好地工作。
+该javafx.scene API允许创建和指定多种类型的内容，例如：
+节点：形状（2-D和3-D），图像，媒体，嵌入式Web浏览器，文本，UI控件，图表，组和容器 状态：内容的变换（节点的位置和方向），视觉效果以及其他视觉状态 效果：更改场景图节点外观的简单对象，例如模糊，阴影和颜色调整 有关更多信息，请参见使用JavaFX场景图文档。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%E6%B5%85%E8%B0%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-FX/JavaFX%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%E6%B5%85%E8%B0%88/</guid>
+      <description>JavaFX游戏开发效率浅谈 这一段时间没事的时候把基于JavaFX的游戏引擎WJFXGameEngine的效率进行优化了一下(个人博客的示例并未重新上传)，简单的2D游戏，在我PC上运行最快可以达到750-800FPS。下面来简单谈谈JavaFX游戏开发上的一些基本问题。
+看过JavaFX官方游戏示例BrickBreak的人都可以发现，这个游戏的绘制和逻辑是在Timeline中进行的。JavaFX中的Timeline根据我使用的经验来看，效率不是很高，而且如果数量过多，会很卡。在我游戏引擎中目前的简单的动画是用Timeline实现的，未来会做大改动。
+而且之前的教程中，JavaFX简单的游戏框架中讲的也是是用的Timeline。这实际是个很严重的问题。被JavaFX官方示例误导了。
+目前我的改动是，使用双线程，一个线程处理绘制，一个线程处理更新操作(这也是很多游戏引擎常用的做法，例如Android游戏引擎AndEngine)。当然，绘制处理必须要在JavaFX MainThread中运行，所以我们使用Platform.runLater来调用绘制操作。虽然它还是在主线程执行，但更新绘制的速度明显更快。之前做的JavaFX游戏示例中，经常出现子弹卡顿等现场，现在不会出现了。
+drawThread = new Thread(new Runnable() {@Overridepublic void run() {while (isRunning) {try {Thread.sleep(waitTime);} catch (Exception e) {}Platform.runLater(new Runnable() {@Overridepublic void run() {draw(getGraphicsContext2D());}});if (fpsMaker != null) {fpsMaker.makeFPS();}}}});updateThread = new Thread(new Runnable() {@Overridepublic void run() {while (isRunning) {try {Thread.sleep(waitTime);} catch (Exception e) {}update();}}}); 这个是我的WScreen类里的代码。</description>
+    </item>
+    
+  </channel>
+</rss>

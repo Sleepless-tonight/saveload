@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3、Java on Save Load</title>
+    <link>https://www.saveload.cn/Tech/3Java/</link>
+    <description>Recent content in 3、Java on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/3Java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/About_System_Gc_And_Finalize/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/About_System_Gc_And_Finalize/</guid>
+      <description>转：关于system.gc()与finalize()方法 注：本文的目的并不是鼓励使用finalize方法，而是大致理清其作用、问题以及GC执行finalize的过程。
+1、finalize的作用 finalize()是Object的protected方法，子类可以覆盖该方法以实现资源清理工作，GC在回收对象之前调用该方法。 finalize()与C++中的析构函数不是对应的。C++中的析构函数调用的时机是确定的（对象离开作用域或delete掉），但Java中的finalize的调用具有不确定性 不建议用finalize方法完成“非内存资源”的清理工作，但建议用于：① 清理本地对象(通过JNI创建的对象)；② 作为确保某些非内存资源(如Socket、文件等)释放的一个补充：在finalize方法中显式调用其他资源释放方法。其原因可见下文[finalize的问题] 2、finalize的问题 一些与finalize相关的方法，由于一些致命的缺陷，已经被废弃了，如System.runFinalizersOnExit()方法、Runtime.runFinalizersOnExit()方法 System.gc()与System.runFinalization()方法增加了finalize方法执行的机会，但不可盲目依赖它们 Java语言规范并不保证finalize方法会被及时地执行、而且根本不会保证它们会被执行 finalize方法可能会带来性能问题。因为JVM通常在单独的低优先级线程中完成finalize的执行 对象再生问题：finalize方法中，可将待回收对象赋值给GC Roots可达的对象引用，从而达到对象再生的目的 finalize方法至多由GC执行一次(用户当然可以手动调用对象的finalize方法，但并不影响GC对finalize的行为) 3、finalize的执行过程(生命周期) 首先，大致描述一下finalize流程：当对象变成(GC Roots)不可达时，GC会判断该对象是否覆盖了finalize方法，若未覆盖，则直接将其回收。否则，若对象未执行过finalize方法，将其放入F-Queue队列，由一低优先级线程执行该队列中对象的finalize方法。执行finalize方法完毕后，GC会再次判断该对象是否可达，若不可达，则进行回收，否则，对象“复活”。 具体的finalize流程： 对象可由两种状态，涉及到两类状态空间，一是终结状态空间 F = {unfinalized, finalizable, finalized}；二是可达状态空间 R = {reachable, finalizer-reachable, unreachable}。各状态含义如下： unfinalized: 新建对象会先进入此状态，GC并未准备执行其finalize方法，因为该对象是可达的 finalizable: 表示GC可对该对象执行finalize方法，GC已检测到该对象不可达。正如前面所述，GC通过F-Queue队列和一专用线程完成finalize的执行 finalized: 表示GC已经对该对象执行过finalize方法 reachable: 表示GC Roots引用可达 finalizer-reachable(f-reachable)：表示不是reachable，但可通过某个finalizable对象可达 unreachable：对象不可通过上面两种途径可达 状态变迁图： 变迁说明： 新建对象首先处于[reachable, unfinalized]状态(A) 随着程序的运行，一些引用关系会消失，导致状态变迁，从reachable状态变迁到f-reachable(B, C, D)或unreachable(E, F)状态 若JVM检测到处于unfinalized状态的对象变成f-reachable或unreachable，JVM会将其标记为finalizable状态(G,H)。若对象原处于[unreachable, unfinalized]状态，则同时将其标记为f-reachable(H)。 在某个时刻，JVM取出某个finalizable对象，将其标记为finalized并在某个线程中执行其finalize方法。由于是在活动线程中引用了该对象，该对象将变迁到(reachable, finalized)状态(K或J)。该动作将影响某些其他对象从f-reachable状态重新回到reachable状态(L, M, N) 处于finalizable状态的对象不能同时是unreachable的，由第4点可知，将对象finalizable对象标记为finalized时会由某个线程执行该对象的finalize方法，致使其变成reachable。这也是图中只有八个状态点的原因 程序员手动调用finalize方法并不会影响到上述内部标记的变化，因此JVM只会至多调用finalize一次，即使该对象“复活”也是如此。程序员手动调用多少次不影响JVM的行为 若JVM检测到finalized状态的对象变成unreachable，回收其内存(I) 若对象并未覆盖finalize方法，JVM会进行优化，直接回收对象（O） 注：System.runFinalizersOnExit()等方法可以使对象即使处于reachable状态，JVM仍对其执行finalize方法 4、一些代码示例 对象复活 public class GC { public static GC SAVE_HOOK = null; public static void main(String[] args) throws InterruptedException { SAVE_HOOK = new GC(); SAVE_HOOK = null; System.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/CGLIBCode-Generation-Library-%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/CGLIBCode-Generation-Library-%E4%BB%8B%E7%BB%8D%E4%B8%8E%E5%8E%9F%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/error/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/error/</guid>
+      <description>error.md
+shardingsphere sql distinct 关键字支持异常， 当一个分库有数据，一个分库无数据时，会有异常。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Regular-Expression/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Regular-Expression/</guid>
+      <description> Java Regular Expression 一些简单的就不写了
+否定式前瞻 否定式向前查找，对于正则表达式引擎来说，因为它是从文本头部向尾部开始解析的（可以通过正则选项控制解析方向），因此对于文本尾部方向，称为“前”。
+解决的问题： 正则表达式匹配不包含某些字符串的技巧
+前瞻的语法是：： (?!匹配模式) 表达式如下： ((?!hede).)* 解释一下几个部分： 在正则表达式里， ?! 是否定式向前查找，它帮我们解决了字符串“不包含”匹配的问题。 表达式(?!hede).会往前查找，看看前面是不是没有“hede”字串，如果没有(是其它字符)，那么.(点号)就会匹配这些其它字符。这种正则表达式的“查找”也叫做“zero-width-assertions”(零宽度断言)，因为它不会捕获任何的字符，只是判断。 在上面的例子里，每个空字符都会检查其前面的字符串是否不是‘hede&amp;rsquo;，如果不是，这.(点号)就是匹配捕捉这个字符。表达式(?!hede).只执行一次，所以，我们将这个表达式用括号包裹成组(group)，然后用*(星号)修饰——匹配0次或多次： 以下是一些补充： // 1、多个 否定式前瞻配合 ((?!\})(?!&amp;#34;)(?!,&amp;#34;).)* // 2、多个 否定式前瞻配合，捕获 json 指定 key 的值。&amp;#34;sub_msg&amp;#34;:\s?\&amp;#34;?((?!\})(?!&amp;#34;)(?!,&amp;#34;).)* </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Tags/</guid>
+      <description>Java Tags 标签：Java Tags 时间：2018年11月1日14:37:44 连接：http://www.saveload.cn/html/mood/2018/Java Tags.mk equals与==的区别 ==与equals的主要区别是：==常用于比较原生类型，而equals()方法用于检查对象的相等性。另一个不同的点是：如果==和equals()用于比较对象，当两个引用地址相同，==返回true。而equals()可以返回true或者false主要取决于重写实现。最常见的一个例子，字符串的比较，不同情况==和equals()返回不同的结果。equals()方法最重要的一点是，能够根据业务要求去重写，按照自定义规则去判断两个对象是否相等。重写equals()方法的时候，要注意一下hashCode是否会因为对象的属性改变而改变，否则在使用散列集合储存该对象的时候会碰到坑！！理解equals()方法的存在是很重要的。
+static： 接口不涉及和任何具体实例相关的细节,因此接口没有构造方法,不能被实例化,没有实例变量，只有静态（static）变量。 static修饰就表示它属于类的，随的类的加载而存在的，当JVM把字节码加载进JVM的时候，static修饰的成员已经在内存中存在了。 如果是非static的话，就表示属于对象的，只有建立对象时才有它，而接口是不能建立对象的，所以接口的常量必须定义为static。
+final： 接口中不可以定义变量即定义的变量前都要加上final修饰，使之成为常量(没有final修饰的是变量，加上final修饰就会变成常量)。 所以接口的属性默认是public static final 常量，且必须赋初值。（ final修饰就是保证接口定义的常量不能被实现类去修改，如果没有final的话，由子类随意去修改的话，接口建立这个常量就没有意义了。
+this： this 这个关键字的最大作用就是让类中的一个方法，访问该类里的另一个方法或变量，
+实体类别： Entity接近原始数据，Model接近业务对象～ Entity：是专用于EF的对数据库表的操作， Model：是为页面提供数据和数据校验的，所以两者可以并存 POJO：POJO是Plain OrdinaryJava Object的缩写不错，但是它通指没有使用Entity Beans的普通java对象，可以把POJO作为支持业务逻辑的协助类。
+面向对象
+面向对象设计：易于扩展、可复用、易维护、易构建复杂系统 （继承 支持了 复用，多态 支持了 扩展，封装 支持了 构建维护复用） “进行面向对象的设计时，一项基本的考虑是：如何将发生变化的东西与保持不变的东西分隔开。” 面向对象的一个主要特性就是隐藏实现（不去暴露非必要暴露的对象成员），即一个对象的成员的可访问范围是必须要进行控制的，而公开的通常是方法，通常的做法是将对象属性私有，通过 get、set 方法来获得对象的属性。 面向对象设计一条基本的准则是“为状态的变化使用数据成员，为行为的变化使用多性形”。（例如用属性记录图形的长宽高或直径，用多形性来指定画圆形还是画方形） 记住多形性只能通过方法调用才能表现出来 “多形性”（Polymorphism）从另一个角度将接口从具体的实施细节中分离出来，亦即实现了“是什么”与“怎样做”两个模块的分离。 “Upcasting”（上溯造型） 我们将从一个 衍生类 句柄转换成一个 基础类 句柄的行为叫作“上溯造型” 把衍生类型（子类）当作它的基本类型（父类）处理的过程叫作“Upcasting”（上溯造型）。 “下溯造型”（Downcasting） 继承、重载(overloaded )、重写、动态绑定 泛型 复用约束 示例：集合的泛型方法 论合成与继承 如果想利用新类内部一个现有类的特性，而不想使用它的接口，通常应选择合成。也就是说，我们可嵌入一个对象，使自己能用它实现新类的特性。但新类的用户会看到我们已定义的接口，而不是来自嵌入对象的接口。考虑到这种效果，我们需在新类里嵌入现有类的private对象。 “属于”或者“类似”关系是用继承来表达的，而“包含”关系是用合成来表达的。 继承 用来表达同一个系列不同种对象的行为间的差异。 句柄在运行期间可以重新与一个不同的对象绑定或结合起来,这样一来，我们在运行期间 通过改变句柄绑定的子类类型 就获得了很大的灵活性。与此相反，我们不能在运行期间换用不同的形式来进行继承；它要求在编译期间完全决定下来。 Logger 大家不要再在方法里写：System.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Util-Concurrent/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Util-Concurrent/</guid>
+      <description> Java Util Concurrent </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E5%88%86%E5%B8%83%E5%BC%8F%E5%94%AF%E4%B8%80ID%E7%94%9F%E6%88%90%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E5%88%86%E5%B8%83%E5%BC%8F%E5%94%AF%E4%B8%80ID%E7%94%9F%E6%88%90%E6%96%B9%E6%A1%88/</guid>
+      <description>分布式唯一ID生成方案 整个系统ID唯一 ID是数字类型，而且是趋势递增的 ID简短，查询效率快
+1、UUID 优点：
+代码实现简单。 本机生成，没有性能问题 因为是全球唯一的ID，所以迁移数据容易 缺点：
+每次生成的ID是无序的，无法保证趋势递增 UUID的字符串存储，查询效率慢 存储空间大 ID本事无业务含义，不可读 应用场景：
+类似生成token令牌的场景 不适用一些要求有趋势递增的ID场景 2、MySQL主键自增 这个方案就是利用了MySQL的主键自增auto_increment，默认每次ID加1。
+优点：
+数字化，id递增 查询效率高 具有一定的业务可读 缺点：
+存在单点问题，如果mysql挂了，就没法生成iD了 数据库压力大，高并发抗不住 3、MySQL多实例主键自增 这个方案就是解决mysql的单点问题，在auto_increment基本上面，设置step步长 每台的初始值分别为1,2,3&amp;hellip;N，步长为N（这个案例步长为4）
+优点：
+解决了单点问题 缺点：
+一旦把步长定好后，就无法扩容；而且单个数据库的压力大，数据库自身性能无法满足高并发 应用场景：
+数据不需要扩容的场景 4、雪花 snowflake 算法 这个算法网上介绍了很多。雪花算法生成64位的二进制正整数，然后转换成10进制的数。64位二进制数由如下部分组成： 1位标识符：始终是0 41位时间戳：41位时间截不是存储当前时间的时间截，而是存储时间截的差值（当前时间截 - 开始时间截 )得到的值，这里的的开始时间截，一般是我们的id生成器开始使用的时间，由我们程序来指定的 10位机器标识码：可以部署在1024个节点，如果机器分机房（IDC）部署，这10位可以由 5位机房ID + 5位机器ID 组成 12位序列：毫秒内的计数，12位的计数顺序号支持每个节点每毫秒(同一机器，同一时间截)产生4096个ID序号 优点：
+此方案每秒能够产生409.6万个ID，性能快 时间戳在高位，自增序列在低位，整个ID是趋势递增的，按照时间有序递增 灵活度高，可以根据业务需求，调整bit位的划分，满足不同的需求 缺点：
+依赖机器的时钟，如果服务器时钟回拨，会导致重复ID生成 -在分布式场景中，服务器时钟回拨会经常遇到，一般存在10ms之间的回拨；小伙伴们就说这点10ms，很短可以不考虑吧。但此算法就是建立在毫秒级别的生成方案，一旦回拨，就很有可能存在重复ID。 5、Redis生成方案 利用redis的incr原子性操作自增，一般算法为：
+年份 + 当天距当年第多少天 + 天数 + 小时 + redis自增
+优点：</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+      <description>Java 动态代理（Dynamic Proxy） 一、什么是代理？ 代理是一种常用的设计模式，其目的就是为其他对象提供一个代理以控制对某个对象的访问。代理类负责为委托类预处理消息，过滤消息并转发消息，以及进行消息被委托类执行后的后续处理。
+简单结构示意图： 为了保持行为的一致性，代理类和委托类通常会实现相同的接口，所以在访问者看来两者没有丝毫的区别。通过代理类这中间一层，能有效控制对委托类对象的直接访问，也可以很好地隐藏和保护委托类对象，同时也为实施不同控制策略预留了空间，从而在设计上获得了更大的灵活性。Java 动态代理机制以巧妙的方式近乎完美地实践了代理模式的设计理念。
+二、Java 动态代理类 Java动态代理类位于java.lang.reflect包下，一般主要涉及到以下两个类：
+(1)Interface InvocationHandler：该接口中仅定义了一个方法： public object invoke(Object obj,Method method, Object[] args) 在实际使用时，第一个参数obj一般是指代理类，method是被代理的方法，args为该方法的参数数组。这个抽象方法在代理类中动态实现。
+(2)Proxy：该类即为动态代理类，其中主要包含以下内容： protected Proxy(InvocationHandler h)：构造函数，用于给内部的h赋值。static Class getProxyClass (ClassLoaderloader, Class[] interfaces)：获得一个代理类，其中loader是类装载器，interfaces是真实类所拥有的全部接口的数组。static Object newProxyInstance(ClassLoaderloader, Class[] interfaces, InvocationHandler h)：返回代理类的一个实例，返回后的代理类（DynamicProxy）可以当作被代理类使用(可使用被代理类的在Subject接口中声明过的方法) 所谓代理类 DynamicProxy 是这样一种class：它是在运行时生成的 class，在生成它时你必须提供一组 interface 给它，然后该 class 就宣称它实现了这些 interface。你当然可以把该 class 的实例当作这些 interface 中的任何一个来用。当然，这 DynamicProxy 其实就是一个 Proxy，它不会替你作实质性的工作，在生成它的实例时你必须提供一个 handler ，由它接管实际的工作。
+在使用动态代理类时，我们必须实现InvocationHandler接口
+通过这种方式，被代理的对象(RealSubject)可以在运行时动态改变，需要控制的接口(Subject接口)可以在运行时改变，控制的方式(DynamicSubject类)也可以动态改变，从而实现了非常灵活的动态代理关系。
+动态代理步骤： 创建一个实现接口InvocationHandler的类，它必须实现invoke方法 创建被代理的类以及接口 通过Proxy的静态方法 newProxyInstance(ClassLoaderloader, Class[] interfaces, InvocationHandler h)创建一个代理 通过代理调用方法 三、JDK的动态代理怎么使用？ 1、需要动态代理的接口： /*** 需要动态代理的接口*/public interface Subject{/*** 你好** @param name* @return*/public String SayHello(String name);/*** 再见** @return*/public String SayGoodBye();} 2、需要代理的实际对象： /*** 实际对象*/public class RealSubject implements Subject{/*** 你好** @param name* @return*/public String SayHello(String name){return &amp;#34;hello &amp;#34; + name;}/*** 再见** @return*/public String SayGoodBye(){return &amp;#34; good bye &amp;#34;;}} 3、调用处理器实现类（有木有感觉这里就是传说中的AOP啊） /*** 调用处理器实现类* 每次生成动态代理类对象时都需要指定一个实现了该接口的调用处理器对象*/public class InvocationHandlerImpl implements InvocationHandler{/*** 这个就是我们要代理的真实对象*/private Object subject;/*** 构造方法，给我们要代理的真实对象赋初值** @param subject*/public InvocationHandlerImpl(Object subject){this.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/</guid>
+      <description>一、java的六种存储地址及解释1） 寄存器(register)：这是最快的存储区，因为它位于不同于其他存储区的地方——处理器内部。但是寄存器的数量极其有限，所以寄存器由编译器根据需求进行分配。你不能直接控制，也不能在程序中感觉到寄存器存在的任何迹象。2） 堆栈(stack)：位于通用RAM中，但通过它的“堆栈指针”可以从处理器哪里获得支持。堆栈指针若向下移动，则分配新的内存；若向上移动，则释放那些内存。这是一种快速有效的分配存储方法，仅次于寄存器。创建程序时候，JAVA编译器必须知道存储在堆栈内所有数据的确切大小和生命周期，因为它必须生成相应的代码，以便上下移动堆栈指针。这一约束限制了程序的灵活性，所以虽然某些JAVA数据存储在堆栈中——特别是对象引用，但是JAVA对象不存储其中。 3）堆(heap)：一种通用性的内存池（也存在于RAM中），用于存放所有的JAVA对象。堆不同于堆栈的好处是：编译器不需要知道要从堆里分配多少存储区域，也不必知道存储的数据在堆里存活多长时间。因此，在堆里分配存储有很大的灵活性。当你需要创建一个对象的时候，只需要new写一行简单的代码，当执行这行代码时，会自动在堆里进行存储分配。当然，为这种灵活性必须要付出相应的代码。用堆进行存储分配比用堆栈进行存储存储需要更多的时间。 4）静态存储(static storage)：这里的“静态”是指“在固定的位置”。静态存储里存放程序运行时一直存在的数据。你可用关键字static来标识一个对象的特定元素是静态的，但JAVA对象本身从来不会存放在静态存储空间里。 5） 常量存储(constant storage)：常量值通常直接存放在程序代码内部，这样做是安全的，因为它们永远不会被改变。有时，在嵌入式系统中，常量本身会和其他部分分割离开，所以在这种情况下，可以选择将其放在ROM中。6） 非RAM存储：如果数据完全存活于程序之外，那么它可以不受程序的任何控制，在程序没有运行时也可以存在。二、栈、堆、方法区存储的内容堆区: 1.存储的全部是对象，每个对象都包含一个与之对应的class的信息。(class的目的是得到操作指令) 2.jvm只有一个堆区(heap)被所有线程共享，堆中不存放基本类型和对象引用，只存放对象本身 。栈区: 1.每个线程包含一个栈区，栈中只保存基础数据类型的值和对象以及基础数据的引用2.每个栈中的数据(基础数据类型和对象引用)都是私有的，其他栈不能访问。 3.栈分为3个部分：基本类型变量区、执行环境上下文、操作指令区(存放操作指令)。 方法区: 1.又叫静态区，跟堆一样，被所有的线程共享。方法区包含所有的class和static变量。 2.方法区中包含的都是在整个程序中永远唯一的元素，如class，static变量。 三、在Java语言里堆(heap)和栈(stack)里的区别 1. 栈(stack)与堆(heap)都是Java用来在Ram中存放数据的地方。与C++不同，Java自动管理栈和堆，程序员不能直接地设置栈或堆。 2. 栈的优势是，存取速度比堆要快，仅次于直接位于CPU中的寄存器。但缺点是，存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。另外，栈数据可以共享，详见第3点。堆的优势是可以动态地分配内存大小，生存期也不必事先告诉编译器，Java的垃圾收集器会自动收走这些不再使用的数据。但缺点是，由于要在运行时动态分配内存，存取速度较慢。 3. Java中的数据类型有两种。 一种是基本类型(primitive types), 共有8种，即int, short, long, byte, float, double, boolean, char(注意，并没有string的基本类型)。这种类型的定义是通过诸如int a = 3; long b = 255L;的形式来定义的，称为自动变量。值得注意的是，自动变量存的是字面值，不是类的实例，即不是类的引用，这里并没有类的存在。如int a = 3; 这里的a是一个指向int类型的引用，指向3这个字面值。这些字面值的数据，由于大小可知，生存期可知(这些字面值固定定义在某个程序块里面，程序块退出后，字段值就消失了)，出于追求速度的原因，就存在于栈中。 另外，栈有一个很重要的特殊性，就是存在栈中的数据可以共享。假设我们同时定义 int a = 3; int b = 3； 编译器先处理int a = 3；首先它会在栈中创建一个变量为a的引用，然后查找有没有字面值为3的地址，没找到，就开辟一个存放3这个字面值的地址，然后将a指向3的地址。接着处理int b = 3；在创建完b的引用变量后，由于在栈中已经有3这个字面值，便将b直接指向3的地址。这样，就出现了a与b同时均指向3的情况。 特别注意的是，这种字面值的引用与类对象的引用不同。假定两个类对象的引用同时指向一个对象，如果一个对象引用变量修改了这个对象的内部状态，那么另一个对象引用变量也即刻反映出这个变化。相反，通过字面值的引用来修改其值，不会导致另一个指向此字面值的引用的值也跟着改变的情况。如上例，我们定义完a与 b的值后，再令a=4；那么，b不会等于4，还是等于3。在编译器内部，遇到a=4；时，它就会重新搜索栈中是否有4的字面值，如果没有，重新开辟地址存放4的值；如果已经有了，则直接将a指向这个地址。因此a值的改变不会影响到b的值。 另一种是包装类数据，如Integer, String, Double等将相应的基本数据类型包装起来的类。这些类数据全部存在于堆中，Java用new()语句来显示地告诉编译器，在运行时才根据需要动态创建，因此比较灵活，但缺点是要占用更多的时间。 4.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E5%B1%9E%E6%80%A7%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E5%B1%9E%E6%80%A7%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E8%AE%B0%E5%BD%95/</guid>
+      <description>1、对象的内存布局 转载于知乎 刘缙 的回答
+1、对象的内存布局： C/C++的内存布局： struct Point {float x;float y;float z;}; bytes field 4 x 4 y 4 z Java 的内存布局： bytes field 12 object header 4 x 4 y 4 z 2、嵌套对象的内存布局： C/C++的内存布局： struct Line {struct Point begin;struct Point end;}; bytes field 4 begin.x 4 begin.y 4 begin.z 4 end.x 4 end.y 4 end.z Java 的内存布局： 3、数组对象的内存布局： C/C++的内存布局： struct Point v[100]; bytes field 4 v[0].</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E5%BC%95%E7%94%A8%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E5%BC%95%E7%94%A8%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/</guid>
+      <description>Java 引用的是四种方式 java内存管理分为内存分配和内存回收，都不需要程序员负责，垃圾回收的机制主要是看对象是否有引用指向该对象。
+java对象的引用包括 强引用，软引用，弱引用，虚引用
+Java中提供这四种引用类型主要有两个目的：
+第一是可以让程序员通过代码的方式决定某些对象的生命周期；
+第二是有利于JVM进行垃圾回收。
+下面来阐述一下这四种类型引用的概念：
+１．强引用
+是指创建一个对象并把这个对象赋给一个引用变量。
+比如：
+Object object =new Object();String str =&amp;#34;hello&amp;#34;; 强引用有引用变量指向时永远不会被垃圾回收，JVM宁愿抛出OutOfMemory错误也不会回收这种对象。
+2.软引用（SoftReference）
+如果一个对象具有软引用，内存空间足够，垃圾回收器就不会回收它；
+如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。
+软引用可用来实现内存敏感的高速缓存,比如网页缓存、图片缓存等。使用软引用能防止内存泄露，增强程序的健壮性。
+SoftReference的特点是它的一个实例保存对一个Java对象的软引用， 该软引用的存在不妨碍垃圾收集线程对该Java对象的回收。
+也就是说，一旦SoftReference保存了对一个Java对象的软引用后，在垃圾线程对 这个Java对象回收前，SoftReference类所提供的get()方法返回Java对象的强引用。
+另外，一旦垃圾线程回收该Java对象之 后，get()方法将返回null。
+举个栗子：
+MyObject aRef = new MyObject(); SoftReference aSoftRef=new SoftReference(aRef); 此时，对于这个MyObject对象，有两个引用路径，一个是来自SoftReference对象的软引用，一个来自变量aReference的强引用，所以这个MyObject对象是强可及对象。
+随即，我们可以结束aReference对这个MyObject实例的强引用:
+aRef = null; 此后，这个MyObject对象成为了软引用对象。如果垃圾收集线程进行内存垃圾收集，并不会因为有一个SoftReference对该对象的引用而始终保留该对象。
+Java虚拟机的垃圾收集线程对软可及对象和其他一般Java对象进行了区别对待:软可及对象的清理是由垃圾收集线程根据其特定算法按照内存需求决定的。
+也就是说，垃圾收集线程会在虚拟机抛出OutOfMemoryError之前回收软可及对象，而且虚拟机会尽可能优先回收长时间闲置不用的软可及对象，对那些刚刚构建的或刚刚使用过的“新”软可反对象会被虚拟机尽可能保留。在回收这些对象之前，我们可以通过:
+MyObject anotherRef=(MyObject)aSoftRef.get(); 重新获得对该实例的强引用。而回收之后，调用get()方法就只能得到null了。 使用ReferenceQueue清除失去了软引用对象的SoftReference：
+使用ReferenceQueue清除失去了软引用对象的SoftReference：
+作为一个Java对象，SoftReference对象除了具有保存软引用的特殊性之外，也具有Java对象的一般性。所以，当软可及对象被回收之后，虽然这个SoftReference对象的get()方法返回null,但这个SoftReference对象已经不再具有存在的价值，需要一个适当的清除机制，避免大量SoftReference对象带来的内存泄漏。在java.lang.ref包里还提供了ReferenceQueue。如果在创建SoftReference对象的时候，使用了一个ReferenceQueue对象作为参数提供给SoftReference的构造方法，如:
+ReferenceQueue queue = new ReferenceQueue(); SoftReference ref=new SoftReference(aMyObject, queue); 那么当这个SoftReference所软引用的aMyOhject被垃圾收集器回收的同时，ref所强引用的SoftReference对象被列入ReferenceQueue。也就是说，ReferenceQueue中保存的对象是Reference对象，而且是已经失去了它所软引用的对象的Reference对象。另外从ReferenceQueue这个名字也可以看出，它是一个队列，当我们调用它的poll()方法的时候，如果这个队列中不是空队列，那么将返回队列前面的那个Reference对象。
+在任何时候，我们都可以调用ReferenceQueue的poll()方法来检查是否有它所关心的非强可及对象被回收。如果队列为空，将返回一个null,否则该方法返回队列中前面的一个Reference对象。利用这个方法，我们可以检查哪个SoftReference所软引用的对象已经被回收。于是我们可以把这些失去所软引用的对象的SoftReference对象清除掉。常用的方式为:
+SoftReference ref = null; while ((ref = (EmployeeRef) q.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E6%8A%80%E6%9C%AF%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E6%8A%80%E6%9C%AF%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <description>线程相关： 锁(sync和Lock) 、线程池 、异步计算、 一些相关概念： 重入锁 、轻量级锁 、重量级锁、 KClass对象头、 悲观锁 、乐观锁、 AQS原理和相关实现(并发集合/Lock) NIO相关(通信方面一定要了解[IO/NIO/AIO]) ：NIO模型 、NIO选择器、 xxxx 高并发的解决方案、 数据静态化 、缓存、 数据库集群 、负载均衡 、CDN加速、 设计模式和设计原则 、工厂模式、 代理模式 、组合模式、 开闭原则、
+相关的分布式框架以及中间件 分布式任务调度框架 消息中间件(各种MQ) 分布式通信 常见的分布式框架 数据结构以及算法相关 没啥好说的，看看JCF就能应付一般的 基本的排序算法(冒泡，快排，归并) 二分查找/Top10/and so on 树的性质和相关操作 Spring相关
+《数据结构和算法》：基础的知识
+《深入java虚拟机》：同上。
+《Java并发编程的艺术》：这本书对并发编程的常用知识点进行了系统的讲解，将的深度还可以，没有具体的案例。
+《架构探险》：同上，这本书上对于我们理解Spring中的实现原理，还是有一定的帮助的。书中模仿Spring框架，写的 配置文件加载、类加载器、IOC的实现、AOP的实现还是有参考价值的。
+《Redis实战》：现在用的越来越多了，不管用没用过，都可以学习一下。
+《大型分布式网站架构设计与实践》：这本书从总体上讲解了大型网站架构常用的技术，不深入，对于从整体上认识 大型分布式网站还是很有参考价值的。如果我们想要在哪一方面深入学习，可以有针对性的进行深入学习。
+《大型网站技术架构：核心原理与案例分析》：同上。
+《Java程序员面试笔试宝典》：买这本书主要是找工作时，做一些题目，对于笔试来说，有针对性的学习复习一下。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E6%97%A5%E5%BF%97%E4%BD%93%E7%B3%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E6%97%A5%E5%BF%97%E4%BD%93%E7%B3%BB/</guid>
+      <description>Java日志体系 转自： Alben
+链接：https://albenw.github.io/posts/854fc091/
+概要 本文的目的是搞清楚Java中各种日志Log之间是怎么的关系，如何作用、依赖，好让我们平时在工作中如果遇到“日志打不出”或者“日志jar包冲突”等之类的问题知道该如何入手解决，以及在各种场景下如何调整项目中的各个框架的日志输出，使得输出统一。
+Log日志体系 在日常工作中我们可能看到项目中依赖的跟日志相关的jar包有很多，commons-logging.jar、log4j.jar、sl4j-api.jar、logback.jar等等，眼花缭乱。我们要正确的配置，使得jar包相互作用生效之前，就先要理清它们之间的关系。
+背景/发展史 那就要从Java Log的发展历程开始说起。
+log4j（作者Ceki Gülcü）出来时就等到了广泛的应用（注意这里是直接使用），是Java日志事实上的标准，并成为了Apache的项目 Apache要求把log4j并入到JDK，SUN拒绝，并在jdk1.4版本后增加了 JUL（java.util.logging） 毕竟是JDK自带的，JUL也有很多人用。同时还有其他日志组件，如SimpleLog等。这时如果有人想换成其他日志组件，如log4j换成JUL，因为api完全不同，就需要改动代码。 Apache见此，开发了 JCL（Jakarta Commons Logging），即commons-logging-xx.jar。它只提供一套通用的日志接口api，并不提供日志的实现。很好的设计原则嘛，依赖抽象而非实现。这样应用程序可以在运行时选择自己想要的日志实现组件。 这样看上去也挺美好的，但是log4j的作者觉得JCL不好用，自己开发出 slf4j，它跟JCL类似，本身不替供日志具体实现，只对外提供接口或门面。目的就是为了替代JCL。同时，还开发出 logback，一个比log4j拥有更高性能的组件，目的是为了替代log4j。 Apache参考了logback,并做了一系列优化，推出了 log4j2 关系/依赖 大概了解心路历程后，再详细看看它们之间的关系、依赖。
+JCL commons-logging 已经停止更新，最后的状态如下所示：
+JCL支持日志组件不多，不过也有很人用的，例如Spring 现在用的也越来越少了，也不多讲了
+SLF4J 因为当时Java的日志组件比较混乱繁杂，Ceki Gülcü推出slf4j后，也相应为行业中各个主流日志组件推出了slf4j的适配
+图来源于官方文档
+图的意思为如果你想用slf4j作为日志门面的话，你如何去配合使用其他日志实现组件，这里说明一下（注意jar包名缺少了版本号，在找版本时也要注意版本之间是否兼容）
+slf4j + logback slf4j-api.jar + logback-classic.jar + logback-core.jar slf4j + log4j slf4j-api.jar + slf4j-log4j12.jar + log4j.jar slf4j + jul slf4j-api.jar + slf4j-jdk14.jar 也可以只用slf4j无日志实现 slf4j-api.jar + slf4j-nop.jar SLF4J的适配 slf4j支持各种适配，无论你现在是用哪种日志组件，你都可以通过slf4j的适配器来使用上slf4j。 只要你切换到了slf4j，那么再通过slf4j用上实现组件，即上面说的。
+图来源于官方文档
+其实总的来说，无论就是以下几种情况
+你在用JCL 使用jcl-over-slf4j.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/</guid>
+      <description>Java 类加载机制详解 转自：JAVA系列之类加载机制详解
+链接：https://www.cnblogs.com/myshare/p/16892361.html
+类的加载机制 ？ 双亲委派机制 ？ 什么是类加载器 ？ 自定义类加载器有哪些应用场景 ？ 通常，在关于Java的类加载部分会遇到以上疑问，本文将对类加载重要部分做详细介绍，包括重要的基础概念和应用场景，在编写过程中也帮助作者重新熟悉并加固了知识点，希望在看完后对读者能有所帮助。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8ESpringMVC%E6%8B%A6%E6%88%AA%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8ESpringMVC%E6%8B%A6%E6%88%AA%E5%99%A8/</guid>
+      <description> Java过滤器与SpringMVC拦截器 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Json/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Json/</guid>
+      <description>FastJson 1、序列化时过滤字段(属性)
+@JSONField(serialize = false)private String name; @JSONField(name = &amp;#34;AGE&amp;#34;)private transient String age; 在实体字段前面，使用transient关键字，表示该字段不参与序列化，转JSON字符串时就可以忽略掉该字段。因为是JAVA关键字所以也会影响该字段其他序列化操作。
+SimplePropertyPreFilter filter = new SimplePropertyPreFilter(); filter.getExcludes().add(&amp;#34;PHONE&amp;#34;); System.out.println(JSONObject.toJSONString(u, filter)); FastJson的属性名过滤器
+2、序列化时过滤字段(属性)
+@JSONField(serialize = false)private String name; 3、
+System.out.println(&amp;#34;RefundCollection 的 json: &amp;#34; + JSON.toJSONString(logisticsAddress.getLogisticsAddressDTOList(), SerializerFeature.WriteMapNullValue)); 4、
+// 序列化配置对象SerializeConfig config = new SerializeConfig();/*** CamelCase 策略，Java对象属性：personId，序列化后属性：persionId* PascalCase 策略，Java对象属性：personId，序列化后属性：PersonId* SnakeCase 策略，Java对象属性：personId，序列化后属性：person_id* KebabCase 策略，Java对象属性：personId，序列化后属性：person-id*/config.propertyNamingStrategy = PropertyNamingStrategy.CamelCase;;// 序列化对象String json = JSON.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/XStream/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/XStream/</guid>
+      <description> XStream 1、string =&amp;gt; boolean /** * 是否重试,1-true:重试、0-false:不重试 */ @XStreamConverter(value= BooleanConverter.class, booleans={false}, strings={&amp;#34;1&amp;#34;, &amp;#34;0&amp;#34;}) @XStreamAsAttribute @XStreamAlias(&amp;#34;isretry&amp;#34;) private boolean isRetry; &amp;lt;error code=&amp;#34;1&amp;#34; analytical=&amp;#34;请登录后再操作&amp;#34; isretry=&amp;#34;0&amp;#34;/&amp;gt; </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/%E5%87%A0%E7%A7%8D%E6%97%A0%E6%8D%9F%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%E4%B8%8E%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/%E5%87%A0%E7%A7%8D%E6%97%A0%E6%8D%9F%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86%E4%B8%8E%E7%AE%80%E4%BB%8B/</guid>
+      <description>几种无损压缩算法整理与简介 转自： 小川CD
+链接：https://m.weibo.cn/profile/1202332555
+压缩算法分为无损压缩和有损压缩。简单来说无损压缩要求压缩后的数据，经过解压能够得到和压缩前一模一样的数据。例如winrar和或者zip就是一种无损压缩。有损压缩，比如视频、图像，并不要求解压后的数据和原始数据一模一样，要求的是肉眼看上去图像是差不多一样即可，例如常见的H.264、H.265算法。
+在存储系统中，要求的是无损压缩，即压缩后再解压能够得到原来的二进制数据。例如：snappy、zlib、zstd、lz4等。这几种算法也是CEPH中可选的压缩算法。一般来说衡量一种压缩算法的优劣，主要从压缩率、压缩速度、解压速度等方面来考虑。
+下面分别来看看这几种压缩算法的简介和特点。 性能评测：lzbench，详见GitHub。
+比较基准：（压缩速度、解压速度、压缩率）
+以memcpy为参考，性能指标为：（10362 MB/s, 10790 MB/s, 100.00）
+Snappy ，详见GitHub，谷歌开源。
+性能指标：（591 MB/s, 1868 MB/s, 48.19）
+Snappy 是一个 C++ 的用来压缩和解压缩的开发包。其目标不是最大限度压缩或者兼容其他压缩格式，而是旨在提供高速压缩速度和合理的压缩率。Snappy 比 zlib 更快，但文件相对要大 20% 到 100%。在 64位模式的 Core i7 处理器上，可达每秒 250~500兆的压缩速度。Snappy 在 Google 内部被广泛的使用，从 BigTable 到 MapReduce 以及内部的 RPC 系统。Google极力赞扬Snappy的各种优点，Snappy从一开始就被“设计为即便遇到损坏或者恶意的输入文件都不会崩溃”，而且被Google在生产环境中用于压缩PB级的数据。其健壮性和稳定程度可见一斑。
+Zstd，详见GitHub，facebook开源。 性能指标：（1级：480 MB/s, 1203 MB/s, 34.68），压缩级别可选，级别越高，压缩率越好，但是性能越差。
+Ztsd，全称Zstandard，其设计目的是提供一个高压缩比，但更快，特别是解压缩快的算法。它的压缩级别从负5级（最快）到22级（压缩速度最慢，但是压缩比最高）可以调节。压缩速度在最快和最慢级别之间可以相差20倍或更多，而解压缩速度统统很快，在最快和最慢级别之间相差不到20%。Zstandard命令行有一个“自适应”（&amp;ndash;adapt）模式，根据I/O条件改变压缩级别，主要是写入输出的速度。Zstd在其最大压缩级别下的压缩比接近lzma、lzham和ppmx，并且比lza或bzip2性能更好。 Zstandard达到了当前的Pareto边界，因为它解压缩的速度比任何其他当前可用的算法都要快，并且有类似的或者更好的压缩比。
+Lz4，详见GitHub。 性能指标：（lz4 1.9.2 737 MB/s, 4448 MB/s, 47.60），lz4提供不同的参数以及压缩级别，可以达到不同的压缩率和压缩速度。
+LZ4是一种无损压缩算法，提供超过单核500MB/s的压缩速度，并且支持多核扩展。它的特点是解压速度非常块，可以达到单核心数GB/s，在多核系统上可以达到内存（RAM）的速度限制。和Zstd一样，它的压缩速度是可以调节的，那么如何在压缩率与压缩速度之间做权衡，这个是需要考虑的。
+Zlib，详见GitHub。 性能指标：（lz4 1.9.2 119 MB/s, 383 MB/s, 36.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E9%89%B4%E6%9D%83%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E9%89%B4%E6%9D%83%E6%96%B9%E5%BC%8F/</guid>
+      <description>常见的前后端鉴权方式 转自：阮一峰
+链接：http://www.ruanyifeng.com/blog/
+Session-Cookie Token 验证(包括JWT，SSO) OAuth2.0（开放授权） 什么是认证（Authentication） 通俗地讲就是验证当前用户的身份，证明“你是你自己”（比如：你每天上下班打卡，都需要通过指纹打卡，当你的指纹和系统里录入的指纹相匹配时，就打卡成功） 互联网中的认证： 用户名密码登录 邮箱发送登录链接 手机号接收验证码 只要你能收到邮箱/验证码，就默认你是账号的主人 什么是授权（Authorization） 赋予某个认证访问某些资源的权限 实现授权的方式有：cookie、session、token、OAuth 什么是凭证（Credentials） 实现认证和授权的前提是需要一种媒介（证书） 来标记访问者的身份 通过[认证]——&amp;gt;进行[授权]——&amp;gt;发放给被认证角色[凭证] 什么是 Cookie HTTP 是无状态的协议 cookie 存储在客户端 cookie 是不可跨域的 什么是 Session 服务器端为每个对话对象（浏览器）创建一个会话对象（session对象）
+session 是另一种记录服务器和客户端会话状态的机制
+session 是基于 cookie 实现的，session 存储在服务器端，sessionId 会被存储到客户端的cookie 中
+session 认证流程：
+用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的 Session 请求返回时将此 Session 的唯一标识信息 SessionID 返回给浏览器 浏览器接收到服务器返回的 SessionID 信息后，会将此信息存入到 Cookie 中，同时 Cookie 记录此 SessionID 属于哪个域名 当用户第二次访问服务器的时候，请求会自动判断此域名下是否存在 Cookie 信息，如果存在自动将 Cookie 信息也发送给服务端，服务端会从 Cookie 中获取 SessionID，再根据 SessionID 查找对应的 Session 信息，如果没有找到说明用户没有登录或者登录失效，如果找到 Session 证明用户已经登录可执行后面操作。 反正就是客户端（浏览器）和服务端（服务器）通过 Cookie 和 Session，标记了你是谁，我是谁，我知道你是谁，这几个信息。</description>
+    </item>
+    
+  </channel>
+</rss>

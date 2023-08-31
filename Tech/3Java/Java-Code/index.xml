@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java Code on Save Load</title>
+    <link>https://www.saveload.cn/Tech/3Java/Java-Code/</link>
+    <description>Recent content in Java Code on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/3Java/Java-Code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Code/Java-Function/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Code/Java-Function/</guid>
+      <description>Java 函数式编程 一、背景 1.Lambda表达式的语法 2.函数式接口 二、Lambda表达式的基本使用 三、语法精简 四、变量捕获 五、Lambda在集合当中的使用 1.Collection接口 六、Lambda 与四大函数接口的使用 七、总结 一、背景 Lambda 表达式是 Java8 中一个重要的新特性。lambda 表达式允许你通过 表达式 来代替功能接口。 lambda 表达式就和方法一样,它提供了一个正常的参数列表和一个使用这些参数的主体(body,可以是一个表达式或一个代码 块)。 Lambda 表达式（Lambda expression）可以看作是一个匿名函数，基于数学中的λ演算得名，也可称为闭包（Closure）
+Lambda 表达式是对函数接口进行简单的实现 1.Lambda表达式的语法 基本语法: (parameters) -&amp;gt; expression 或 (parameters) -&amp;gt;{ statements; }
+Lambda表达式由三部分组成： 1.paramaters：类似方法中的形参列表，这里的参数是函数式接口里的参数。这里的参数类型可以明确的声明 也可不声明而由JVM隐含的推断。另外当只有一个推断类型时可以省略掉圆括号。 2.-&amp;gt;：可理解为“被用于”的意思 3.方法体：可以是表达式也可以代码块，是函数式接口里方法的实现。代码块可返回一个值或者什么都不反 回，这里的代码块块等同于方法的方法体。如果是表达式，也可以返回一个值或者什么都不反回。 2.函数式接口 要了解Lambda表达式,首先需要了解什么是函数式接口，
+函数式接口定义： 一个接口有且只有一个抽象方法 。
+注意：
+1.如果一个接口只有一个抽象方法，那么该接口就是一个函数式接口 2.如果我们在某个接口上声明了 @FunctionalInterface 注解，那么编译器就会按照函数式接口的定义来要求该接口，这样如果有两个抽象方法，程序编译就会报错的。所以，从某种意义上来说，只要你保证你的接口 中只有一个抽象方法，你可以不加这个注解。加上就会自动进行检测的。 定义方式： @FunctionalInterfaceinterface NoParameterNoReturn {//注意：只能有一个抽象方法void test();} 但是这种方式也是可以的：
+@FunctionalInterfaceinterface NoParameterNoReturn {void test();default void test2() {System.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Code/Java-Lambda-Expressions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Code/Java-Lambda-Expressions/</guid>
+      <description>Lambda Expressions 匿名类的一个问题是，如果匿名类的实现非常简单（例如仅包含一个方法的接口），则匿名类的语法可能看起来笨拙且不清楚。在这些情况下，您通常试图将功能作为参数传递给另一种方法，例如，当某人单击按钮时应采取什么措施。Lambda表达式使您能够执行此操作，将功能视为方法参数，或将代码视为数据。
+一个功能接口仅包含一个抽象方法，因此在实现该方法时可以省略该方法的名称。为此，您可以使用lambda表达式（而不是使用匿名类表达式）
+Lambda 表达式 lambda表达式类似于一个方法:它提供了一个形式参数列表和一个主体(一个表达式或块)，后者根据这些参数进行表达。
+LambdaExpression:LambdaParameters -&amp;gt; LambdaBody Lambda表达式总是poly表达式
+如果lambda表达式出现在程序中的除分配上下文（第5.2节），调用上下文（第5.3节）或强制转换上下文（第5.5 节）之外的其他地方，则是编译时错误。
+分配上下文 赋值上下文 允许将表达式的值赋给变量 // 常量表达式的编译时范围变窄意味着代码如下被允许。byte theAnswer = 42; 调用上下文 调用上下文允许将方法或构造函数调用（第 8.8.7.1节，第 15.9节，第 15.12节）中的参数值分配给相应的形式参数。 // 严格的或宽松的调用上下文都不包含在赋值上下文中允许的整数常量表达式的隐式缩小。Java编程语言的设计人员认为，包括这些隐式变窄的转换会给重载解析规则（第15.22.2节）增加额外的复杂性。public class Test {static int m(byte a, int b) { return a+b; }// static long m(long a, int b) { return a+b; } // static int m(short a, short b) { return a-b; }public static void main(String[] args) {System.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Code/Java-List/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Code/Java-List/</guid>
+      <description> 创建一个空的 不可变 或 不可修改 的列 // Java 9 之前 List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(); list.add(&amp;#34;公众号&amp;#34;); list.add(&amp;#34;我没有三颗心脏&amp;#34;); list.add(&amp;#34;关注走起来&amp;#34;); List&amp;lt;String&amp;gt; unmodifiableList = Collections.unmodifiableList(list); // 或者使用 {{}} 的形式 List&amp;lt;String&amp;gt; list = new ArrayList&amp;lt;&amp;gt;() {{ add(&amp;#34;公众号&amp;#34;); add(&amp;#34;我没有三颗心脏&amp;#34;); add(&amp;#34;关注走起来&amp;#34;); }}; List&amp;lt;String&amp;gt; unmodifiableList = Collections.unmodifiableList(list); // Java 9 便捷的工厂方法 List&amp;lt;String&amp;gt; unmodifiableList = List.of(&amp;#34;公众号&amp;#34;, &amp;#34;我没有三颗心脏&amp;#34;, &amp;#34;关注走起来&amp;#34;); </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Code/Java-Method-References/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Code/Java-Method-References/</guid>
+      <description>Java Method References Java 方法参考 使用 lambda表达式创建匿名方法。但是，有时lambda表达式除了调用现有方法外什么也不做。在这种情况下，通常更容易按名称引用现有方法。方法引用使您可以执行此操作；它们是紧凑，易于阅读的lambda表达式，用于已具有名称的方法。
+再次考虑Lambda表达式Person部分中讨论的 类 ：
+public class Person {public enum Sex {MALE, FEMALE}String name;LocalDate birthday;Sex gender;String emailAddress;public int getAge() {// ...}public Calendar getBirthday() {return birthday;} public static int compareByAge(Person a, Person b) {return a.birthday.compareTo(b.birthday);}} 假设您的社交网络应用程序的成员包含在一个数组中，并且您想按年龄对数组进行排序。您可以使用以下代码（在示例中找到本节中描述的代码摘录 MethodReferencesTest）：
+Person[] rosterAsArray = roster.toArray(new Person[roster.size()]);class PersonAgeComparator implements Comparator&amp;lt;Person&amp;gt; {public int compare(Person a, Person b) {return a.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Code/Java-%E4%B8%AD-Stream-%E7%9A%84%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Code/Java-%E4%B8%AD-Stream-%E7%9A%84%E7%94%A8%E6%B3%95/</guid>
+      <description>Java 中 Stream 的用法 1、操作符 Stream的操作符大体上分为两种：中间操作符和终止操作符
+1.1、中间操作符 对于数据流来说，中间操作符在执行制定处理程序后，数据流依然可以传递给下一级的操作符。
+中间操作符包含8种(排除了parallel,sequential,这两个操作并不涉及到对数据流的加工操作)
+map(mapToInt,mapToLong,mapToDouble) 转换操作符，把比如A-&amp;gt;B，这里默认提供了转int，long，double的操作符。 flatmap(flatmapToInt,flatmapToLong,flatmapToDouble) 拍平操作比如把 int[]{2,3,4} 拍平 变成 2，3，4 也就是从原来的一个数据变成了3个数据，这里默认提供了拍平成int,long,double的操作符。 limit 限流操作，比如数据流中有10个 我只要出前3个就可以使用。 distint 去重操作，对重复元素去重，底层使用了equals方法。 filter 过滤操作，把不想要的数据过滤。 peek 挑出操作，如果想对数据进行某些操作，如：读取、编辑修改等。 skip 跳过操作，跳过某些元素。 sorted(unordered) 排序操作，对元素排序，前提是实现Comparable接口，当然也可以自定义比较器。 1.2、终止操作符 数据经过中间加工操作，就轮到终止操作符上场了；终止操作符就是用来对数据进行收集或者消费的，数据到了终止操作这里就不会向下流动了，终止操作符只能使用一次。
+collect 收集操作，将所有数据收集起来，这个操作非常重要，官方的提供的Collectors 提供了非常多收集器，可以说Stream 的核心在于Collectors。 count 统计操作，统计最终的数据个数。 findFirst、findAny 查找操作，查找第一个、查找任何一个 返回的类型为Optional。 noneMatch、allMatch、anyMatch 匹配操作，数据流中是否存在符合条件的元素 返回值为bool 值。 min、max 最值操作，需要自定义比较器，返回数据流中最大最小的值。 reduce 规约操作，将整个数据流的值规约为一个值，count、min、max底层就是使用reduce。 forEach、forEachOrdered 遍历操作，这里就是对最终的数据进行消费了。 toArray 数组操作，将数据流的元素转换成数组。 这里只介绍了Stream，并没有涉及到IntStream、LongStream、DoubleStream，这三个流实现了一些特有的操作符，我将在后续文章中介绍到。
+2、Example 2.1、stream public class Test { public static void main(String[] args) { // 1、对象属性 to Map Map&amp;lt;String, Integer&amp;gt; collect = detailList.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Code/Java-%E6%B3%9B%E5%9E%8BGenerics-/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Code/Java-%E6%B3%9B%E5%9E%8BGenerics-/</guid>
+      <description>Java 泛型(Generics ) 1. 概述 泛型，即“参数化类型”。一提到参数，最熟悉的就是定义方法时有形参，然后调用此方法时传递实参。那么参数化类型怎么理解呢？
+顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（可以称之为类型形参），
+然后在使用/调用时传入具体的类型（类型实参）。
+泛型的本质是为了参数化类型（在不创建新的类型的情况下，通过泛型指定的不同类型来控制形参具体限制的类型）。也就是说在泛型使用过程中，
+操作的数据类型被指定为一个参数，这种参数类型可以用在类、接口和方法中，分别被称为泛型类、泛型接口、泛型方法。
+2. 泛型的使用 泛型有三种使用方式，分别为：泛型类、泛型接口、泛型方法
+2.1. 泛型类 泛型类型用于类的定义中，被称为泛型类。通过泛型可以完成对一组类的操作对外开放相同的接口。最典型的就是各种容器类，如：List、Set、Map。
+泛型类的最基本写法（这么看可能会有点晕，会在下面的例子中详解）：
+class 类名称 &amp;lt;泛型标识：可以随便写任意标识号，标识指定的泛型的类型&amp;gt;{private 泛型标识 /*（成员变量类型）*/ var; .....}} 2.1.1 一个最普通的泛型类： 例子：
+//此处T可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型//在实例化泛型类时，必须指定T的具体类型public class Generic&amp;lt;T&amp;gt;{ //key这个成员变量的类型为T,T的类型由外部指定 private T key;public Generic(T key) { //泛型构造方法形参key的类型也为T，T的类型由外部指定this.key = key;}public T getKey(){ //泛型方法getKey的返回值类型为T，T的类型由外部指定return key;}} 使用：
+//泛型的类型参数只能是类类型（包括自定义类），不能是简单类型//传入的实参类型需与泛型的类型参数类型相同，即为Integer.Generic&amp;lt;Integer&amp;gt; genericInteger = new Generic&amp;lt;Integer&amp;gt;(123456);//传入的实参类型需与泛型的类型参数类型相同，即为String.Generic&amp;lt;String&amp;gt; genericString = new Generic&amp;lt;String&amp;gt;(&amp;#34;key_vlaue&amp;#34;);Log.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Code/Java8-%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E5%BC%95%E7%94%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Code/Java8-%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E5%BC%95%E7%94%A8/</guid>
+      <description>Java8 方法引用，构造器引用 1. 前言 Lambda 表达式是可以简化函数式接口的变量或形参赋值的语法。
+而方法引用和构造器引用是为了简化 Lambda 表达式的。
+2. 方法引用 方法引用可以看做是 Lambda 表达式深层次的表达。换句话说，方法引用就是 Lambda 表达式，也就是函数式接口的一个实例，通过方法的名字来指向一个方法，可以认为是 Lambda 表达式的一个语法糖。
+2.1 方法引用语法格式 格式：使用方法引用操作符 “::” 将类(或对象) 与 方法名分隔开来。 两个:中间不能有空格，而且必须英文状态下半角输入 如下三种主要使用情况： 情况1：对象 :: 实例方法名 情况2：类 :: 静态方法名 情况3：类 :: 实例方法名 理解：类（或对象） :: 要调用的类（或对象）中的方法
+2.2 方法引用使用前提 要求1：
+Lambda 体只有一句语句，并且是通过调用一个对象的/类现有的方法来完成的 要求2：
+针对情况1：函数式接口中的抽象方法 a 在被重写时使用了某一个对象的方法 b。如果方法 a 的形参列表、返回值类型与方法 b 的形参列表、返回值类型都相同，则我们可以使用方法 b 实现对方法 a 的重写、替换。 注意： 此方法是实例方法，需要对象调用！
+针对情况2：函数式接口中的抽象方法a在被重写时使用了某一个类的静态方法b。如果方法a的形参列表、返回值类型与方法b的形参列表、返回值类型都相同，则我们可以使用方法b实现对方法a的重写、替换。 注意： 此方法是静态方法，需要类调用！
+针对情况3：函数式接口中的抽象方法a在被重写时使用了某一个对象的方法b。如果方法a的返回值类型与方法b的返回值类型相同，同时方法a的形参列表中有n个参数，方法b的形参列表有n-1个参数，且方法a的第1个参数作为方法b的调用者，且方法a的后n-1参数与方法b的n-1参数匹配（类型相同或满足多态场景也可以） 注意： 此方法b是非静态方法，需要对象调用。但是形式上，写成对象a所属的类调用
+3. 构造器引用、数组引用 理解了方法引用，构造器引用、数组引用就很好理解了。
+构造器引用格式：</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Code/JDK-1.8-4%E5%A4%A7%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Code/JDK-1.8-4%E5%A4%A7%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/</guid>
+      <description>4 大函数式接口 JDK 1.8 主要在 java.util.function 包中
+1、Supplier 接口 java.util.function Interface Supplier&amp;lt;T&amp;gt; 接口中包含了一个抽象方法T get()。用来获取一个泛型参数指定类型的对象数据。
+该接口被称为生产型接口，指定接口是什么类型，那么接口中的get方法就会产生什么类型的数据。
+public class SupplierTest { public static String getString(Supplier&amp;lt;String&amp;gt; sup){ return sup.get(); } public static int getInt(Supplier&amp;lt;Integer&amp;gt; sup){ return sup.get(); } public static void main(String[] args) { String str = getString(() -&amp;gt; &amp;#34;heroC&amp;#34;); /*getString(new Supplier&amp;lt;String&amp;gt;() { @Override public String get() { return &amp;#34;heroC&amp;#34;; } });*/ System.out.println(str); int strInt = getInt(() -&amp;gt; 1130); System.out.println(strInt); } } 2、Consumer 接口 java.</description>
+    </item>
+    
+  </channel>
+</rss>

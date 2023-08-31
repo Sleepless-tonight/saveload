@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Save Load</title>
+    <link>https://www.saveload.cn/Tech/8IDE/Linux/</link>
+    <description>Recent content in Linux on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/8IDE/Linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Linux/CentOS-7-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Linux/CentOS-7-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+      <description>=======================================================================================================================================================================================
+查看安装 rpm -aq| grep postgres
+查看启动 ps -ax | grep postgres
+列出所有端口 netstat -ntlp
+mkdir /usr/pgsql-10/data
+chown postgres /usr/pgsql-10/data
+CREATE USER finley WITH PASSWORD &amp;lsquo;password&amp;rsquo;;
+ALTER USER postgres WITH PASSWORD &amp;lsquo;password&amp;rsquo;
+psql mydb -U finley
+============================================================================================ CentOS 7 开发环境部署 =================================================================
+CentOS 7的网络配置以及设置主机名和绑定IP的问题
+说明：截止目前CentOS 7.x最新版本为CentOS 7.0-1804，下面介绍CentOS 7.0的具体安装配置过程前置工作 VMware 设置 1、点击工具栏：编辑（E） 2、点击：虚拟网络编辑器 3、点击：更改设置（需具备管理员权限） 4、点击条目：VNnet8 5、取消勾选：使用本地DHCP服务奖IP地址分配给虚拟机（D） 6、修改：子网IP（I）：192.168.2.0 子网掩码（M）：255.255.255.0 7、点击：NAT设置（S） 8、修改：网关IP（G）：192.168.2.2 #下方的 端口转发（F）：可在实现虚拟机的端口穿透功能。 9、将虚拟机的 网络适配器 选择 NAT模式。 win系统的网络适配器设置 将 VMware Neteork Adapter VMnet8 设置为固定IP：192.</description>
+    </item>
+    
+  </channel>
+</rss>

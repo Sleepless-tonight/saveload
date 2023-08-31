@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java 命令 on Save Load</title>
+    <link>https://www.saveload.cn/Tech/3Java/Java-%E5%91%BD%E4%BB%A4/</link>
+    <description>Recent content in Java 命令 on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/3Java/Java-%E5%91%BD%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-%E5%91%BD%E4%BB%A4/Java-%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-%E5%91%BD%E4%BB%A4/Java-%E5%91%BD%E4%BB%A4/</guid>
+      <description> Java 命令 转自：Java 官网
+链接：https://docs.oracle.com/en/java/javase/19/docs/specs/man/java.html
+查看当前使用的是哪种垃圾回收器
+java -XX:+PrintCommandLineFlags -version </description>
+    </item>
+    
+  </channel>
+</rss>

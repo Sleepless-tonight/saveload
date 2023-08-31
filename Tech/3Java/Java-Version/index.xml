@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java Version on Save Load</title>
+    <link>https://www.saveload.cn/Tech/3Java/Java-Version/</link>
+    <description>Recent content in Java Version on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/3Java/Java-Version/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Version/Java-%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7%E6%9B%B4%E6%96%B0%E5%88%B0Java20/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Version/Java-%E5%90%84%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7%E6%9B%B4%E6%96%B0%E5%88%B0Java20/</guid>
+      <description>JDK各版本新特性(更新到Java20) 发行说明:https://openjdk.org/projects/jdk/
+JDK 1.0 1996-01-23 Oak(橡树)
+JDK 1.1 1997-02-19
+JDK 1.2 1998-12-08 Playground(操场)
+JDK 1.3 2000-05-08 Kestrel(红隼)
+JDK 1.4 2004-02-06 Merlin(隼)
+JDK 1.5新特性 2004-9-30(Tiger)老虎
+JDK 1.6 2006-12-11 Mustang(野马)
+JDK 7新特性: 2011-07-28 Dolphin(海豚)
+JDK 1.8 2014-03-18
+JDK 1.0 1996-01-23 Oak(橡树) 初代版本,伟大的一个里程碑,但是是纯解释运行,使用外挂JIT,性能比较差,运行速度慢JDK 1.1 1997-02-19 JDBC(Java DataBase Connectivity)支持内部类RMI(Remote Method Invocation)反射Java BeanJDK 1.2 1998-12-08 Playground(操场) 集合框架JIT(Just In Time)编译器对打包的Java文件进行数字签名JFC(Java Foundation Classes)包括Swing1.0,拖放和Java2D类库Java插件JDBC中引入可滚动结果集,BLOB,CLOB,批量更新和用户自定义类型Applet中添加声音支持JDK 1.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Version/Java8-%E6%96%B0%E6%8F%90%E4%BE%9B%E6%97%B6%E9%97%B4API/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Version/Java8-%E6%96%B0%E6%8F%90%E4%BE%9B%E6%97%B6%E9%97%B4API/</guid>
+      <description>Java8新提供时间API Java8新的日期和时间API的设计原则 Java8中新的日期和时间是基于JSR-310实现的,参考了绝大多数的joda-timeApi。
+不变性：新的日期/时间API中，所有的类都是不可变的，实现了线程安全； 关注点分离：新的API中将人可读的日期时间和机器时间(unix timestamp)明确分离，它为日期(Date)、时间(Time)、日期时间(DateTime)、时间戳(unix timestamp)以及时区定义了不同的类； 清晰明了：新的API中，方法都被明确定义用以完成相同的行为，例如，想要拿到当前实例，可以用new()方法，在所有的类方法中都实现了 formate()和parse()方法，不再是之前用单独一个类去解决，而且新的API中所有的类都使用了工厂模式和策略模式； 实用性：所有新的日期和时间API类都实现了一系列方法用以完成通用的需求，例如：加、减、格式化、解析、从日期或时间中提取单独部分等等； 可扩展性：新的日期/时间API是基于国际标准ISO 8601,其实我们也是可以将其用于非IOS的日历上 Java8中的日期和时间API包含以下包 java.time包：这是新的Java日期/时间API的基础包，所有的主要基础类都是该包的一部分，例如：LocalDate、LocalTime、LocalDateTime、Instant、Period、Duration等类。这些类都是线程安全的 java.time.chrono包：这个包为非ISO的日历标准定义了一些泛化的API，我们可以拓展AbstractChronology来创建自己的日历标准 java.time.formate包：这个包包含能够格式化和解析日期时间对象的类，在绝大数情况下，我们不应该直接使用它，因为java.time包中相应的类已经提供了格式化和解析的方法 java.time.temporal包：这个包包含一些时态对象，可以用其找出关于某个日期/时间对象的某个特定日期或时间，比如说找到某个月的第一天或最后一天，可以根据withXXX的格式进行区分 java.time.zone包：这个包支持不同的时区以及相关规则的类 时间相关类 介绍 LocalDate 时间处理类，最高精确到天，没有时区的日期, LocalDate是不可变并且线程安全的 LocalTime 时间处理类，最高精确到分秒，没有时区的日期, LocalDate是不可变并且线程安全的 LocalDateTime 时间处理类，最高精确到纳秒, LocalDate是不可变并且线程安全的 DateTimeFormatter 时间格式化 ZoneId 时区设置类 Instant 用来表示时间线上的一个点（瞬时） Clock 时钟,用于访问当前时刻、日期、时间，用到时区 Duration 用秒和纳秒表示时间的数量（长短），用于计算两个日期的“时间”间隔 Period 用于计算两个“日期”间隔 获取当前日期、时间 //now LocalDateTime now = LocalDateTime.now(); System.out.println(now); //2020-10-23T19:29:08.064 //localDate LocalDate localDate = now.toLocalDate(); System.out.println(&amp;#34;localDate:&amp;#34;+localDate);//2020-10-23 //localTime LocalTime localTime = now.toLocalTime(); System.out.println(&amp;#34;localTime:&amp;#34; + localTime); //19:29:08.064 //year int year = now.getYear(); System.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Version/Java9-%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Version/Java9-%E7%89%88%E6%9C%AC%E6%96%B0%E7%89%B9%E6%80%A7/</guid>
+      <description>Java9 版本新特性 发行说明:https://openjdk.org/projects/jdk9/
+特性总览 以下是 Java 9 中的引入的部分新特性。关于 Java 9 新特性更详细的介绍可参考这里。
+REPL（JShell） 不可变集合的工厂方法 模块系统 接口支持私有化 钻石操作符升级 Optional 改进 Stream API 改进 反应式流（Reactive Streams） 进程 API 升级的 Try-With-Resources HTTP / 2 多版本兼容 Jar 包 其他 改进应用安全性能 统一 JVM 日志 G1 设为默认垃圾回收器 String 底层存储结构更改 CompletableFuture API 改进 I/O 流新特性 JavaScript 引擎 Nashorn 改进 标识符增加限制 改进的 Javadoc 改进的 @Deprectaed 注解 多分辨率图像 API 变量句柄 改进方法句柄（Method Handle） 提前编译 AOT </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Java-Version/Java9-%E7%89%B9%E6%80%A7-%E5%93%8D%E5%BA%94%E5%BC%8F%E6%B5%81Reactive-Stream/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Java-Version/Java9-%E7%89%B9%E6%80%A7-%E5%93%8D%E5%BA%94%E5%BC%8F%E6%B5%81Reactive-Stream/</guid>
+      <description>Java9 特性-响应式流(Reactive Stream) 转自：Java9 特性-响应式流(Reactive Stream)
+作者：蜜糖的代码注释
+链接：https://www.jianshu.com/p/eddea056e38a
+来源：简书
+什么是流 形象的比喻来说就是如同水一样绵绵不绝的数据形式。而抽象点来说，是有一个生产者（source）产生，由一个或者多个消费者（sink）消费的数据元素（item）序列。那从这个抽象的描述就可以看出，使用流来承担数据交互的模式就是咱们经常说的生产者/消费者模型，而这种模型也可以称之为发布者/订阅者模型（后文将使用这个名字，因为JDK中使用的是这个名字）。
+对于流数据来说，一般有两种的数据流转方式：
+拉（pull）数据模式：订阅者向发布者索要数据。 推（push）数据模式：发布者向订阅者推送数据（push）。 这两种模式都是描述的单次信息传递的方式。如果发布者产生信息的速度和订阅者消费信息的速度一致的话，那这两种方法都将是十分有效的数据流转方式。
+流有什么问题 流的问题在于当两端的速度不匹配的时候（考虑一下各种mq主要处理的问题削峰平谷）。而速度的不匹配自然存在以下两种情况：
+订阅者消费速度快 这种情况的时候会出现订阅者有处理能力了，但是订阅者无信息可以处理的情况。如果这种时候是同步的调用模式，则订阅者将会阻塞，直到有新的信息可以进行处理。而如果这时候是异步的信息处理模式，则订阅者可以在无消息处理的时候挂起，直接切换到其他的任务处理中（对于多核CPU的多线程来说）。也就是说，对于这种情况，比较理想的是异步推模式。
+发布者发布速度快 当发布者发布速度快的时候，会发生订阅者来不及处理数据的情况。如果是同步的情况下发布者会一直阻塞，而如果是异步模式则对于订阅者来说有两种处理方式（可以类比一下线程池设计）可以处理:
+损失数据：丢弃数据（在有限的队列缓存已经满了的情况下） 不损失数据：加入队列缓存数据（订阅者需要有拥有无限的缓冲队列暂存数据，以确保不会溢出） 而还有另一种需要发布者加入的处理方式叫做背压（backpressure）。背压的实现方式是：由订阅者发出信号，让发布者降低信息的发布速度，从而让信息速度之间匹配。背压的优点是同样可以处理信息流速不一致问题。而更有意思的是，这时候信息的处理策略可以由发布者来选择：
+损失数据：丢弃数据（在有限的队列缓存已经满了的情况下） 不损失数据：加入队列缓存数据（订阅者需要有拥有无限的缓冲队列暂存数据，以确保不会溢出） 没错，这两种情况是和订阅者一致的，不过选择权则由订阅者变成了发布者。
+也就是说，在发布者发布速度快的时候，要么发布者直接同步阻塞，要么可以先根据消息的主要关心方（是发布者还是订阅者）来确定是否使用背压，然后再根据数据的类型判断是否接受数据丢弃（不丢弃可能会导致系统崩溃）。往往我们的发布者可以由上层的mq或者程序的应答机制保护消息的可用性。
+那么结论是什么，我们需要异步非阻塞(订阅者消费快)、以及背压（发布者发布快）。
+什么是响应式流 Reactive Streams 是一项非阻塞背压的异步流处理标准的倡议，当然，如果我这个翻译看的不清楚的话就还是看原文吧（http://www.reactive-streams.org/）。
+Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure.
+响应式流（Reactive Streams）概念被提出是在2013年，旨在处理上一小节中由于流速问题而产生的几种问题：订阅者订阅者的阻塞、由订阅者（数据下游）来选择是依赖无限队列（数据不丢）或直接丢弃数据。
+而对于一项标准而言，它的目是自然是用更少的协议来描述交互。而响应式流的模型也是十分简单:
+订阅者异步的向发布者请求N个元素。 发布者一步的向订阅者发送M（0&amp;lt;M&amp;lt;=N）个元素。 基于这个模型，响应式流可以做到pull模型和push模型流处理机制之间动态切换。当订阅者较慢时，发送者没有新数量的请求则发布者进入等待请求信息的状态，相当于pull模型；当订阅者更快时，相当于发布者没有新的信息，订阅者进入到等待消息发送的状态相当于push模型。
+Java中的响应式流 对于响应式流，在2015年的时候确定了关于其Java API，具体的详情也也可以参考上面的链接。其中定义了4个API，具体为：
+Publisher Subscriber Subscription Processor&amp;lt;T,R&amp;gt; 对他们的定义为:
+Publisher(发布者) 是一个假定上游会产生无限数据的信息发布者。他们会向有发送请求的订阅者推送元素
+Subscriber(订阅者) 订阅者会从发布者那里领取令牌，然后根据令牌向发布者发送“获取请求”。同时当发布者部分准备好元素的时候，会通过令牌对订阅者进行调用，进行数据消费。
+Subscription(令牌) 发布者和订阅者通过令牌来进行信息通信的约定。主要有：开始订阅、信息获取、信息推送、异常、结束、取消订阅。</description>
+    </item>
+    
+  </channel>
+</rss>

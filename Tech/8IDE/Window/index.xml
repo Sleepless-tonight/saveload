@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Window on Save Load</title>
+    <link>https://www.saveload.cn/Tech/8IDE/Window/</link>
+    <description>Recent content in Window on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/8IDE/Window/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Window/Window-Mark/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Window/Window-Mark/</guid>
+      <description>Window Mark Wind10系统C盘各个文件夹及重要文件的作用 一、C盘根目录常见文件夹
+1、Intel
+Intel文件夹是安装了intel芯片组驱动留下来的log类文件夹,主要是给安装者提供一些信息：安装了哪些驱动，是否安装成功等等，没什么大用，你不喜欢完全可以删除。但安装或更新驱动还是会出现该文件夹。
+2、debug
+debug是系统调试文件夹，用来存放系统运行过程中调试模块的日志文件，以便管理员根据这些日志文件来发现计算机所存在的问题。一般为空文件夹。
+3、PerfLogs
+PerfLogs是系统日志信息文件夹，如磁盘扫描错误信息，是系统自动生成的，系统测试之后，测试记录文件也会自动存放在这个文件夹下。可以删掉，但不建议，因为这样反而降低系统速度。
+4、Program Files
+Program Files是系统自带应用应用和软件的安装目录。
+64位系统会有Program Files(X86)文件夹，这是系统中32位软件的安装目录。
+5、Windows
+它是Windows系统安装文件所在文件夹，一般用来存储系统安装文件和硬件驱动程序等内容，是系统正常运转的必要保证。
+6、用户
+它是用来储存系统所有用户数据、用户应用程序数据、桌面、我的文档、我的图片、我的视频和开始菜单等内容的文件夹。
+二、C盘隐藏文件夹（点查看，勾选“隐藏的项目”即可看到）
+1、$Recycle.Bin
+回收站文件，删除后会自动重建，用于保存删除文件数据。
+2、Boot
+用于保存操作系统引导文件的文件夹。绝对不能删除。
+3、Documents and Settings
+系统用户设置文件夹，包括各个用户的文档、收藏夹、上网浏览信息、配置文件等。这里面保存着系统所有用户的文档和账户设置，尤其是里面的default user、all users、administrator和以你当前登陆用户名的文件夹。切忌随便删除这里面的东西，否则会造成系统重新启动不能登陆的情况发生。
+4、Program Data
+Windows 7以上系统系统文件夹，放置程序的使用数据、设置等文件，不建议删除。
+5、Recovery
+用于存放恢复系统用的恢复环境的文件夹，如果用户习惯于系统出现状况后重装系统的话，可以删除这个文件夹，对系统不会造成任何影响。
+6、System Volume Information
+这是任何一个分区下都会存在的一个文件夹，一般翻译成系统卷标信息文件夹。用于存储系统还原的备份信息以及磁盘分区数据信息。
+最后说一点，不要磁盘空间不够用了就随意删除系统C盘文件，平时注意养成良好的使用习惯，及时清理系统垃圾，这样才能从根本上解决问题，否则真的是得不偿失！
+Windows系统目录结构 Windows系统目录 ├—WINDOWS │ ├—system32（存放Windows的系统文件和硬件驱动程序） │ │ ├—config（用户配置信息和密码信息） │ │ │ └—systemprofile（系统配置信息，用于恢复系统） │ │ ├—drivers（用来存放硬件驱动文件，不建议删除） │ │ ├—spool（用来存放系统打印文件。包括打印的色彩、打印预存等） │ │ ├—wbem（存放WMI测试程序，用于查看和更改公共信息模型类、实例和方法等。请勿删除） │ │ ├—IME（用来存放系统输入法文件，类似WINDOWS下的IME文件夹） │ │ ├—CatRoot（计算机启动测试信息目录，包括了计算机启动时检测的硬软件信息） │ │ ├—Com（用来存放组件服务文件） │ │ ├—ReinstallBackups（电脑中硬件的驱动程序备份） │ │ ├—DllCache（用来存放系统缓存文件。当系统文件被替换时，文件保护机制会复制这个文件夹下的文件去覆盖非系统文件） │ │ ├—GroupPolicy（组策略文件夹） │ │ │ ├—system（系统文件夹，用来存放系统虚拟设备文件） │ ├—N t U n i n s t a l l NtUninstallNtUninstall（每给系统打一个补丁，系统就会自动创建这样的一个目录，可删除） │ ├—security（系统安全文件夹，用来存放系统重要的数据文件） │ ├—srchasst（搜索助手文件夹，用来存放系统搜索助手文件，与msagent文件夹类似） │ ├—repair（系统修复文件夹，用来存放修复系统时所需的配置文件） │ ├—Downloaded Program Files（下载程序文件夹，用来存放扩展IE功能的ActiveX等插件） │ ├—inf（用来存放INF文件。INF文件最常见的应用是为硬件设备提供驱动程序服务，不建议删除其中文件） │ ├—Help（Windows帮助文件） │ ├—Config（系统配置文件夹，用来存放系统的一些临时配置的文件） │ ├—msagent（微软助手文件夹，存放动态的卡通形象，协助你更好地使用系统。若觉得没有必要，可直接删除） │ ├—Cursors（鼠标指针文件夹） │ ├—Media（声音文件夹，开关机等wav文件存放于此） │ ├—Mui（多语言包文件夹，用来存放多国语言文件。简体中文系统中这个文件夹默认是空的，但不建议删除此文件夹） │ ├—java（存放Java运行的组件及其程序文件。不建议删除其中文件） │ ├—Web │ │ ├—Wall*****（存放桌面壁纸的文件夹） │ │ │ ├—addins（系统附加文件夹，用来存放系统附加功能的文件） │ ├—Connection Wizard（连接向导文件夹，用来存放“Internet连接向导”的相关文件） │ ├—Driver Cache（驱动缓存文件夹，用来存放系统已知硬件的驱动文件） │ │ └—i386（Windows操作系统自带的已知硬件驱动文件，可删除以节省空间） │ ├—TEMP（系统临时文件夹，其中内容可以全部删除） │ ├—twain_32（扫描仪相关） │ ├—AppPatch（应用程序修补备份文件夹，用来存放应用程序的修补文件） │ ├—Debug（系统调试文件夹，用来存放系统运行过程中调试模块的日志文件） │ ├—Resources（系统资源文件夹，用来存放系统SHELL资源文件，就是我们在桌面上所看到的主题） │ │ └—Themes（桌面主题都存放于此，可删除无用主题） │ ├—WinSxS（存储各个版本的Windows XP组件，减少因为DLL文件而引起的配置问题） │ ├—ime（输入法信息） │ ├—PCHealth（用来存放协调、配置和管理计算机正常运行的文件） │ │ └—HelpCtr（帮助和支持） │ │ ├—Binaries（我们常用的msconfig就在这里哟） │ ├—Offline Web Pages（脱机浏览文件存放于此） │ ├—Prefetch（预读取文件夹，用来存放系统已访问过的文件的预读信息(此信息是系统在访问时自动生成的新信息)，以加快文件的访问速度，其扩展名为“PF”。可以将此文件夹中的文件删除） │ ├—ShellNew │ ├—Fonts（字体文件夹。要安装某种字体只需将字体文件复制到该目录下即可） │ ├—pss（用来备份系统启动配置文件的，一般对“Boot.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Window/Window10-%E4%B8%8B%E6%90%AD%E5%BB%BA-Rust-%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Window/Window10-%E4%B8%8B%E6%90%AD%E5%BB%BA-Rust-%E7%8E%AF%E5%A2%83/</guid>
+      <description>Window10 下搭建 Rust 环境 首先要说明的是，本文是介绍 windows + MSYS2 + Rust ，非 MSVC。
+Windows作业系统中的Rust程式，预设会使用MSVC来编译的。但是如果Rust程式有使用到GNU相关的函式库(例如GTK)时，就得搭配MinGW来编译了。MSYS2 是一套整合MinGW和POSIX环境的工具，可以在Windows作业系统上模拟出Linux作业系统的开发环境，且能利用MinGW直接编译出在Windows作业系统上执行的程式。
+1、安装和设定 MSYS2 已经有其他博文做过介绍，参考即可
+2、安在Windows作业系统安装Rust开发环境 现在官方推荐使用 rustup 来安装 Rust 环境。
+首先在MSYS2的终端机上执行以下指令：
+curl https://sh.rustup.rs -sSf | sh 注意，在 Windows 上面，Rust 编译需要 Visual C++ Build Tools。请先安装这个之后再安装 rustup。
+安装程式可能会提示说需要微软的Visual C++ Build Tools。不要理它，输入「y」继续。
+选择第二个选项，自定义Rust要如何安装
+host triple的部份，输入「x86_64-pc-windows-gnu」，也就是我们的Rust编译器预设使用的目标(target)名称。
+接着输入Rust的版本，建议使用「stable」，如果有nightly需求的话就用「nightly」吧！
+概要文件(要安装哪些工具和数据)?(最小/违约/完成) Profile (which tools and data to install)? (minimal/default/complete)
+default
+接着设定是否要修改「PATH」环境变数，输入「y」。
+然后回到选单，选择第一项，开始用我们刚才的设定来安装Rust。
+更新与卸载 更新所有 Rust，运行：
+rustup update 校验Rust编译环境
+rustc --versioncargo --version 检查 rustup 自身是否有更新：</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Window/Windows-%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Window/Windows-%E5%91%BD%E4%BB%A4/</guid>
+      <description> Windows 命令 网络复位
+netsh winsock reset 查看曾经连接过的无线网络:
+netsh wlan show profiles 查看指定无线网络（WIFI）的明文密码:
+netsh wlan show profiles name=&amp;#34;361&amp;#34; key=clear </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/8IDE/Window/Windward-C-%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/8IDE/Window/Windward-C-%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+      <description>Windward C 语言开发环境配置 1、下载安装 MSYS2 MSYS2官方网站：http://www.msys2.org/
+清华大学开源镜像：https://mirrors.tuna.tsinghua.edu.cn/help/msys2/
+中国科学技术大学源 https://mirrors.ustc.edu.cn/help/msys2.html
+2、修改软件源： 可修改 中科大源 或者 清华大学 源
+3、配置更新 执行 pacman -Sy 刷新软件包数据即可。 执行 pacman-key &amp;ndash;init
+pacman -Syu
+更新软件，更新过程中可能要求重新打开终端，另外更新的时候，pacman的软件源可能恢复到默认，需要手动再修改一次。 gpg: 警告：服务器 ‘gpg-agent’ 比我们的版本更老 （2.2.19-unknown &amp;lt; 2.2.20-unknown） gpg: 注意： 过时的服务器可能缺少重要的安全修复。 gpg: 注意： 使用 “gpgconf &amp;ndash;kill all” 来重启他们。
+4、安装工具链 pacman -S mingw-w64-x86_64-cmake mingw-w64-x86_64-extra-cmake-modules pacman -S mingw-w64-x86_64-make pacman -S mingw-w64-x86_64-gdb pacman -S mingw-w64-x86_64-toolchain 命令出错可重新执行。
+5、安装GTK3及其依赖项 运行： pacman -S mingw-w64-x86_64-gtk3 pacman -S mingw-w64-x86_64-gtk4 pacman -S mingw-w64-x86_64-gtk4 mingw-w64-x86_64-pkgconf mingw-w64-x86_64-gcc</description>
+    </item>
+    
+  </channel>
+</rss>

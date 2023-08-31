@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring Framework on Save Load</title>
+    <link>https://www.saveload.cn/Tech/3Java/Spring/Spring-Framework/</link>
+    <description>Recent content in Spring Framework on Save Load</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/3Java/Spring/Spring-Framework/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Spring/Spring-Framework/Spring-Framework-1-%E6%A6%82%E8%BF%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Spring/Spring-Framework/Spring-Framework-1-%E6%A6%82%E8%BF%B0/</guid>
+      <description>Spring Framework
+來源：
+链接：https://docs.spring.io/spring-framework/docs/current/reference/html/index.html
+概述 Spring 使创建 Java 企业应用程序变得容易。它提供您所需的一切 需要在企业环境中拥抱Java语言，并支持Groovy。 和 Kotlin 作为 JVM 上的替代语言，并且可以灵活地创建许多 各种体系结构，具体取决于应用程序的需求。从 Spring Framework 6.0 开始， Spring 需要 Java 17+。
+Spring 支持广泛的应用场景。在大型企业中，应用程序 经常存在很长时间，并且必须在其升级的JDK和应用程序服务器上运行 周期超出了开发人员的控制范围。其他人可能作为嵌入服务器的单个jar运行， 可能在云环境中。还有一些可能是独立的应用程序（例如批处理 或不需要服务器的集成工作负载。
+春天是开源的。它有一个庞大而活跃的社区，提供持续的反馈 基于各种实际用例。这帮助Spring成功 经过很长时间的发展。
+1. 我们所说的 “Spring” 是什么意思 “Spring”这个词在不同的语境中有不同的含义。它可以用来指代 Spring Framework 项目本身，它是一切的起点。随着时间的推移，其他 Spring 项目已经建立在 Spring 框架之上。大多数情况下，当人们说“Spring”时，他们指的是整个项目系列。本参考文档侧重于基础：Spring 框架本身。
+Spring Framework 分为模块。应用程序可以选择他们需要的模块。核心是核心容器的模块，包括配置模型和依赖注入机制。除此之外，Spring Framework 还为不同的应用程序架构提供基础支持，包括消息传递、事务数据和持久性以及 Web。它还包括基于 Servlet 的 Spring MVC Web 框架，以及并行的 Spring WebFlux 反应式 Web 框架。
+关于模块的注意事项：Spring 的框架 jar 允许部署到 JDK 9 的模块路径（“Jigsaw”）。为了在支持 Jigsaw 的应用程序中使用，Spring Framework 5 jar 带有“Automatic-Module-Name”清单条目，它定义了稳定的语言级模块名称（“spring.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Spring/Spring-Framework/Spring-Framework-2-%E6%A0%B8%E5%BF%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Spring/Spring-Framework/Spring-Framework-2-%E6%A0%B8%E5%BF%83/</guid>
+      <description>Spring Framework
+來源：
+链接：https://docs.spring.io/spring-framework/docs/current/reference/html/index.html
+核心 IoC 容器， 事件， 资源， i18n， 验证、数据绑定、类型转换、SpEL、AOP、AOT。 息
+参考文档的这一部分涵盖了 Spring 框架绝对不可或缺的所有技术。
+其中最重要的是 Spring 框架的 控制反转 (IoC) 容器。在全面介绍 Spring Framework 的 IoC 容器之后，将全面介绍 Spring 的面向方面编程 (AOP) 技术。Spring Framework 有自己的 AOP 框架，概念上很容易理解，成功解决了 Java 企业编程中 80% 的 AOP 需求。
+还提供了 Spring 与 AspectJ 的集成（就功能而言，目前是最丰富的，当然也是 Java 企业领域中最成熟的 AOP 实现）。
+AOT 处理可用于提前优化您的应用程序。它通常用于使用 GraalVM 的本机映像部署。
+AspectJ 是一个面向切面的框架，它扩展了Java语言。AspectJ定义了AOP语法，它有一个专门的编译器用来生成遵守Java字节编码规范的Class文件。
+JIT (Just-In-Time - 实时编译) 和 AOT (Ahead-Of-Time - 预先编译)
+1. IoC 容器 本章涵盖 Spring 的控制反转 (IoC) 容器。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.saveload.cn/Tech/3Java/Spring/Spring-Framework/Spring-Framework/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.saveload.cn/Tech/3Java/Spring/Spring-Framework/Spring-Framework/</guid>
+      <description>Spring Framework
+來源：
+链接：https://docs.spring.io/spring-framework/docs/current/reference/html/index.html
+概述 历史、设计理念、反馈、 开始。
+核心 IoC 容器， 事件， 资源， i18n， 验证、数据绑定、类型转换、SpEL、AOP、AOT。
+测试 模拟对象， 测试上下文框架， Spring MVC Test， WebTestClient.
+数据访问 交易， DAO 支持， JDBC， R2DBC， O/R Mapping， XML Marshalling.
+Web Servlet Spring MVC， WebSocket， SockJS， 跺脚消息。
+网络响应式 Spring WebFlux， WebClient， WebSocket， RSocket.
+集成 REST Client， JMS， JCA， JMX， 电子邮件、任务、计划、缓存、可观测性。
+语言 Kotlin，Groovy，动态语言。
+附录 弹簧属性。
+维基 最新消息， 升级说明、支持的版本、其他跨版本信息。</description>
+    </item>
+    
+  </channel>
+</rss>
