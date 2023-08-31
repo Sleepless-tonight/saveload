@@ -1,19 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Ubuntu on Save Load</title>
-    <link>https://www.saveload.cn/Tech/8IDE/Ubuntu/</link>
-    <description>Recent content in Ubuntu on Save Load</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://www.saveload.cn/Tech/8IDE/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title></title>
-      <link>https://www.saveload.cn/Tech/8IDE/Ubuntu/Ubuntu/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.saveload.cn/Tech/8IDE/Ubuntu/Ubuntu/</guid>
-      <description>Docker 应知应会 1、Ubuntu 镜像文件下载 官方下载地址（不推荐）https://www.ubuntu.com/download中国官网（推荐）https://cn.ubuntu.com/中科大源http://mirrors.ustc.edu.cn/ubuntu-releases/16.04/阿里云开源镜像站http://mirrors.aliyun.com/ubuntu-releases/16.04/兰州大学开源镜像站http://mirror.lzu.edu.cn/ubuntu-releases/16.04/北京理工大学开源http://mirror.bit.edu.cn/ubuntu-releases/16.04/浙江大学http://mirrors.zju.edu.cn/ubuntu-releases/16.04/不知名镜像网站http://mirror.pnl.gov/releases/xenial/各个版本下载网址：http://mirrors.melbourne.co.uk/ubuntu-releases/ Ubuntu忘记密码的解决办法 ubuntu忘记root密码怎么办？如果普通用户忘记了怎么办
-第一种方法：无论你是否申请了root帐号，或是普通账号密码忘记了都没有问题的！1、重启ubuntu，随即长按shift进入grub菜单；2、选择第二个高级模式recovery mode进入3、进入Recovery Menu界面，选择root Drop to root shell prompt ,也就是获取root权限4、在命令行# 后面敲入 cat /etc/shadow 查看用户名（如果连用户名都忘记的话）5、敲入：passwd &amp;#34;用户名&amp;#34; 之后再敲两次密码就可以修改用户名密码了。另外想修改root密码可使用下面的方法：修改root密码操作：#passwd输入新密码：# 再输入一遍密码：#这是设置root密码，如果是设置其它用户密码使用命令：passwd 用户名 即可6、按ctrl+alt+del重启系统，完成。 Linux RPM和DEB包的区别 关于rpm和deb RPM(Red Hat Package Manager)，是基于Red hat的Linux Distribution的包管理系统，同时也指rpm包本身，RPM用于rpm包的管理（诸如安装、卸载、升级等），像Mandrake和SuSE这些基于RPM的发行版通常有自己特定的rpm包，如果混合安装可能不会正常工作，而对于第三方发行的rpm包一般都能在基于RPM的系统上正常安装。 对于基于Debian的系统使用deb格式的包，有包转换工具使rpm与deb及其他文件之间互相转换(Alien Package Converter），其安装和升级可用dpkg，不过它不能很方便地处理包的依赖关系，比较省事的有dselect和apt-get, Ubunut是debian的变种, 其软件以deb包或者源文件的形式出现. deb软件包的格式和使用 (1).deb软件包命令遵行如下约定： soft_ver-rev_arch.</description>
-    </item>
-    
-  </channel>
-</rss>
